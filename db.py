@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean, JSON
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 import random
@@ -29,6 +29,7 @@ class Event(Base):
     code = Column('code', Integer, unique = True)
     location = Column('location', String)
     event_name = Column('event_name', String)
+    participants = Column('attendees', JSON)
     #TODO: list of users and if they need a ride/can give a ride (json)
     organiser_id = Column('event_organiser', Integer) #user id
 

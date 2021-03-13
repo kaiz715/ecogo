@@ -44,6 +44,7 @@ def create_event(location, organiser_id, event_name): #returns the code
     event.location = location
     event.organiser_id = organiser_id
     event.event_name = event_name
+    event.participants = {}
     session.add(event)
     session.commit()
     session.close()
@@ -81,8 +82,17 @@ def get_requests(receivening_id):
         pairs[i.requesting_id] = i.event_id
     return pairs
 
+def add_user_to_event(uid, eid, avaliability): #avalibility can be need, give, filled
+    session= Session()
+    event = session.query(Event).filter_by(eid = eid).first()
+    tdic = event.participants
+    tdic[uid] = avaliability
+    event.participants = tdic
+    session.add(event)
+    session.commit()
+    session.close()
 
-
+# add_user_event(123,1,'need')
 
 # create_user("name", "last","hello this is meaa", "password sample", "address sample", "phone", 'email')
 # create_event("asdhfasdf", 1231231, 'name')
