@@ -1,0 +1,73 @@
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean, func
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker, relationship
+from db import User, Event, Request
+import random
+
+
+
+    
+def create_user(first_name, last_name, username, password, address, phone_number, email):
+    engine = create_engine('sqlite:///users.db', echo=True)
+    Session = sessionmaker(bind =engine)
+    session = Session()
+    if (session.query(User.username).filter_by(username = username).first()) == None:
+        user = User()
+        if session.query(func.max(User.uid)).first()[0] != None:
+            user.uid = session.query(func.max(User.uid)).first()[0]+1
+        else: 
+            user.uid = 1
+        user.username = username
+        user.password = password
+        user.first_name = first_name
+        user.last_name = last_name
+        user.phone_number = phone_number
+        user.email = email
+        user.address = address
+        user.in_event = False
+        session.add(user)
+        session.commit()
+        session.close()
+        return True
+    return False
+    
+
+def create_event(location, organiser_id, event_name): #returns the code
+    engine = create_engine('sqlite:///users.db', echo=True)
+    Session = sessionmaker(bind =engine)
+    session = Session()
+    event = Event()
+    if session.query(func.max(Event.eid)).first()[0] != None:
+        event.eid = session.query(func.max(Event.eid)).first()[0]+1
+    else: 
+        event_id = 1
+    code = random.randint(0,1000000)
+    while session.query(Event.code).filter_by(code = code).first() != None:
+        code = random.randint(0,1000000)
+    event.code = code
+    event.location = location
+    event.organiser_id = organiser_id
+    event.event_name = event_name
+    session.add(event)
+    session.commit()
+    #TODO: list of users and if they need a ride/can give a ride (json)
+    return code
+    
+def create_request(requesting_id, receivening_id, event_id):
+    engine = create_engine('sqlite:///users.db', echo=True)
+    Session = sessionmaker(bind =engine)
+    session = Session()
+    request = Request()
+    if session.query(func.max(Request.rid)).first()[0] != None:
+        request.rid = session.query(func.max(Request.rid)).first()[0]+1
+    else:
+        request.rid = 1
+    request.requesting_id = requesting_id
+    request.receivening_id = receivening_id
+    request.event_id = event_id
+    session.add(request)
+    session.commit()
+
+create_user("name", "last","hello this is meaa", "password sample", "address sample", "phone", 'email')
+create_event("asdhfasdf", 1231231, 'name')
+create_request(182930890, 123890089123, 12890890132)
