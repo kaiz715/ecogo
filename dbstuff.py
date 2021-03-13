@@ -60,12 +60,12 @@ def create_request(requesting_id, receivening_id, event_id):
     request.requesting_id = requesting_id
     request.receivening_id = receivening_id
     request.event_id = event_id
-    request.status = 'Default'
+    request.status = 'default'
     session.add(request)
     session.commit()
     session.close()
 
-def update_request(rid, new_status):
+def update_request(rid, new_status): #new_status can be default, yes, no
     session = Session()
     request = session.query(Request).filter_by(rid = rid).first()
     request.status = new_status
@@ -73,11 +73,17 @@ def update_request(rid, new_status):
     session.commit()
     session.close()
 
-
+def get_requests(receivening_id):
+    pairs = dict()
+    session = Session()
+    requests = session.query(Request).filter_by(receivening_id = receivening_id).all()
+    for i in requests:
+        pairs[i.requesting_id] = i.event_id
+    return pairs
 
 
 
 
 # create_user("name", "last","hello this is meaa", "password sample", "address sample", "phone", 'email')
 # create_event("asdhfasdf", 1231231, 'name')
-# create_request(1820, 10089123, 1280132)
+# create_request(142332, 10089123, 128013)
