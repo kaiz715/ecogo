@@ -5,6 +5,13 @@
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
 <html>
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 	<head>
 		<title>Join Event</title>
 		<meta charset="utf-8" />
@@ -36,7 +43,7 @@
 
 		<!-- Heading -->
 			<div id="heading" >
-				<h1>Generic Page</h1>
+				<h1>Join Event</h1>
 			</div>
 
 		<!-- Main -->
@@ -49,6 +56,11 @@
 						<form method="post" action="/join">
 							<p>Enter Event Code:</p>
 							<p><input type="text" name="code"/></p>
+							<p>Status:</p>
+							<input type="checkbox" name="option1" id="option1" value="Needs Ride"/>
+							<label for="option1">
+								I need a ride
+							</label>
 							<p><input type="submit" name="done" value="Join"/></p>
 						</form>
 						<hr />

@@ -111,8 +111,15 @@ def event_name_to_eid(event_name):
     session.close()
     return eid
 
+def code_to_eid(code):
+    session = Session()
+    event = session.query(Event).filter_by(code = code).first()
+    eid = event.eid
+    session.close()
+    return eid
 
-add_user_to_event(1233245333,1,'need')
+
+#add_user_to_event(1233245333,1,'need')
 #print(username_to_uid('hello this is meaa'))
 #print(event_name_to_eid('name'))
 # create_user("name", "last","hello this is meaa", "password sample", "address sample", "phone", 'email')

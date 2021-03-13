@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, request, redirect, url_for
+from flask import Flask, render_template, session, request, redirect, url_for, flash
 import flask_sqlalchemy
 import dbstuff
 from datetime import timedelta
@@ -93,9 +93,23 @@ def requests():
 
 @app.route('/join', methods=['POST', 'GET'])
 def join():
+    status = ''
     if request.method == 'POST':
+        if request.form['option1'] == 'Needs Ride':
+            status = 'need'
+        else:
+            status = 'give'
         code = request.form['code']
-        return redirect(url_for('index'))
+        print(code)
+        if code is None:
+            flash("Please enter a code!")
+            return render_template('join.html')
+        else:
+            eid = dbstuff.code_to_eid(code)
+            username = session['user']
+            id = dbstuff.username_to_uid(username)
+            dbstuff.add_user_to_event(id, eid, status)
+            return redirect(url_for('index'))
     else:
         return render_template('join.html')
 
