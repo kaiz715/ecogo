@@ -5,8 +5,6 @@ from db import User, Event, Request, Session
 import random
 
 
-
-    
 def create_user(first_name, last_name, username, password, address, phone_number, email):
     session = Session()
     if (session.query(User.username).filter_by(username = username).first()) == None:
@@ -50,8 +48,9 @@ def create_event(location, organiser_id, event_name): #returns the code
     session.close()
     #TODO: list of users and if they need a ride/can give a ride (json)
     return code
-    
-def create_request(requesting_id, receivening_id, event_id):
+
+
+def create_request(requesting_id, receiving_id, event_id):
     session = Session()
     request = Request()
     if session.query(func.max(Request.rid)).first()[0] != None:
@@ -59,12 +58,13 @@ def create_request(requesting_id, receivening_id, event_id):
     else:
         request.rid = 1
     request.requesting_id = requesting_id
-    request.receivening_id = receivening_id
+    request.receiving_id = receiving_id
     request.event_id = event_id
     request.status = 'default'
     session.add(request)
     session.commit()
     session.close()
+
 
 def update_request(rid, new_status): #new_status can be default, yes, no
     session = Session()
@@ -74,19 +74,21 @@ def update_request(rid, new_status): #new_status can be default, yes, no
     session.commit()
     session.close()
 
-def get_requests(receivening_id):
+
+def get_requests(receiving_id):
     pairs = dict()
     session = Session()
-    requests = session.query(Request).filter_by(receivening_id = receivening_id).all()
+    requests = session.query(Request).filter_by(receiving_id=receiving_id).all()
     for i in requests:
         pairs[i.requesting_id] = i.event_id
     return pairs
 
-def add_user_to_event(uid, eid, avaliability): #avalibility can be need, give, filled
+
+def add_user_to_event(uid, eid, availability): #avalibility can be need, give, filled
     session= Session()
     event = session.query(Event).filter_by(eid = eid).first()
     tdic = event.participants
-    tdic[uid] = avaliability
+    tdic[uid] = availability
     event.participants = tdic
     session.add(event)
     session.commit()
@@ -99,12 +101,15 @@ def username_to_uid(username):
     session.close()
     return uid
 
+
 def event_name_to_eid(event_name):
     session = Session()
     event = session.query(Event).filter_by(event_name = event_name).first()
     eid = event.eid
     session.close()
     return eid
+
+
 # add_user_event(123,1,'need')
 # print(username_to_uid('hello this is meaa'))
 # print(event_name_to_eid('name'))

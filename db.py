@@ -39,7 +39,7 @@ class Request(Base):
 
     rid = Column('rid', Integer, primary_key=True)
     requesting_id=Column('requesting_id', String)
-    receivening_id=Column('receivening_id', String)
+    receiving_id=Column('receiving_id', String)
     event_id = Column('event_id', Integer)
     status = Column('status', String)
 
