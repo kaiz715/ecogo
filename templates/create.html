@@ -17,7 +17,7 @@
 
 		<!-- Header -->
 			<header id="header">
-				<a class="logo" href="index.html">Carpool</a>
+				<a class="logo" href="/">Carpool</a>
 				<nav>
 					<a href="#menu">Menu</a>
 				</nav>
@@ -26,18 +26,20 @@
 		<!-- Nav -->
 			<nav id="menu">
 				<ul class="links">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="elements.html">Login</a></li>
-					<li><a href="generic.html">Sign Up</a></li>
+					<li><a href="/">Home</a></li>
+					<li><a href="/login">Login</a></li>
+					<li><a href="/signup">Sign Up</a></li>
+                    <li><a href="/logout">Log Out</a></li>
+                 	<li><a href="/requests">Requests</a></li>
 				</ul>
 			</nav>
 
 		<!-- Banner -->
 			<section id="banner">
 				<div class="inner">
-					<h1>Industrious</h1>
-					<p>A responsive business oriented template with a video background<br />
-					designed by <a href="https://templated.co/">TEMPLATED</a> and released under the Creative Commons License.</p>
+					<h1>Create Event</h1>
+					<p>Create an event and allow other users to carpool to your event
+						<a href="https://templated.co/">TEMPLATED</a> and released under the Creative Commons License.</p>
 				</div>
 			</section>
 
@@ -45,73 +47,31 @@
 			<section class="wrapper">
 				<div class="inner">
 					<header class="special">
-						<h2>Sem turpis amet semper</h2>
-						<p>In arcu accumsan arcu adipiscing accumsan orci ac. Felis id enim aliquet. Accumsan ac integer lobortis commodo ornare aliquet accumsan erat tempus amet porttitor.</p>
+						<h2>Create Event</h2>
+							<form action="/create" method="post">
+								<p>Zip Code:</p>
+								<p><input type="text" name="zipcode" placeholder="e.g 33410"/></p>
+								<p>Address 1:</p>
+								<p><input type="text" name="Address" placeholder="e.g John Smith Boulevard"/></p>
+								<p>Address 2:</p>
+								<p><input type="text" name="secondary" placeholder="e.g Apt 316"/></p>
+								<p>City:</p>
+								<p><input type="text" name="city" placeholder="e.g Tampa"/></p>
+								<p>State:</p>
+								<p><input type="text" name="state" placeholder="e.g OH"/></p>
+								<p>Event Name:</p>
+								<p><input type="text" name="name" placeholder="e.g Pool Party"/></p>
+								<p><input type="submit" value="Create Account" /></p>
+							</form>
 					</header>
-					<div class="highlights">
-						<section>
-							<div class="content">
-								<header>
-									<a href="#" class="icon fa-vcard-o"><span class="label">Icon</span></a>
-									<h3>Feugiat consequat</h3>
-								</header>
-								<p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
-							</div>
-						</section>
-						<section>
-							<div class="content">
-								<header>
-									<a href="#" class="icon fa-files-o"><span class="label">Icon</span></a>
-									<h3>Ante sem integer</h3>
-								</header>
-								<p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
-							</div>
-						</section>
-						<section>
-							<div class="content">
-								<header>
-									<a href="#" class="icon fa-floppy-o"><span class="label">Icon</span></a>
-									<h3>Ipsum consequat</h3>
-								</header>
-								<p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
-							</div>
-						</section>
-						<section>
-							<div class="content">
-								<header>
-									<a href="#" class="icon fa-line-chart"><span class="label">Icon</span></a>
-									<h3>Interdum gravida</h3>
-								</header>
-								<p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
-							</div>
-						</section>
-						<section>
-							<div class="content">
-								<header>
-									<a href="#" class="icon fa-paper-plane-o"><span class="label">Icon</span></a>
-									<h3>Faucibus consequat</h3>
-								</header>
-								<p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
-							</div>
-						</section>
-						<section>
-							<div class="content">
-								<header>
-									<a href="#" class="icon fa-qrcode"><span class="label">Icon</span></a>
-									<h3>Accumsan viverra</h3>
-								</header>
-								<p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
-							</div>
-						</section>
-					</div>
 				</div>
 			</section>
 
 		<!-- CTA -->
 			<section id="cta" class="wrapper">
 				<div class="inner">
-					<h2>Curabitur ullamcorper ultricies</h2>
-					<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing. Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing sed feugiat eu faucibus. Integer ac sed amet praesent. Nunc lacinia ante nunc ac gravida.</p>
+					<h2>Overview</h2>
+					<p>Organizers create an event, input its location, and receive a randomly generated code. They can send the code to everyone attending the event, so they can input the code and join the event. People can see others attending the same event in order of driving distance from them, and send a carpool request. When someone receives a carpool request, they can view the requester’s email and phone number information to contact them and arrange carpooling details.</p>
 				</div>
 			</section>
 		<!-- Footer -->

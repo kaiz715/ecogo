@@ -4,7 +4,7 @@ import dbstuff
 from datetime import timedelta
 app = Flask('__name__')
 app.secret_key = 'app'
-app.permanent_session_lifetime = timedelta(seconds=1)
+app.permanent_session_lifetime = timedelta(days=1)
 requests_dic = {
     'kaiz': 'HighSchool',
     'evelynz': 'Party'
@@ -17,10 +17,9 @@ def index():
         if request.form["button"] == 'Requests':
             return redirect(url_for('requests'))
         elif request.form["button"] == 'Join Event':
-            print('join')
-
+            return redirect(url_for('join'))
         else:
-            print('create')
+            return redirect(url_for('create'))
     else:
         if "user" in session:
             return render_template('home.html')
@@ -101,9 +100,22 @@ def join():
         return render_template('join.html')
 
 
-@app.route('/create')
+@app.route('/create', methods=['POST', 'GET'])
 def create():
-    return render_template('create.html')
+    if request.method == 'POST':
+        zip = request.form['zipcode']
+        add1 = request.form['Address']
+        add2 = request.form['secondary']
+        city = request.form['city']
+        state = request.form['state']
+        address = zip + add1 + ',' + add2 + ',' + city + state
+        username = session['user']
+        id = dbstuff.username_to_uid(username)
+        event_name = request.form['name']
+        event_id = dbstuff.create_event(address, id, event_name)
+        return render_template('eventCreated.html', code=event_id)
+    else:
+        return render_template('create.html')
 
 
 if __name__ == "__main__":

@@ -112,7 +112,7 @@ def event_name_to_eid(event_name):
     return eid
 
 
-#add_user_to_event(1233245333,1,'need')
+add_user_to_event(1233245333,1,'need')
 #print(username_to_uid('hello this is meaa'))
 #print(event_name_to_eid('name'))
 # create_user("name", "last","hello this is meaa", "password sample", "address sample", "phone", 'email')
