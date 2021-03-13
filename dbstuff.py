@@ -92,8 +92,22 @@ def add_user_to_event(uid, eid, avaliability): #avalibility can be need, give, f
     session.commit()
     session.close()
 
-# add_user_event(123,1,'need')
+def username_to_uid(username):
+    session = Session()
+    user = session.query(User).filter_by(username = username).first()
+    uid = user.uid
+    session.close()
+    return uid
 
+def event_name_to_eid(event_name):
+    session = Session()
+    event = session.query(Event).filter_by(event_name = event_name).first()
+    eid = event.eid
+    session.close()
+    return eid
+# add_user_event(123,1,'need')
+# print(username_to_uid('hello this is meaa'))
+# print(event_name_to_eid('name'))
 # create_user("name", "last","hello this is meaa", "password sample", "address sample", "phone", 'email')
 # create_event("asdhfasdf", 1231231, 'name')
 # create_request(142332, 10089123, 128013)
