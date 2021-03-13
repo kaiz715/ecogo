@@ -40,39 +40,7 @@ class Request(Base):
     requesting_id=Column('requesting_id', String)
     receivening_id=Column('receivening_id', String)
     event_id = Column('event_id', Integer)
+    status = Column('status', String)
 
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
-# engine = create_engine('sqlite:///users.db', echo=True)
-# Base.metadata.create_all(bind=engine)
-# Session = sessionmaker(bind =engine)
-
-# session = Session()
-# user = User()
-# user.uid = 3
-# user.username = "helloyoo"
-# user.password = "passwordsample"
-# user.address = "2768 Richmond Road, Beachwood, Ohio, 44122"
-# user.in_event = False
-
-# session.add(user)
-# session.commit()
-
-# session.close()
-
-# session = Session()
-# event = Event()
-# event.eid = 0#session.query(func.max(event.eid)).first()[0]+1
-# code = random.randint(0,1000000)
-# while session.query(Event.code).filter_by(code = code).first() != None:
-#     code = random.randint(0,1000000)
-# event.code = code
-# event.location = "location"
-# event.organiser_id = 123
-
-# session.add(event)
-
-# session.commit()
-
-# session.close()
-

@@ -1,15 +1,13 @@
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean, func
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
-from db import User, Event, Request
+from db import User, Event, Request, Session
 import random
 
 
 
     
 def create_user(first_name, last_name, username, password, address, phone_number, email):
-    engine = create_engine('sqlite:///users.db', echo=True)
-    Session = sessionmaker(bind =engine)
     session = Session()
     if (session.query(User.username).filter_by(username = username).first()) == None:
         user = User()
@@ -33,8 +31,6 @@ def create_user(first_name, last_name, username, password, address, phone_number
     
 
 def create_event(location, organiser_id, event_name): #returns the code
-    engine = create_engine('sqlite:///users.db', echo=True)
-    Session = sessionmaker(bind =engine)
     session = Session()
     event = Event()
     if session.query(func.max(Event.eid)).first()[0] != None:
@@ -50,12 +46,11 @@ def create_event(location, organiser_id, event_name): #returns the code
     event.event_name = event_name
     session.add(event)
     session.commit()
+    session.close()
     #TODO: list of users and if they need a ride/can give a ride (json)
     return code
     
 def create_request(requesting_id, receivening_id, event_id):
-    engine = create_engine('sqlite:///users.db', echo=True)
-    Session = sessionmaker(bind =engine)
     session = Session()
     request = Request()
     if session.query(func.max(Request.rid)).first()[0] != None:
@@ -65,9 +60,24 @@ def create_request(requesting_id, receivening_id, event_id):
     request.requesting_id = requesting_id
     request.receivening_id = receivening_id
     request.event_id = event_id
+    request.status = 'Default'
     session.add(request)
     session.commit()
+    session.close()
 
-create_user("name", "last","hello this is meaa", "password sample", "address sample", "phone", 'email')
-create_event("asdhfasdf", 1231231, 'name')
-create_request(182930890, 123890089123, 12890890132)
+def update_request(rid, new_status):
+    session = Session()
+    request = session.query(Request).filter_by(rid = rid).first()
+    request.status = new_status
+    session.add(request)
+    session.commit()
+    session.close()
+
+
+
+
+
+
+# create_user("name", "last","hello this is meaa", "password sample", "address sample", "phone", 'email')
+# create_event("asdhfasdf", 1231231, 'name')
+# create_request(1820, 10089123, 1280132)
