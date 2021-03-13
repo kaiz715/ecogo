@@ -2,7 +2,7 @@ from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boole
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 from db import User, Event, Request, Session
-import random
+import random, time
 
 
 def create_user(first_name, last_name, username, password, address, phone_number, email):
@@ -87,10 +87,12 @@ def get_requests(receiving_id):
 def add_user_to_event(uid, eid, availability): #avalibility can be need, give, filled
     session= Session()
     event = session.query(Event).filter_by(eid = eid).first()
-    tdic = event.participants
+    tdic = event.participants.copy()
+    time.sleep(.05)
     tdic[uid] = availability
-    event.participants = tdic
-    session.add(event)
+    time.sleep(.05)
+    event.participants = tdic.copy()
+    time.sleep(.05)
     session.commit()
     session.close()
 
@@ -110,9 +112,9 @@ def event_name_to_eid(event_name):
     return eid
 
 
-# add_user_event(123,1,'need')
-# print(username_to_uid('hello this is meaa'))
-# print(event_name_to_eid('name'))
+#add_user_to_event(1233245333,1,'need')
+#print(username_to_uid('hello this is meaa'))
+#print(event_name_to_eid('name'))
 # create_user("name", "last","hello this is meaa", "password sample", "address sample", "phone", 'email')
 # create_event("asdhfasdf", 1231231, 'name')
 # create_request(142332, 10089123, 128013)
