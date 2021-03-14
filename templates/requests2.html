@@ -50,6 +50,9 @@
                             {% for i,j in nrequests.items()%}
                                 <form method="post" action="/requests">
                                     <p>{{i}} for event {{j}}</p>
+									<p>Email: {{nemails[i]}}</p>
+									<p>Phone Number: {{nphones[i]}}</p>
+									<p>Distance: {{ndistances[i]}}</p>
                                     <p><input type="submit" name={{i}} value="Accept" ></p>
                                     <p><input type="submit" name={{i}} value="Decline" ></p>
                                 </form>

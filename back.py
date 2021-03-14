@@ -1,5 +1,6 @@
 from flask import Flask, render_template, session, request, redirect, url_for, flash
 import dbstuff
+import distance
 from datetime import timedelta
 app = Flask('__name__')
 app.secret_key = 'app'
@@ -73,9 +74,18 @@ def requests():
     uid = dbstuff.username_to_uid(session['user'])
     requests = dbstuff.get_requests(uid)
     nrequests = dict()
+    email = dict()
+    numbers = dict()
+    distances = dict()
+    user_data = dbstuff.uid_to_stuff(uid)
+    user_address = user_data[2]
     for i, j in requests.items():
         nrequests[dbstuff.uid_to_username(i)] = dbstuff.eid_to_event_name(j)
-
+        data = dbstuff.uid_to_stuff(i)
+        email[i] = data[0]
+        numbers[i] = data[1]
+        address = data[2]
+        distances[i] = distance.distance(user_address, address)
     if request.method == 'POST':
         for i in nrequests:
             if request.form[i] == "Accept":
@@ -83,10 +93,9 @@ def requests():
             else:
                 dbstuff.update_request(dbstuff.username_to_uid(i), 'no')
         requests_dic = dbstuff.get_requests(uid)
-            
-        return render_template('requests.html', nrequests=nrequests)
+        return render_template('requests2.html', nrequests=nrequests, nemails=email, nphones=numbers, ndistances=distances)
     else:
-        return render_template('requests.html', nrequests=nrequests)
+        return render_template('requests2.html', nrequests=nrequests)
 
 
 @app.route('/join', methods=['POST', 'GET'])
