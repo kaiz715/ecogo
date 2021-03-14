@@ -2,7 +2,6 @@ from flask import Flask, render_template, session, request, redirect, url_for, f
 import dbstuff
 import distance
 from datetime import timedelta
-import distance
 app = Flask('__name__')
 app.secret_key = 'app'
 app.permanent_session_lifetime = timedelta(days=1)
