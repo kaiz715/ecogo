@@ -15,8 +15,10 @@ def index():
             return redirect(url_for('requests'))
         elif request.form["button"] == 'Join Event':
             return redirect(url_for('join'))
-        else:
+        elif request.form["button"] == 'Create Event':
             return redirect(url_for('create'))
+        else:
+            return redirect(url_for('make_request'))
     else:
         if "user" in session:
             return render_template('home.html')
@@ -153,10 +155,14 @@ def join():
             return render_template('join.html')
         else:
             eid = dbstuff.code_to_eid(code)
-            username = session['user']
-            id = dbstuff.username_to_uid(username)
-            dbstuff.add_user_to_event(id, eid, status)
-            return redirect(url_for('index'))
+            if eid is False:
+                flash('Invalid code!')
+                return render_template('join.html')
+            else:
+                username = session['user']
+                id = dbstuff.username_to_uid(username)
+                dbstuff.add_user_to_event(id, eid, status)
+                return redirect(url_for('index'))
     else:
         return render_template('join.html')
 
