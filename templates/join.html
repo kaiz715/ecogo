@@ -5,7 +5,7 @@
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
 <html>
-{% with messages = get_flashed_messages() %}
+	{% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for msg in messages %}
                 <p>{{msg}}</p>
@@ -13,7 +13,7 @@
         {% endif %}
     {% endwith %}
 	<head>
-		<title>Join Event</title>
+		<title>CarbonGo</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<meta name="description" content="" />
@@ -24,7 +24,7 @@
 
 		<!-- Header -->
 			<header id="header">
-				<a class="logo" href="index.html">Join Event</a>
+				<a class="logo" href="index.html">CarbonGo</a>
 				<nav>
 					<a href="#menu">Menu</a>
 				</nav>

@@ -37,8 +37,8 @@
 		<!-- Banner -->
 			<section id="banner">
 				<div class="inner">
-					<h1>Carpool</h1>
-					<p>Arrange carpools to your plans, reduce your carbon footprint, and keep the Earth healthy.</p>
+					<h1>Create Event</h1>
+					<p>Create an event to allow other users to carpool to your event</p>
 				</div>
 			</section>
 
@@ -46,45 +46,36 @@
 			<section class="wrapper">
 				<div class="inner">
 					<header class="special">
-						<h2>Requests</h2>
-						<p>Check your requests here:</p>
-                        <form method="post">
-                            <p><input type="submit" name="button" value="Requests" onclick=href"/requests"/></p>
-                        </form>
+						<h2>Create Event</h2>
+							<form action="/create" method="post">
+                                <p>Event Name:</p>
+                                <p><input type="text" name="name" placeholder="Event Name"/></p>
+                                <p>Zipcode:</p>
+                                <p><input type="text" name="zipcode" placeholder="e.g 33410"/></p>
+								<p>Address 1:</p>
+								<p><input type="text" name="Address" placeholder="e.g John Smith Boulevard"/></p>
+								<p>Address 2:</p>
+								<p><input type="text" name="secondary" placeholder="e.g Apt 316"/></p>
+								<p>City:</p>
+								<p><input type="text" name="city" placeholder="e.g Tampa"/></p>
+								<p>State:</p>
+								<p><input type="text" name="state" placeholder="e.g OH"/></p>
+                                <p><input type="submit" /></p>
+							</form>
 					</header>
-					<div class="highlights">
-						<section>
-
-						</section>
-					</div>
 				</div>
 			</section>
 
 		<!-- CTA -->
 			<section id="cta" class="wrapper">
 				<div class="inner">
-                    <form method="post" action=".">
-                        <h2>Events</h2>
-                        <p><input type="submit" name="button" value="Join Event"/></p>
-                        <p><input type="submit" name="button" value="Create Event"/></p>
-                    </form>
-                </div>
+					<h2>Using CarbonGo</h2>
+					<p>Organizers create an event, input its location, and receive a randomly generated code. They can send the code to everyone attending the event, so they can input the code and join the event. People can see others attending the same event in order of driving distance from them, and send a carpool request. When someone receives a carpool request, they can view the requester’s email and phone number information to contact them and arrange carpooling details.</p>
+				</div>
 			</section>
 		<!-- Footer -->
 			<footer id="footer">
 				<div class="inner">
-                    <section>
-							<h3>Using CarbonGo</h3>
-							<p>Organizers create an event, input its location, and receive a randomly generated code. They can send the code to everyone attending the event, so they can input the code and join the event. People can see others attending the same event in order of driving distance from them, and send a carpool request. When someone receives a carpool request, they can view the requester’s email and phone number information to contact them and arrange carpooling details.</p>
-                    </section>
-                    <section>
-							<ul class="alt">
-								<li><a href="/">Home</a></li>
-								<li><a href="login">Login</a></li>
-								<li><a href="signup">Sign Up</a></li>
-								<li><a href="requests">Requests</a></li>
-							</ul>
-                    </section>
 					<div class="copyright">
 						&copy; Untitled. Photos <a href="https://unsplash.co">Unsplash</a>, Video <a href="https://coverr.co">Coverr</a>.
 					</div>

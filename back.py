@@ -2,6 +2,7 @@ from flask import Flask, render_template, session, request, redirect, url_for, f
 import dbstuff
 import distance
 from datetime import timedelta
+import distance
 app = Flask('__name__')
 app.secret_key = 'app'
 app.permanent_session_lifetime = timedelta(days=1)
@@ -32,8 +33,13 @@ def login():
         else:
             session.permanent = True
             user = request.form['username']
-            session["user"] = user
-            return redirect(url_for('index'))
+            password = request.form['password']
+            if dbstuff.credential_check(user, password) is True:
+                session["user"] = user
+                return redirect(url_for('index'))
+            else:
+                flash("Credentials don't match, try again or make an account!")
+                return render_template('login.html')
     else:
         if "user" in session:
             return redirect(url_for('index'))
@@ -47,17 +53,21 @@ def signup():
         first = request.form['first_name']
         last = request.form['last_name']
         username = request.form['username']
-        password = request.form['password']
-        zip = request.form['zipcode']
-        add1 = request.form['Address']
-        add2 = request.form['secondary']
-        city = request.form['city']
-        state = request.form['state']
-        address = zip + add1 + ',' + add2 + ',' + city + state
-        phone_num = request.form['phone_number']
-        email = request.form['email']
-        dbstuff.create_user(first, last, username, password, address, phone_num, email)
-        return redirect(url_for('index'))
+        if dbstuff.username_exists(username) is True:
+            flash('Username already exists! Please select another one!')
+            return render_template('signup.html')
+        else:
+            password = request.form['password']
+            zip = request.form['zipcode']
+            add1 = request.form['Address']
+            add2 = request.form['secondary']
+            city = request.form['city']
+            state = request.form['state']
+            address = zip + ' ' + add1 + ' , ' + add2 + ' , ' + city + ' ' + state
+            phone_num = request.form['phone_number']
+            email = request.form['email']
+            dbstuff.create_user(first, last, username, password, address, phone_num, email)
+            return redirect(url_for('index'))
     else:
         return render_template('signup.html')
 
@@ -74,6 +84,7 @@ def requests():
     uid = dbstuff.username_to_uid(session['user'])
     requests = dbstuff.get_requests(uid)
     nrequests = dict()
+<<<<<<< Updated upstream
     email = dict()
     numbers = dict()
     distances = dict()
@@ -86,6 +97,14 @@ def requests():
         numbers[i] = data[1]
         address = data[2]
         distances[i] = distance.distance(user_address, address)
+=======
+    #emails = dict()
+    #addresses = dict()
+    #phone = dict()
+    for i, j in requests.items():
+        nrequests[dbstuff.uid_to_username(i)] = dbstuff.eid_to_event_name(j)
+        #emails[dbstuff.]
+>>>>>>> Stashed changes
     if request.method == 'POST':
         for i in nrequests:
             if request.form[i] == "Accept":
@@ -93,9 +112,25 @@ def requests():
             else:
                 dbstuff.update_request(dbstuff.username_to_uid(i), 'no')
         requests_dic = dbstuff.get_requests(uid)
+<<<<<<< Updated upstream
         return render_template('requests2.html', nrequests=nrequests, nemails=email, nphones=numbers, ndistances=distances)
+=======
+        return render_template('requests.html', nrequests=nrequests)
+>>>>>>> Stashed changes
     else:
         return render_template('requests2.html', nrequests=nrequests)
+
+
+@app.route('/make', methods=['POST', 'GET'])
+def make_request():
+    eid = 0
+    people = dbstuff.list_of_people(eid)
+    if request.method == 'POST':
+        username = session['user']
+        id = dbstuff.username_to_uid(username)
+        return redirect(url_for('index'))
+    else:
+        return render_template('create.html', )
 
 
 @app.route('/join', methods=['POST', 'GET'])
@@ -129,14 +164,18 @@ def create():
         add2 = request.form['secondary']
         city = request.form['city']
         state = request.form['state']
-        address = zip + add1 + ',' + add2 + ',' + city + state
-        username = session['user']
-        id = dbstuff.username_to_uid(username)
-        event_name = request.form['name']
-        code = dbstuff.create_event(address, id, event_name)
-        return render_template('eventCreated.html', code=code)
+        address = zip + ' ' + add1 + ' , ' + add2 + ' , ' + city + ' ' + state
+        if 'user' in session:
+            username = session['user']
+            id = dbstuff.username_to_uid(username)
+            event_name = request.form['name']
+            code = dbstuff.create_event(address, id, event_name)
+            return render_template('eventCreated.html', code=code)
+        else:
+            flash('You need to login!')
+            return redirect(url_for('login'))
     else:
-        return render_template('create.html')
+        return render_template('event.html')
 
 
 if __name__ == "__main__":
