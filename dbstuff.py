@@ -46,7 +46,6 @@ def create_event(location, organiser_id, event_name): #returns the code
     session.add(event)
     session.commit()
     session.close()
-    #TODO: list of users and if they need a ride/can give a ride (json)
     return code
 
 
@@ -80,7 +79,9 @@ def get_requests(receiving_id): #returns none if no requests
     session = Session()
     requests = session.query(Request).filter_by(receiving_id=receiving_id).all()
     for i in requests:
-        pairs[i.requesting_id] = i.event_id
+        if i.status == 'default':
+            pairs[i.requesting_id] = i.event_id
+    session.close()
     return pairs
 
 def add_user_to_event(uid, eid, availability): #avalibility can be need, give, filled
@@ -134,7 +135,9 @@ def credential_check(username, password): #returns 'no username' if username doe
         session.close()
         return 'no username'
     if password == session.query(User).filter_by(username = username).first().password:
+        session.close()
         return True
+    session.close()
     return False
 
 def event_name_to_eid(event_name):#returns false if event_name doesnt exist
@@ -191,9 +194,10 @@ def list_of_people(eid):
     session.close()
     return names
 
+
 #add_user_to_event(1233245333,1,'need')
 # print(username_to_uid('hello this is meaa'))
 # print(event_name_to_eid('name'))
-# create_user("name", "last","hello this is meaa", "password sample", "address sample", "phone", 'email')
-# create_event("asdhfasdf", 128013, 'name')
-# create_request(1, 2, 128013)
+# create_user("kai", "last","hellouser", "password sample", "address sample", "phone", 'email')
+# create_event("asdhfasdf", 1, 'name')
+# create_request(1, 2, 1)
