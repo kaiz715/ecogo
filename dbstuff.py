@@ -191,6 +191,19 @@ def username_exists(username): #returns false if username doesnt exist
     session.close()
     return True
 
+def uid_to_events(uid):
+    ret = []
+    session = Session()
+    events = session.query(Event).all()
+    for i in events:
+        try:
+            if i.participants[str(uid)] != None:
+                ret.append(i.eid)
+        except:
+            pass
+    return ret
+
+
 def list_of_people(eid):
     session = Session()
     if session.query(Event).filter_by(eid = eid).first() == None:
