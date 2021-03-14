@@ -15,8 +15,10 @@ def index():
             return redirect(url_for('requests'))
         elif request.form["button"] == 'Join Event':
             return redirect(url_for('join'))
-        else:
+        elif request.form["button"] == 'Create Event':
             return redirect(url_for('create'))
+        else:
+            return redirect(url_for('make_request'))
     else:
         if "user" in session:
             return render_template('home.html')
@@ -111,25 +113,26 @@ def requests():
 @app.route('/send', methods=['POST', 'GET'])
 def make_request():
     username = session['user']
-    id = dbstuff.username_to_uid(username)
+    id1 = dbstuff.username_to_uid(username)
     events = dbstuff.uid_to_events(id)
     eids = {}
     for event in events:
         eids[event] = []
-    list = []
     data = {'': []}
     for eid, value in eids.items():
-        list = dbstuff.list_of_people(eid)
+        list2 = dbstuff.list_of_people(eid)
         eids[eid] = list
-        for item in list:
-            data[dbstuff.eid_to_event_name(eid)] = data[dbstuff.eid_to_event_name(eid)].append(dbstuff.uid_to_username(item))
+        counter = 0
+        for item in list2:
+            data[dbstuff.eid_to_event_name(eid)].append(dbstuff.uid_to_username(item))
+            counter = counter + 1
     if request.method == 'POST':
         for i, j in data.items():
             for z in j:
                 if request.form[f'{i} {z}'] == 'Send Request':
                     uid = dbstuff.username_to_uid(z)
                     event_id = dbstuff.event_name_to_eid(i)
-                    dbstuff.create_request(id, uid, event_id)
+                    dbstuff.create_request(id1, uid, event_id)
         return render_template('create.html', people=data)
     else:
         return render_template('create.html', people=data)
@@ -150,10 +153,14 @@ def join():
             return render_template('join.html')
         else:
             eid = dbstuff.code_to_eid(code)
-            username = session['user']
-            id = dbstuff.username_to_uid(username)
-            dbstuff.add_user_to_event(id, eid, status)
-            return redirect(url_for('index'))
+            if eid is False:
+                flash('Invalid code!')
+                return render_template('join.html')
+            else:
+                username = session['user']
+                id = dbstuff.username_to_uid(username)
+                dbstuff.add_user_to_event(id, eid, status)
+                return redirect(url_for('index'))
     else:
         return render_template('join.html')
 
