@@ -1,5 +1,4 @@
 from flask import Flask, render_template, session, request, redirect, url_for, flash
-import flask_sqlalchemy
 import dbstuff
 from datetime import timedelta
 app = Flask('__name__')
@@ -83,17 +82,28 @@ def requests():
             keys1 = {dbstuff.uid_to_username(reques): name}
     if request.method == 'POST':
         for i in requests_dic:
-            keys.append(i)
-        for key in keys:
             try:
-                if request.form[key] == 'Accept':
-                    dbstuff.update_request(key, 'yes')
+                print('hello')
+                print(i)
+                print(request.form)
+                if request.form[1] == "Accept":
+                    print('hello')
+                    print(i)
+                    
+                    dbstuff.update_request(i, 'yes')
                 else:
-                    dbstuff.update_request(key, 'no')
-                requests_dic = dbstuff.get_requests(uid)
-            except:
-                print('Error')
-        return render_template('requests.html', request=keys1)
+                    dbstuff.update_request(i, 'no')
+                
+            except Exception as e:
+                
+                print(e)
+            requests_dic = dbstuff.get_requests(uid)
+        # for key in keys:
+            
+        #     print(request.form[key])
+        #     print('SEEE MEEE FUCK')
+            
+        return render_template('requests.html', requests=keys1)
     else:
         return render_template('requests.html', requests=keys1)
 

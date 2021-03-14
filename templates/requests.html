@@ -51,8 +51,8 @@
                                 {% for request in requests%}
                                     <form method="post" action="/requests">
                                         <p>{{request}} for event {{requests[request]}}</p>
-                                        <p><input type="submit" name={{request}} value=Accept ></p>
-                                        <p><input type="submit" name={{request}} value=Decline ></p>
+                                        <p><input type="submit" name={{request}} value="Accept" ></p>
+                                        <p><input type="submit" name={{request}} value="Decline" ></p>
                                     </form>
                                 {% endfor %}
                             {% endif %}

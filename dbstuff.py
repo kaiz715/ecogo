@@ -75,7 +75,7 @@ def update_request(rid, new_status): #new_status can be default, yes, no
     session.close()
 
 
-def get_requests(receiving_id):
+def get_requests(receiving_id): #returns none if no requests
     pairs = dict()
     session = Session()
     requests = session.query(Request).filter_by(receiving_id=receiving_id).all()
@@ -85,7 +85,10 @@ def get_requests(receiving_id):
 
 
 def add_user_to_event(uid, eid, availability): #avalibility can be need, give, filled
+    #returns false if event doesnt exist
     session= Session()
+    if session.query(Event).filter_by(eid = eid).first() == None:
+        return False
     event = session.query(Event).filter_by(eid = eid).first()
     tdic = event.participants.copy()
     time.sleep(.05)
@@ -116,6 +119,16 @@ def uid_to_username(uid): #returns false if username doesnt exist
     session.close()
     return username
 
+def uid_to_name(uid): #returns false if username doesnt exist
+    session = Session()
+    if session.query(User).filter_by(uid = uid).first() == None:
+        session.close()
+        return False
+    user = session.query(User).filter_by(uid = uid).first()
+    name = user.first_name + ' ' + user.last_name
+    session.close()
+    return name
+
 def credential_check(username, password): #returns 'no username' if username doesnt exist
     session = Session()
     if session.query(User).filter_by(username = username).first() == None:
@@ -144,7 +157,7 @@ def eid_to_event_name(eid):#returns false if event_name doesnt exist
     name = event.event_name
     session.close()
     return name
-print(eid_to_event_name(2))
+
 def code_to_eid(code):#returns false if code doesnt exist
     session = Session()
     if session.query(Event).filter_by(code = code).first() == None:
@@ -163,9 +176,25 @@ def username_exists(username): #returns false if username doesnt exist
     session.close()
     return True
 
+def list_of_people(eid):
+    session = Session()
+    if session.query(Event).filter_by(eid = eid).first() == None:
+        session.close()
+        return False
+    event = session.query(Event).filter_by(eid = eid).first()
+    participants = event.participants
+    uids = list()
+    print(list(participants.keys()))
+    for i in list(participants.keys()):
+        uids.append(int(i))
+    names = list()
+    for j in uids:
+        names.append(uid_to_name(j))
+    return names
+
 #add_user_to_event(1233245333,1,'need')
 # print(username_to_uid('hello this is meaa'))
 # print(event_name_to_eid('name'))
-create_user("name", "last","hello this is meaa", "password sample", "address sample", "phone", 'email')
-create_event("asdhfasdf", 128013, 'name')
-create_request(1, 2, 128013)
+# create_user("name", "last","hello this is meaa", "password sample", "address sample", "phone", 'email')
+# create_event("asdhfasdf", 128013, 'name')
+# create_request(1, 2, 128013)
