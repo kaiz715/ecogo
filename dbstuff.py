@@ -64,10 +64,16 @@ def create_request(requesting_id, receiving_id, event_id):
     session.commit()
     session.close()
 
+def check_status(rid):
+    session = Session()
+    request = session.query(Request).filter_by(rid = rid).first()
+    return request.status
 
 def update_request(rid, new_status): #new_status can be default, yes, no
     session = Session()
     request = session.query(Request).filter_by(rid = rid).first()
+    print(rid)
+    print(request)
     request.status = new_status
     session.add(request)
     session.commit()
@@ -203,6 +209,18 @@ def uid_to_events(uid):
             pass
     return ret
 
+def usernames_to_rid(receiving_id, requesting_id):
+    session = Session()
+    a = session.query(Request).filter_by(requesting_id = requesting_id).all()
+    print(requesting_id)
+    print(receiving_id)
+    for i in a:
+        if int(i.receiving_id) == receiving_id:
+            rid = i.rid
+            session.close()
+            return rid
+    session.close()
+    return "none thring"
 
 def list_of_people(eid):
     session = Session()

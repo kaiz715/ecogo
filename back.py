@@ -1,6 +1,6 @@
 from flask import Flask, render_template, session, request, redirect, url_for, flash
 import dbstuff
-#import distance
+import distance
 from datetime import timedelta
 app = Flask('__name__')
 app.secret_key = 'app'
@@ -88,6 +88,7 @@ def requests():
     distances = dict()
     user_data = dbstuff.uid_to_stuff(uid)
     user_address = user_data[2]
+    address = dict()
     for i, j in requests.items():
         nrequests[dbstuff.uid_to_username(i)] = dbstuff.eid_to_event_name(j)
     for i, j in nrequests.items():
@@ -95,13 +96,13 @@ def requests():
         email[i] = data[0]
         numbers[i] = data[1]
         address = data[2]
-        #distances[i] = distance.distance(user_address, address)
+        distances[i] = distance.distance(user_address, address)
     if request.method == 'POST':
-        for i in nrequests:
+        for i, j in nrequests.items():
             if request.form[i] == "Accept":
-                dbstuff.update_request(dbstuff.username_to_uid(i), 'yes')
+                dbstuff.update_request(dbstuff.usernames_to_rid(uid, dbstuff.username_to_uid(i)), 'yes')
             else:
-                dbstuff.update_request(dbstuff.username_to_uid(i), 'no')
+                dbstuff.update_request(dbstuff.usernames_to_rid(uid, dbstuff.username_to_uid(i)), 'no')
         requests_dic = dbstuff.get_requests(uid)
         return render_template('requests2.html', nrequests=nrequests, nemails=email, nphones=numbers, ndistances=distances)
     else:
@@ -111,28 +112,30 @@ def requests():
 @app.route('/send', methods=['POST', 'GET'])
 def make_request():
     username = session['user']
-    id = dbstuff.username_to_uid(username)
-    events = dbstuff.uid_to_events(id)
-    eids = {}
-    for event in events:
-        eids[event] = []
-    list = []
-    data = {'': []}
-    for eid, value in eids.items():
-        list = dbstuff.list_of_people(eid)
-        eids[eid] = list
-        for item in list:
-            data[dbstuff.eid_to_event_name(eid)] = data[dbstuff.eid_to_event_name(eid)].append(dbstuff.uid_to_username(item))
+    uid = dbstuff.username_to_uid(username)
+    events = dbstuff.uid_to_events(uid)
+    events_users = {}
+    track = {}
+    fin = {}
+    for i in events:
+        events_users[i] = (dbstuff.list_of_people(i))
+    for i, j in events_users.items():
+        for k in j:
+            if k != uid:
+                track[i] = k
+    for i, j in track.items():
+        fin[dbstuff.eid_to_event_name(i)] = dbstuff.uid_to_username(j)
     if request.method == 'POST':
-        for i, j in data.items():
-            for z in j:
-                if request.form[f'{i} {z}'] == 'Send Request':
-                    uid = dbstuff.username_to_uid(z)
+        for i, j in fin.items():
+            try:
+                if request.form[str(i) + str(j)] == 'Send Request':
+                    senduid = dbstuff.username_to_uid(j)
                     event_id = dbstuff.event_name_to_eid(i)
-                    dbstuff.create_request(id, uid, event_id)
-        return render_template('create.html', people=data)
-    else:
-        return render_template('create.html', people=data)
+                    dbstuff.create_request(uid, senduid, event_id)
+            except:
+                pass
+
+    return render_template('create.html', fin = fin)
 
 
 @app.route('/join', methods=['POST', 'GET'])
