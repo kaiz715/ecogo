@@ -85,8 +85,7 @@ def get_requests(receiving_id): #returns none if no requests
     session = Session()
     requests = session.query(Request).filter_by(receiving_id=receiving_id).all()
     for i in requests:
-        if i.status == 'default':
-            pairs[i.requesting_id] = i.event_id
+        pairs[i.requesting_id] = i.event_id
     session.close()
     return pairs
 

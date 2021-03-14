@@ -193,5 +193,31 @@ def create():
 def about_us():
     return render_template('about_us.html')
 
+
+@app.route('/getActive', methods=['GET'])
+def get_active():
+    uid = dbstuff.username_to_uid(session['user'])
+    requests = dbstuff.get_requests(uid)
+    nrequests = dict()
+    email = dict()
+    numbers = dict()
+    distances = dict()
+    user_data = dbstuff.uid_to_stuff(uid)
+    user_address = user_data[2]
+    address = dict()
+    status = dict()
+    for i, j in requests.items():
+        nrequests[dbstuff.uid_to_username(i)] = dbstuff.eid_to_event_name(j)
+    for i, j in nrequests.items():
+        data = dbstuff.uid_to_stuff(dbstuff.username_to_uid(i))
+        email[i] = data[0]
+        numbers[i] = data[1]
+        address = data[2]
+        id3 = dbstuff.username_to_uid(i)
+        request = dbstuff.usernames_to_rid(uid, id3)
+        status[i] = dbstuff.check_status(request)
+        distances[i] = distance.distance(user_address, address)
+    return render_template('getactive.html', nrequests=nrequests, nemails=email, nphones=numbers, ndistances=distances, status=status)
+
 if __name__ == "__main__":
     app.run(debug=True)
