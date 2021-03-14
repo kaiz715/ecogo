@@ -1,6 +1,6 @@
 from flask import Flask, render_template, session, request, redirect, url_for, flash
 import dbstuff
-import distance
+#import distance
 from datetime import timedelta
 app = Flask('__name__')
 app.secret_key = 'app'
@@ -95,7 +95,7 @@ def requests():
         email[i] = data[0]
         numbers[i] = data[1]
         address = data[2]
-        distances[i] = distance.distance(user_address, address)
+        #distances[i] = distance.distance(user_address, address)
     if request.method == 'POST':
         for i in nrequests:
             if request.form[i] == "Accept":
@@ -108,16 +108,31 @@ def requests():
         return render_template('requests2.html', nrequests=nrequests, nemails=email, nphones=numbers, ndistances=distances)
 
 
-@app.route('/make', methods=['POST', 'GET'])
+@app.route('/send', methods=['POST', 'GET'])
 def make_request():
-    eid = 0
-    people = dbstuff.list_of_people(eid)
+    username = session['user']
+    id = dbstuff.username_to_uid(username)
+    events = dbstuff.uid_to_events(id)
+    eids = {}
+    for event in events:
+        eids[event] = []
+    list = []
+    data = {'': []}
+    for eid, value in eids.items():
+        list = dbstuff.list_of_people(eid)
+        eids[eid] = list
+        for item in list:
+            data[dbstuff.eid_to_event_name(eid)] = data[dbstuff.eid_to_event_name(eid)].append(dbstuff.uid_to_username(item))
     if request.method == 'POST':
-        username = session['user']
-        id = dbstuff.username_to_uid(username)
-        return redirect(url_for('index'))
+        for i, j in data.items():
+            for z in j:
+                if request.form[f'{i} {z}'] == 'Send Request':
+                    uid = dbstuff.username_to_uid(z)
+                    event_id = dbstuff.event_name_to_eid(i)
+                    dbstuff.create_request(id, uid, event_id)
+        return render_template('create.html', people=data)
     else:
-        return render_template('create.html', )
+        return render_template('create.html', people=data)
 
 
 @app.route('/join', methods=['POST', 'GET'])

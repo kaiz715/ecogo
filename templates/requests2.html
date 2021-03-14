@@ -49,7 +49,7 @@
                         {% block content%}
                             {% for i,j in nrequests.items()%}
                                 <form method="post" action="/requests">
-                                    <p>{{i}} for event {{j}}</p>
+                                    <p>{{i}} for the event {{j}}</p>
 									<p>Email: {{nemails[i]}}</p>
 									<p>Phone Number: {{nphones[i]}}</p>
 									<p>Distance: {{ndistances[i]}}</p>
@@ -63,7 +63,7 @@
 			<footer id="footer">
 				<div class="inner">
                     <section>
-							<h3>Carpooling</h3>
+							<h3>Using CarbonGo</h3>
 							<p>Organizers create an event, input its location, and receive a randomly generated code. They can send the code to everyone attending the event, so they can input the code and join the event. People can see others attending the same event in order of driving distance from them, and send a carpool request. When someone receives a carpool request, they can view the requester’s email and phone number information to contact them and arrange carpooling details.</p>
                     </section>
                     <section>

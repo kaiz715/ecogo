@@ -34,39 +34,44 @@
 				</ul>
 			</nav>
 
-		<!-- Banner -->
-			<section id="banner">
-				<div class="inner">
-					<h1>Send Request</h1>
-					<p>Send a request to carpool with someone going the same place as you</p>
-				</div>
-			</section>
+		<!-- Heading -->
+			<div id="heading" >
+				<h1>Send A Request</h1>
+			</div>
 
-		<!-- Highlights -->
-			<section class="wrapper">
+		<!-- Main -->
+			<section id="main" class="wrapper">
 				<div class="inner">
-					<header class="special">
-						<h2>Send Request</h2>
-							<form action="/createRequests" method="post">
-								{% for person in people %}
-									<p>{{person}}</p>
-									<p><input type="submit" name={{person}} value="Send Request" /></p>
+					<div class="content">
+						<header>
+							<h2>Send A Request</h2>
+						</header>
+                        {% block content%}
+                            {% for i, j in people.items()%}
+								{% for z in j%}
+									<form method="post" action="/send">
+										<p>{{z}} for the event {{i}}</p>
+										<p><input type="submit" name="{{i}} {{z}}" value="Send Request" /></p>
+									</form>
 								{% endfor %}
-							</form>
-					</header>
-				</div>
-			</section>
+                            {% endfor %}
+                        {% endblock %}
 
-		<!-- CTA -->
-			<section id="cta" class="wrapper">
-				<div class="inner">
-					<h2>Using CarbonGo</h2>
-					<p>Organizers create an event, input its location, and receive a randomly generated code. They can send the code to everyone attending the event, so they can input the code and join the event. People can see others attending the same event in order of driving distance from them, and send a carpool request. When someone receives a carpool request, they can view the requester’s email and phone number information to contact them and arrange carpooling details.</p>
-				</div>
-			</section>
 		<!-- Footer -->
 			<footer id="footer">
 				<div class="inner">
+                    <section>
+							<h3>Using CarbonGo</h3>
+							<p>Organizers create an event, input its location, and receive a randomly generated code. They can send the code to everyone attending the event, so they can input the code and join the event. People can see others attending the same event in order of driving distance from them, and send a carpool request. When someone receives a carpool request, they can view the requester’s email and phone number information to contact them and arrange carpooling details.</p>
+                    </section>
+                    <section>
+							<ul class="alt">
+								<li><a href="/">Home</a></li>
+								<li><a href="login">Login</a></li>
+								<li><a href="signup">Sign Up</a></li>
+								<li><a href="requests">Requests</a></li>
+							</ul>
+                    </section>
 					<div class="copyright">
 						&copy; Untitled. Photos <a href="https://unsplash.co">Unsplash</a>, Video <a href="https://coverr.co">Coverr</a>.
 					</div>
