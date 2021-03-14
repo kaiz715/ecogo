@@ -17,7 +17,7 @@
 
 		<!-- Header -->
 			<header id="header">
-				<a class="logo" href="/">EcoGo</a>
+				<a class="logo" href="index.html">EcoGo</a>
 				<nav>
 					<a href="#menu">Menu</a>
 				</nav>
@@ -36,40 +36,29 @@
 					<li><a href="/aboutUs">About Us</a></li>
 				</ul>
 			</nav>
-
-		<!-- Heading -->
-			<div id="heading" >
-				<h1>Requests</h1>
-			</div>
-
-		<!-- Main -->
-			<section id="main" class="wrapper">
+		<!-- Banner -->
+			<section id="banner">
 				<div class="inner">
-					<div class="content">
-						<header>
-							<h2>Requests</h2>
-						</header>
-                        {% block content%}
-                            {% for i,j in nrequests.items()%}
-                                <form method="post" action="/requests">
-                                    <p>{{i}} for the event {{j}}</p>
-									<p>Email: {{nemails[i]}}</p>
-									<p>Phone Number: {{nphones[i]}}</p>
-									<p>Distance: {{ndistances[i]}}</p>
-                                    <p><input type="submit" name={{i}} value="Accept" ></p>
-                                    <p><input type="submit" name={{i}} value="Decline" ></p>
-                                </form>
-                            {% endfor %}
-                        {% endblock %}
-
+					<h1>WRITE HEADER HERE</h1>
+					<p>WRITE TEXT HERE</p>
+				</div>
+			</section>
+		<!-- CTA -->
+			<section id="cta" class="wrapper">
+				<div class="inner">
+					<h2>WRITE HEADER HERE</h2>
+					<p>WRITE TEXT HERE</p>
+				</div>
+			</section>
 		<!-- Footer -->
 			<footer id="footer">
 				<div class="inner">
-                    <section>
+					<div class="content">
+						<section>
 							<h3>Using EcoGo</h3>
 							<p>Organizers create an event, input its location, and receive a randomly generated code. They can send the code to everyone attending the event, so they can input the code and join the event. People can see others attending the same event in order of driving distance from them, and send a carpool request. When someone receives a carpool request, they can view the requester’s email and phone number information to contact them and arrange carpooling details.</p>
-                    </section>
-                    <section>
+						</section>
+						<section>
 							<ul class="alt">
 								<li><a href="/">Home</a></li>
 								<li><a href="login">Login</a></li>
@@ -77,7 +66,8 @@
 								<li><a href="/requests">Requests</a></li>
 								<li><a href="aboutUs">About Us</a></li>
 							</ul>
-                    </section>
+						</section>
+					</div>
 					<div class="copyright">
 						&copy; Untitled. Photos <a href="https://unsplash.co">Unsplash</a>, Video <a href="https://coverr.co">Coverr</a>.
 					</div>

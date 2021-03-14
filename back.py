@@ -187,5 +187,9 @@ def create():
         return render_template('event.html')
 
 
+@app.route('/aboutUs', methods=['POST', 'GET'])
+def about_us():
+    return render_template('about_us.html')
+
 if __name__ == "__main__":
     app.run(debug=True)
