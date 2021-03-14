@@ -70,42 +70,23 @@ def logout():
 
 @app.route('/requests', methods=['POST', 'GET'])
 def requests():
-    global requests_dic
     uid = dbstuff.username_to_uid(session['user'])
-    requests_dic = dbstuff.get_requests(uid)
-    keys = []
-    keys1 = {}
-    for reques in requests_dic:
-        if reques is not None:
-            eid = requests_dic[reques]
-            name = dbstuff.eid_to_event_name(eid)
-            keys1 = {dbstuff.uid_to_username(reques): name}
+    requests = dbstuff.get_requests(uid)
+    nrequests = dict()
+    for i, j in requests.items():
+        nrequests[dbstuff.uid_to_username(i)] = dbstuff.eid_to_event_name(j)
+
     if request.method == 'POST':
-        for i in requests_dic:
-            try:
-                print('hello')
-                print(i)
-                print(request.form)
-                if request.form[1] == "Accept":
-                    print('hello')
-                    print(i)
-                    
-                    dbstuff.update_request(i, 'yes')
-                else:
-                    dbstuff.update_request(i, 'no')
-                
-            except Exception as e:
-                
-                print(e)
-            requests_dic = dbstuff.get_requests(uid)
-        # for key in keys:
+        for i in nrequests:
+            if request.form[i] == "Accept":
+                dbstuff.update_request(dbstuff.username_to_uid(i), 'yes')
+            else:
+                dbstuff.update_request(dbstuff.username_to_uid(i), 'no')
+        requests_dic = dbstuff.get_requests(uid)
             
-        #     print(request.form[key])
-        #     print('SEEE MEEE FUCK')
-            
-        return render_template('requests.html', requests=keys1)
+        return render_template('requests.html', nrequests=nrequests)
     else:
-        return render_template('requests.html', requests=keys1)
+        return render_template('requests.html', nrequests=nrequests)
 
 
 @app.route('/join', methods=['POST', 'GET'])

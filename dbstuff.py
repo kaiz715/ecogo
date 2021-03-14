@@ -83,7 +83,6 @@ def get_requests(receiving_id): #returns none if no requests
         pairs[i.requesting_id] = i.event_id
     return pairs
 
-
 def add_user_to_event(uid, eid, availability): #avalibility can be need, give, filled
     #returns false if event doesnt exist
     session= Session()
@@ -184,12 +183,12 @@ def list_of_people(eid):
     event = session.query(Event).filter_by(eid = eid).first()
     participants = event.participants
     uids = list()
-    print(list(participants.keys()))
     for i in list(participants.keys()):
         uids.append(int(i))
     names = list()
     for j in uids:
         names.append(uid_to_name(j))
+    session.close()
     return names
 
 #add_user_to_event(1233245333,1,'need')

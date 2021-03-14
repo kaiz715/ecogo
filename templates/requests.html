@@ -47,15 +47,13 @@
 							<h2>Requests</h2>
 						</header>
                         {% block content%}
-                            {% if requests %}
-                                {% for request in requests%}
-                                    <form method="post" action="/requests">
-                                        <p>{{request}} for event {{requests[request]}}</p>
-                                        <p><input type="submit" name={{request}} value="Accept" ></p>
-                                        <p><input type="submit" name={{request}} value="Decline" ></p>
-                                    </form>
-                                {% endfor %}
-                            {% endif %}
+                            {% for i,j in nrequests.items()%}
+                                <form method="post" action="/requests">
+                                    <p>{{i}} for event {{j}}</p>
+                                    <p><input type="submit" name={{i}} value="Accept" ></p>
+                                    <p><input type="submit" name={{i}} value="Decline" ></p>
+                                </form>
+                            {% endfor %}
                         {% endblock %}
 
 		<!-- Footer -->
