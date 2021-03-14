@@ -214,12 +214,11 @@ def list_of_people(eid):
     uids = list()
     for i in list(participants.keys()):
         uids.append(int(i))
-    names = list()
-    for j in uids:
-        names.append(uid_to_name(j))
-    session.close()
-    return names
-
+    # names = list()
+    # for j in uids:
+    #     names.append(uid_to_name(j))
+    # session.close()
+    return uids
 
 #add_user_to_event(1233245333,1,'need')
 # print(username_to_uid('hello this is meaa'))
