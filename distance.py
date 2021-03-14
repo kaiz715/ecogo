@@ -1,6 +1,6 @@
 import requests
 import json
-import googlemapspy
+import googlemaps
 from config import apikey
 
 def distance(driverAddress, passengerAddress):

@@ -84,7 +84,6 @@ def requests():
     uid = dbstuff.username_to_uid(session['user'])
     requests = dbstuff.get_requests(uid)
     nrequests = dict()
-<<<<<<< Updated upstream
     email = dict()
     numbers = dict()
     distances = dict()
@@ -92,19 +91,12 @@ def requests():
     user_address = user_data[2]
     for i, j in requests.items():
         nrequests[dbstuff.uid_to_username(i)] = dbstuff.eid_to_event_name(j)
-        data = dbstuff.uid_to_stuff(i)
+    for i, j in nrequests.items():
+        data = dbstuff.uid_to_stuff(dbstuff.username_to_uid(i))
         email[i] = data[0]
         numbers[i] = data[1]
         address = data[2]
         distances[i] = distance.distance(user_address, address)
-=======
-    #emails = dict()
-    #addresses = dict()
-    #phone = dict()
-    for i, j in requests.items():
-        nrequests[dbstuff.uid_to_username(i)] = dbstuff.eid_to_event_name(j)
-        #emails[dbstuff.]
->>>>>>> Stashed changes
     if request.method == 'POST':
         for i in nrequests:
             if request.form[i] == "Accept":
@@ -112,13 +104,9 @@ def requests():
             else:
                 dbstuff.update_request(dbstuff.username_to_uid(i), 'no')
         requests_dic = dbstuff.get_requests(uid)
-<<<<<<< Updated upstream
         return render_template('requests2.html', nrequests=nrequests, nemails=email, nphones=numbers, ndistances=distances)
-=======
-        return render_template('requests.html', nrequests=nrequests)
->>>>>>> Stashed changes
     else:
-        return render_template('requests2.html', nrequests=nrequests)
+        return render_template('requests2.html', nrequests=nrequests, nemails=email, nphones=numbers, ndistances=distances)
 
 
 @app.route('/make', methods=['POST', 'GET'])
