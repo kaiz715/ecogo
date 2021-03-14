@@ -96,32 +96,56 @@ def add_user_to_event(uid, eid, availability): #avalibility can be need, give, f
     session.commit()
     session.close()
 
-def username_to_uid(username):
+def username_to_uid(username): #returns false if username doesnt exist
     session = Session()
+    if session.query(User).filter_by(username = username).first() == None:
+        session.close()
+        return False
     user = session.query(User).filter_by(username = username).first()
     uid = user.uid
     session.close()
     return uid
 
-
-def event_name_to_eid(event_name):
+def credential_check(username, password): #returns 'no username' if username doesnt exist
     session = Session()
+    if session.query(User).filter_by(username = username).first() == None:
+        session.close()
+        return 'no username'
+    if password == session.query(User).filter_by(username = username).first().password:
+        return True
+    return False
+
+def event_name_to_eid(event_name):#returns false if event_name doesnt exist
+    session = Session()
+    if session.query(Event).filter_by(event_name = event_name).first() == None:
+        session.close()
+        return False
     event = session.query(Event).filter_by(event_name = event_name).first()
     eid = event.eid
     session.close()
     return eid
 
-def code_to_eid(code):
+def code_to_eid(code):#returns false if code doesnt exist
     session = Session()
+    if session.query(Event).filter_by(code = code).first() == None:
+        session.close()
+        return False
     event = session.query(Event).filter_by(code = code).first()
     eid = event.eid
     session.close()
     return eid
 
+def username_exists(username): #returns false if username doesnt exist
+    session = Session()
+    if session.query(User).filter_by(username = username).first() == None:
+        session.close()
+        return False
+    session.close()
+    return True
 
 #add_user_to_event(1233245333,1,'need')
-#print(username_to_uid('hello this is meaa'))
-#print(event_name_to_eid('name'))
+# print(username_to_uid('hello this is meaa'))
+# print(event_name_to_eid('name'))
 # create_user("name", "last","hello this is meaa", "password sample", "address sample", "phone", 'email')
 # create_event("asdhfasdf", 1231231, 'name')
 # create_request(142332, 10089123, 128013)
