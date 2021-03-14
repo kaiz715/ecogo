@@ -5,7 +5,7 @@ from datetime import timedelta
 app = Flask('__name__')
 app.secret_key = 'app'
 app.permanent_session_lifetime = timedelta(days=1)
-requests_dic = {}
+requests_dic = dict()
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -73,9 +73,14 @@ def logout():
 def requests():
     global requests_dic
     uid = dbstuff.username_to_uid(session['user'])
-    print(uid)
     requests_dic = dbstuff.get_requests(uid)
     keys = []
+    keys1 = {}
+    for reques in requests_dic:
+        if reques is not None:
+            eid = requests_dic[reques]
+            name = dbstuff.eid_to_event_name(eid)
+            keys1 = {dbstuff.uid_to_username(reques): name}
     if request.method == 'POST':
         for i in requests_dic:
             keys.append(i)
@@ -88,11 +93,9 @@ def requests():
                 requests_dic = dbstuff.get_requests(uid)
             except:
                 print('Error')
-        print(requests_dic)
-        return render_template('requests.html', request=requests_dic)
+        return render_template('requests.html', request=keys1)
     else:
-        print(requests_dic)
-        return render_template('requests.html', requests=requests_dic)
+        return render_template('requests.html', requests=keys1)
 
 
 @app.route('/join', methods=['POST', 'GET'])
@@ -130,8 +133,8 @@ def create():
         username = session['user']
         id = dbstuff.username_to_uid(username)
         event_name = request.form['name']
-        event_id = dbstuff.create_event(address, id, event_name)
-        return render_template('eventCreated.html', code=event_id)
+        code = dbstuff.create_event(address, id, event_name)
+        return render_template('eventCreated.html', code=code)
     else:
         return render_template('create.html')
 

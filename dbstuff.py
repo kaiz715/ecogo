@@ -106,6 +106,16 @@ def username_to_uid(username): #returns false if username doesnt exist
     session.close()
     return uid
 
+def uid_to_username(uid): #returns false if username doesnt exist
+    session = Session()
+    if session.query(User).filter_by(uid = uid).first() == None:
+        session.close()
+        return False
+    user = session.query(User).filter_by(uid = uid).first()
+    username = user.username
+    session.close()
+    return username
+
 def credential_check(username, password): #returns 'no username' if username doesnt exist
     session = Session()
     if session.query(User).filter_by(username = username).first() == None:
@@ -125,6 +135,16 @@ def event_name_to_eid(event_name):#returns false if event_name doesnt exist
     session.close()
     return eid
 
+def eid_to_event_name(eid):#returns false if event_name doesnt exist
+    session = Session()
+    if session.query(Event).filter_by(eid = eid).first() == None:
+        session.close()
+        return False
+    event = session.query(Event).filter_by(eid = eid).first()
+    name = event.event_name
+    session.close()
+    return name
+print(eid_to_event_name(2))
 def code_to_eid(code):#returns false if code doesnt exist
     session = Session()
     if session.query(Event).filter_by(code = code).first() == None:
@@ -146,6 +166,6 @@ def username_exists(username): #returns false if username doesnt exist
 #add_user_to_event(1233245333,1,'need')
 # print(username_to_uid('hello this is meaa'))
 # print(event_name_to_eid('name'))
-# create_user("name", "last","hello this is meaa", "password sample", "address sample", "phone", 'email')
-# create_event("asdhfasdf", 1231231, 'name')
-# create_request(142332, 10089123, 128013)
+create_user("name", "last","hello this is meaa", "password sample", "address sample", "phone", 'email')
+create_event("asdhfasdf", 128013, 'name')
+create_request(1, 2, 128013)
