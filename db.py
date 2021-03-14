@@ -24,7 +24,6 @@ class User(Base):
 class Event(Base):
     __tablename__="events"
 
-
     eid=Column('eid', Integer, primary_key=True)
     code = Column('code', Integer, unique = True)
     location = Column('location', String)

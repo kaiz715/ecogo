@@ -83,7 +83,7 @@ def logout():
 @app.route('/requests', methods=['POST', 'GET'])
 def requests():
     uid = dbstuff.username_to_uid(session['user'])
-    requests = dbstuff.get_requests(uid)
+    requests = dbstuff.get_requestss(uid)
     nrequests = dict()
     email = dict()
     numbers = dict()
@@ -97,18 +97,18 @@ def requests():
         data = dbstuff.uid_to_stuff(dbstuff.username_to_uid(i))
         email[i] = data[0]
         numbers[i] = data[1]
-        address = data[2]
-        distances[i] = distance.distance(user_address, address)
+        address[i] = data[2]
+        distances[i] = distance.distance(user_address, address[i])
     if request.method == 'POST':
         for i, j in nrequests.items():
             if request.form[i] == "Accept":
                 dbstuff.update_request(dbstuff.usernames_to_rid(uid, dbstuff.username_to_uid(i)), 'yes')
             else:
                 dbstuff.update_request(dbstuff.usernames_to_rid(uid, dbstuff.username_to_uid(i)), 'no')
-        requests_dic = dbstuff.get_requests(uid)
-        return render_template('requests2.html', nrequests=nrequests, nemails=email, nphones=numbers, ndistances=distances)
+        requests_dic = dbstuff.get_requestss(uid)
+        return render_template('requests2.html', nrequests=nrequests, nemails=email, nphones=numbers, ndistances=distances ,naddress = address)
     else:
-        return render_template('requests2.html', nrequests=nrequests, nemails=email, nphones=numbers, ndistances=distances)
+        return render_template('requests2.html', nrequests=nrequests, nemails=email, nphones=numbers, ndistances=distances, naddress = address)
 
 
 @app.route('/send', methods=['POST', 'GET'])
@@ -212,12 +212,12 @@ def get_active():
         data = dbstuff.uid_to_stuff(dbstuff.username_to_uid(i))
         email[i] = data[0]
         numbers[i] = data[1]
-        address = data[2]
+        address[i] = data[2]
         id3 = dbstuff.username_to_uid(i)
         request = dbstuff.usernames_to_rid(uid, id3)
         status[i] = dbstuff.check_status(request)
-        distances[i] = distance.distance(user_address, address)
-    return render_template('getactive.html', nrequests=nrequests, nemails=email, nphones=numbers, ndistances=distances, status=status)
+        distances[i] = distance.distance(user_address, address[i])
+    return render_template('getactive.html', nrequests=nrequests, nemails=email, nphones=numbers, ndistances=distances, status=status, naddress = address)
 
 if __name__ == "__main__":
     app.run(debug=True)

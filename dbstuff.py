@@ -89,6 +89,16 @@ def get_requests(receiving_id): #returns none if no requests
     session.close()
     return pairs
 
+def get_requestss(receiving_id): #returns none if no requests
+    pairs = dict()
+    session = Session()
+    requests = session.query(Request).filter_by(receiving_id=receiving_id).all()
+    for i in requests:
+        if i.status =='default':
+            pairs[i.requesting_id] = i.event_id
+    session.close()
+    return pairs
+
 def add_user_to_event(uid, eid, availability): #avalibility can be need, give, filled
     #returns false if event doesnt exist
     session= Session()
