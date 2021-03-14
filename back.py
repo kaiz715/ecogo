@@ -5,10 +5,7 @@ from datetime import timedelta
 app = Flask('__name__')
 app.secret_key = 'app'
 app.permanent_session_lifetime = timedelta(days=1)
-requests_dic = {
-    'kaiz': 'HighSchool',
-    'evelynz': 'Party'
-            }
+requests_dic = {}
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -74,6 +71,10 @@ def logout():
 
 @app.route('/requests', methods=['POST', 'GET'])
 def requests():
+    global requests_dic
+    uid = dbstuff.username_to_uid(session['user'])
+    print(uid)
+    requests_dic = dbstuff.get_requests(uid)
     keys = []
     if request.method == 'POST':
         for i in requests_dic:
@@ -81,13 +82,16 @@ def requests():
         for key in keys:
             try:
                 if request.form[key] == 'Accept':
-                    print(f'Accepted {key}')
+                    dbstuff.update_request(key, 'yes')
                 else:
-                    print(f'Declined {key}')
+                    dbstuff.update_request(key, 'no')
+                requests_dic = dbstuff.get_requests(uid)
             except:
                 print('Error')
+        print(requests_dic)
         return render_template('requests.html', request=requests_dic)
     else:
+        print(requests_dic)
         return render_template('requests.html', requests=requests_dic)
 
 
@@ -101,7 +105,7 @@ def join():
             status = 'give'
         code = request.form['code']
         print(code)
-        if code is None:
+        if code  == '':
             flash("Please enter a code!")
             return render_template('join.html')
         else:
