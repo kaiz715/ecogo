@@ -49,13 +49,11 @@
 							<h2>Send A Request</h2>
 						</header>
                         {% block content%}
-                            {% for i, j in people.items()%}
-								{% for z in j%}
-									<form method="post" action="/send">
-										<p>{{z}} for the event {{i}}</p>
-										<p><input type="submit" name="{{i}} {{z}}" value="Send Request" /></p>
-									</form>
-								{% endfor %}
+                            {% for i, j in fin.items()%}
+								<form method="post" action="/send">
+									<p>{{j}} for the event {{i}}</p>
+									<p><input type="submit" name="{{i}}{{j}}" value="Send Request" /></p>
+								</form>
                             {% endfor %}
                         {% endblock %}
 
