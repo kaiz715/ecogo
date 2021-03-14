@@ -160,6 +160,19 @@ def eid_to_event_name(eid):#returns false if event_name doesnt exist
     session.close()
     return name
 
+def uid_to_stuff(uid):#returns false if event_name doesnt exist
+    session = Session()
+    if session.query(User).filter_by(uid = uid).first() == None:
+        session.close()
+        return False
+    user = session.query(User).filter_by(uid = uid).first()
+    ret = list()
+    ret.append(user.email)
+    ret.append(user.phone_number)
+    ret.append(user.address)
+    session.close()
+    return ret #email, list, address
+    
 def code_to_eid(code):#returns false if code doesnt exist
     session = Session()
     if session.query(Event).filter_by(code = code).first() == None:
