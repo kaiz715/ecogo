@@ -5,7 +5,7 @@ import random
 
 
 Base = declarative_base()
-engine = create_engine('sqlite:///users.db', echo=True)
+engine = create_engine('sqlite:///ecogo.db', echo=True)
 
 class User(Base):
     __tablename__="users"
