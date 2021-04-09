@@ -106,7 +106,7 @@ def requests():
             else:
                 dbstuff.update_request(dbstuff.usernames_to_rid(uid, dbstuff.username_to_uid(i)), 'no')
         requests_dic = dbstuff.get_requestss(uid)
-        return redirect('http://127.0.0.1:5000/getActive')
+        return render_template('requests2.html', nrequests=nrequests, nemails=email, nphones=numbers, ndistances=distances ,naddress = address)
     else:
         return render_template('requests2.html', nrequests=nrequests, nemails=email, nphones=numbers, ndistances=distances, naddress = address)
 
