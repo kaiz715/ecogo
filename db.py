@@ -19,7 +19,6 @@ class User(Base):
     phone_number = Column('phone_number', String)
     email = Column('email', String)
     address = Column('address', String)
-    in_event = Column('in_event', Boolean)
 
 class Event(Base):
     __tablename__="events"

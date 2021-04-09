@@ -3,8 +3,35 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 from db import User, Event, Request, Session
 import random, time
+#DO NOT USE THIS PLEASE
+#DO NOT USE THIS PLEASE
+#DO NOT USE THIS PLEASE
+#DO NOT USE THIS PLEASE
+#DO NOT USE THIS PLEASE
+#DO NOT USE THIS PLEASE
+#DO NOT USE THIS PLEASE
+#DO NOT USE THIS PLEASE
+#DO NOT USE THIS PLEASE
+#DO NOT USE THIS PLEASE
+#DO NOT USE THIS PLEASE
+#DO NOT USE THIS PLEASE
+#DO NOT USE THIS PLEASE
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+# done
 def create_user(first_name, last_name, username, password, address, phone_number, email):
     session = Session()
     if (session.query(User.username).filter_by(username = username).first()) == None:
@@ -27,7 +54,7 @@ def create_user(first_name, last_name, username, password, address, phone_number
         return True
     return False
     
-
+# done
 def create_event(location, organiser_id, event_name): #returns the code
     session = Session()
     event = Event()
@@ -48,7 +75,7 @@ def create_event(location, organiser_id, event_name): #returns the code
     session.close()
     return code
 
-
+# done
 def create_request(requesting_id, receiving_id, event_id):
     session = Session()
     request = Request()
@@ -64,11 +91,13 @@ def create_request(requesting_id, receiving_id, event_id):
     session.commit()
     session.close()
 
+# done
 def check_status(rid):
     session = Session()
     request = session.query(Request).filter_by(rid = rid).first()
     return request.status
 
+# done
 def update_request(rid, new_status): #new_status can be default, yes, no
     session = Session()
     request = session.query(Request).filter_by(rid = rid).first()
@@ -79,7 +108,7 @@ def update_request(rid, new_status): #new_status can be default, yes, no
     session.commit()
     session.close()
 
-
+# done
 def get_requests(receiving_id): #returns none if no requests
     pairs = dict()
     session = Session()
@@ -88,7 +117,7 @@ def get_requests(receiving_id): #returns none if no requests
         pairs[i.requesting_id] = i.event_id
     session.close()
     return pairs
-
+# done
 def get_requestss(receiving_id): #returns none if no requests
     pairs = dict()
     session = Session()
@@ -99,6 +128,7 @@ def get_requestss(receiving_id): #returns none if no requests
     session.close()
     return pairs
 
+# done 
 def add_user_to_event(uid, eid, availability): #avalibility can be need, give, filled
     #returns false if event doesnt exist
     session= Session()
@@ -114,6 +144,8 @@ def add_user_to_event(uid, eid, availability): #avalibility can be need, give, f
     session.commit()
     session.close()
 
+
+# done
 def username_to_uid(username): #returns false if username doesnt exist
     session = Session()
     if session.query(User).filter_by(username = username).first() == None:
@@ -124,6 +156,7 @@ def username_to_uid(username): #returns false if username doesnt exist
     session.close()
     return uid
 
+#done
 def uid_to_username(uid): #returns false if username doesnt exist
     session = Session()
     if session.query(User).filter_by(uid = uid).first() == None:
@@ -134,6 +167,8 @@ def uid_to_username(uid): #returns false if username doesnt exist
     session.close()
     return username
 
+
+# done
 def uid_to_name(uid): #returns false if username doesnt exist
     session = Session()
     if session.query(User).filter_by(uid = uid).first() == None:
@@ -144,6 +179,7 @@ def uid_to_name(uid): #returns false if username doesnt exist
     session.close()
     return name
 
+#done
 def credential_check(username, password): #returns 'no username' if username doesnt exist
     session = Session()
     if session.query(User).filter_by(username = username).first() == None:
@@ -155,6 +191,7 @@ def credential_check(username, password): #returns 'no username' if username doe
     session.close()
     return False
 
+#done
 def event_name_to_eid(event_name):#returns false if event_name doesnt exist
     session = Session()
     if session.query(Event).filter_by(event_name = event_name).first() == None:
@@ -165,6 +202,7 @@ def event_name_to_eid(event_name):#returns false if event_name doesnt exist
     session.close()
     return eid
 
+#done
 def eid_to_event_name(eid):#returns false if event_name doesnt exist
     session = Session()
     if session.query(Event).filter_by(eid = eid).first() == None:
@@ -175,6 +213,7 @@ def eid_to_event_name(eid):#returns false if event_name doesnt exist
     session.close()
     return name
 
+# done
 def uid_to_stuff(uid):#returns false if event_name doesnt exist
     session = Session()
     if session.query(User).filter_by(uid = uid).first() == None:
@@ -187,7 +226,8 @@ def uid_to_stuff(uid):#returns false if event_name doesnt exist
     ret.append(user.address)
     session.close()
     return ret #email, list, address
-    
+
+#done
 def code_to_eid(code):#returns false if code doesnt exist
     session = Session()
     if session.query(Event).filter_by(code = code).first() == None:
@@ -198,6 +238,7 @@ def code_to_eid(code):#returns false if code doesnt exist
     session.close()
     return eid
 
+# done
 def username_exists(username): #returns false if username doesnt exist
     session = Session()
     if session.query(User).filter_by(username = username).first() == None:
@@ -206,6 +247,7 @@ def username_exists(username): #returns false if username doesnt exist
     session.close()
     return True
 
+# done
 def uid_to_events(uid):
     ret = []
     session = Session()
@@ -218,6 +260,7 @@ def uid_to_events(uid):
             pass
     return ret
 
+# N/A DO NOT USE THIS PLZ THIS IS BAD
 def usernames_to_rid(receiving_id, requesting_id):
     session = Session()
     a = session.query(Request).filter_by(requesting_id = requesting_id).all()
@@ -231,6 +274,7 @@ def usernames_to_rid(receiving_id, requesting_id):
     session.close()
     return "none thring"
 
+# done
 def list_of_people(eid):
     session = Session()
     if session.query(Event).filter_by(eid = eid).first() == None:
@@ -246,6 +290,7 @@ def list_of_people(eid):
     #     names.append(uid_to_name(j))
     # session.close()
     return uids
+
 
 #add_user_to_event(1233245333,1,'need')
 # print(username_to_uid('hello this is meaa'))
