@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean, JSON
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean, JSON, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 import random
@@ -29,6 +29,9 @@ class Event(Base):
     event_name = Column('event_name', String)
     participants = Column('participants', JSON)
     organiser_id = Column('event_organiser', Integer) #user id
+    start_time = Column('start_time', DateTime)
+    end_time = Column('end_time', DateTime)
+    repeat = Column('repeat', Boolean)
 
 
 class Request(Base):

@@ -2,6 +2,7 @@ from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boole
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 from db import User, Event, Request, Session
+from datetime import datetime
 import random, time
 
 
@@ -69,7 +70,7 @@ def credential_check(username, password):  # returns -1 if username doesnt exist
 
 
 class FunctionUser:
-    def __init__(  # IMPORTANT: check if unique username first by using unique_check()
+    def __init__(
         self,
         uid,
         first_name,
@@ -90,8 +91,16 @@ class FunctionUser:
         self.address = address
 
     @classmethod
-    def from_new(
-        cls, first_name, last_name, username, password, phone_number, email, address
+    def from_new(  # for creating a new user
+        # IMPORTANT: check if unique username first by using unique_check()
+        cls,
+        first_name,
+        last_name,
+        username,
+        password,
+        phone_number,
+        email,
+        address,
     ):
         session = Session()
         user = User()
@@ -114,7 +123,7 @@ class FunctionUser:
         )
 
     @classmethod
-    def from_db(cls, uid):
+    def from_db(cls, uid):  # for already existing user
         session = Session()
         user = session.query(User).filter_by(uid=uid).first()
         username = user.username
@@ -188,7 +197,9 @@ class FunctionRequests:
         self.status = status
 
     @classmethod
-    def from_new(cls, requesting_id, receiving_id, event_id):
+    def from_new(
+        cls, requesting_id, receiving_id, event_id
+    ):  # you can use this or the one in the functionuser class
         session = Session()
         request = Request()
 
@@ -225,7 +236,17 @@ class FunctionRequests:
 
 
 class FunctionEvents:
-    def __init__(self, eid, location, organiser_id, event_name, code):
+    def __init__(
+        self,
+        eid,
+        location,
+        organiser_id,
+        event_name,
+        code,
+        start_time,
+        end_time,
+        repeat,
+    ):
 
         self.eid = eid
         self.code = code
@@ -233,9 +254,12 @@ class FunctionEvents:
         self.organiser_id = organiser_id
         self.event_name = event_name
         self.participants = {}
+        self.start_time = start_time
+        self.end_time = end_time
+        self.repeat = repeat
 
     @classmethod
-    def from_new(cls, location, organiser_id, event_name):
+    def from_new(cls, location, organiser_id, event_name, start_time, end_time, repeat):
         session = Session()
 
         code = random.randint(0, 1000000)
@@ -250,11 +274,16 @@ class FunctionEvents:
         event.organiser_id = organiser_id
         event.event_name = event_name
         event.participants = {}
+        event.start_time = start_time
+        event.end_time = end_time
+        event.repeat = repeat
 
         session.add(event)
         session.commit()
         session.close()
-        return cls(eid, location, organiser_id, event_name, code)
+        return cls(
+            eid, location, organiser_id, event_name, code, start_time, end_time, repeat
+        )
 
     @classmethod
     def from_db(cls, eid):
@@ -265,8 +294,14 @@ class FunctionEvents:
         organiser_id = event.organiser_id
         event_name = event.event_name
         participants = event.participants
+        start_time = event.start_time
+        end_time = event.end_time
+        repeat = event.repeat
+
         session.close()
-        return cls(eid, location, organiser_id, event_name, code)
+        return cls(
+            eid, location, organiser_id, event_name, code, start_time, end_time, repeat
+        )
 
     # use this to update user avaliability too
     def add_user(self, uid, availability):
@@ -320,9 +355,10 @@ class FunctionEvents:
 # exuser2 = FunctionUser.from_new(
 #     first_name, last_name, username, password, phone_number, email, address
 # )
-
-# exevent = FunctionEvents.from_new("24275 Woodside Ln, Beachwood, OH 44122", 0, "pool party")
-# print(exevent.eid, exevent.location, exevent.organiser_id, exevent.event_name)
+# start = datetime(2021, 4, 10)
+# end = datetime(2021, 4, 11)
+# exevent = FunctionEvents.from_new("24275 Woodside Ln, Beachwood, OH 44122", 0, "pool party", start, end, True)
+# print(exevent.eid, exevent.location, exevent.organiser_id, exevent.event_name, exevent.start_time, exevent.end_time)
 # time.sleep(0.5)
 # exuser.join_event(0)
 # exuser.make_request(1, 0)
