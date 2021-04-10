@@ -136,8 +136,7 @@ def make_request():
                     dbstuff.create_request(uid, senduid, event_id)
             except:
                 pass
-
-    return render_template('create.html', fin = fin)
+    return render_template('create.html', fin=fin)
 
 
 @app.route('/join', methods=['POST', 'GET'])
@@ -218,6 +217,7 @@ def get_active():
         status[i] = dbstuff.check_status(request)
         distances[i] = distance.distance(user_address, address[i])
     return render_template('getactive.html', nrequests=nrequests, nemails=email, nphones=numbers, ndistances=distances, status=status, naddress = address)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

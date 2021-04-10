@@ -3,6 +3,7 @@ import json
 import googlemaps
 from config import apikey
 
+
 #driver_address is the address of the user
 #all_addresses is the addresses of all the people going to the event
 def all_distances(driver_address, all_addresses):
@@ -14,7 +15,7 @@ def all_distances(driver_address, all_addresses):
 
     full_requests = int(len(passenger_addresses)/25)
     for i in range(full_requests + 1):
-        if i < (full_requests):
+        if i < full_requests:
             j = 25
         else:
             j = int(len(passenger_addresses)%25)

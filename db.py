@@ -7,9 +7,9 @@ import random
 Base = declarative_base()
 engine = create_engine('sqlite:///ecogo.db', echo=True)
 
+
 class User(Base):
     __tablename__="users"
-
 
     uid=Column('uid', Integer, primary_key=True)
     first_name = Column('first_name', String)
