@@ -3,6 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 from db import User, Event, Request, Session
 from datetime import datetime
+from distance import all_distances
 import random, time
 
 
@@ -246,6 +247,7 @@ class FunctionEvents:
         start_time,
         end_time,
         repeat,
+        participants,
     ):
 
         self.eid = eid
@@ -253,7 +255,7 @@ class FunctionEvents:
         self.location = location
         self.organiser_id = organiser_id
         self.event_name = event_name
-        self.participants = {}
+        self.participants = participants
         self.start_time = start_time
         self.end_time = end_time
         self.repeat = repeat
@@ -282,7 +284,15 @@ class FunctionEvents:
         session.commit()
         session.close()
         return cls(
-            eid, location, organiser_id, event_name, code, start_time, end_time, repeat
+            eid,
+            location,
+            organiser_id,
+            event_name,
+            code,
+            start_time,
+            end_time,
+            repeat,
+            {},
         )
 
     @classmethod
@@ -300,7 +310,15 @@ class FunctionEvents:
 
         session.close()
         return cls(
-            eid, location, organiser_id, event_name, code, start_time, end_time, repeat
+            eid,
+            location,
+            organiser_id,
+            event_name,
+            code,
+            start_time,
+            end_time,
+            repeat,
+            participants,
         )
 
     # use this to update user availability too
@@ -317,6 +335,15 @@ class FunctionEvents:
         time.sleep(0.05)
         session.commit()
         session.close()
+
+    def find_distances(self, uid):
+        session = Session()
+        all_addresses = []
+        for i in self.participants.keys():
+            all_addresses.append(session.query(User).filter_by(uid=i).first().address)
+        driver_address = session.query(User).filter_by(uid=uid).first().address
+        distances = all_distances(driver_address, all_addresses)
+        return distances
 
 
 # # tester code:
@@ -361,8 +388,12 @@ class FunctionEvents:
 # print(exevent.eid, exevent.location, exevent.organiser_id, exevent.event_name, exevent.start_time, exevent.end_time)
 # time.sleep(0.5)
 # exuser.join_event(0)
+# exuser2.join_event(0)
 # exuser.make_request(1, 0)
 # print(exuser.get_events())
 # print(exuser.get_sent_requests())
 # print(exuser.get_receiving_requests())
 # exuser.update_request(0, "yes")
+
+# a = FunctionEvents.from_db(0)
+# print(a.find_distances(0))
