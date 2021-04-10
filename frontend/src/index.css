@@ -1,5 +1,5 @@
 .u-section-1 {
-  background-image: url({{url_for('static', filename = "/images/ecogologo_5.png");
+  background-image: url({{url_for('static', filename = "//public/images/ecogologo_5.png");
   background-position: 50% 50%;
 }
 

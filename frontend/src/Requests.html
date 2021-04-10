@@ -1,38 +1,14 @@
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="en">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
-    <meta name="keywords" content="INTUITIVE">
-    <meta name="description" content="">
-    <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>Home</title>
-    <link rel="stylesheet" href="nicepage.css" media="screen">
-<link rel="stylesheet" href="Home.css" media="screen">
-    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
-    <meta name="generator" content="Nicepage 3.11.0, nicepage.com">
-    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
-    
-    
-    
-    
-    <script type="application/ld+json">{
-		"@context": "http://schema.org",
-		"@type": "Organization",
-		"name": "Eco-Go",
-		"url": "index.html",
-		"logo": "images/ecogologo_7.svg"
-}</script>
-    <meta property="og:title" content="Home">
-    <meta property="og:type" content="website">
-    <meta name="theme-color" content="#478ac9">
-    <link rel="canonical" href="index.html">
-    <meta property="og:url" content="index.html">
-  </head>
-  <body data-home-page="Home.html" data-home-page-title="Home" class="u-body"><header class="u-clearfix u-header u-header" id="sec-f1ab"><div class="u-clearfix u-sheet u-sheet-1">
+
+    <include src="includes/head.html">{
+    "title": "Requests",
+    "css": "Requests.css"
+    }</include> 
+
+  <body class="u-body"><header class="u-clearfix u-header u-header" id="sec-f1ab"><div class="u-clearfix u-sheet u-sheet-1">
         <a href="https://nicepage.com" class="u-image u-logo u-image-1" data-image-width="750" data-image-height="250">
-          <img src="images/ecogologo_7.svg" class="u-logo-image u-logo-image-1" data-image-width="171.9558">
+          <img src="/public/images/ecogologo_7.svg" class="u-logo-image u-logo-image-1" data-image-width="171.9558">
         </a>
         <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
           <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
@@ -67,50 +43,58 @@
           </div>
         </nav>
       </div></header>
-    <section class="u-align-left u-clearfix u-image u-section-1" src="" id="sec-edf6" data-image-width="1000" data-image-height="500">
-      <div class="u-clearfix u-sheet u-sheet-1"></div>
-    </section>
-    <section class="u-align-center u-clearfix u-white u-section-2" id="carousel_643c">
+    <section class="u-align-left u-clearfix u-image u-shading u-section-1" src="" id="sec-8e92" data-image-width="1600" data-image-height="800">
       <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-          <div class="u-layout">
-            <div class="u-layout-row">
-              <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
-                <div class="u-container-layout u-container-layout-1">
-                  <h1 class="u-text u-text-body-color u-text-1">Pending Requests</h1>
-                  <h3 class="u-text u-text-2">Requests</h3>
-                </div>
+        <h1 class="u-align-center u-text u-title u-text-1">Requests</h1>
+      </div>
+    </section>
+    <section class="u-align-center u-clearfix u-section-2" id="sec-0712">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-expanded-width u-tab-links-align-left u-tabs u-tabs-1">
+          <ul class="u-border-2 u-border-palette-1-base u-spacing-10 u-tab-list u-unstyled" role="tablist">
+            <li class="u-tab-item" role="presentation">
+              <a class="active u-active-grey-10 u-button-style u-custom-color-9 u-tab-link u-text-active-black u-text-body-alt-color u-tab-link-1" id="link-tab-6d38" href="#tab-6d38" role="tab" aria-controls="tab-6d38" aria-selected="true">Make A Request<br>
+              </a>
+            </li>
+            <li class="u-tab-item" role="presentation">
+              <a class="u-active-grey-10 u-button-style u-custom-color-9 u-tab-link u-text-active-black u-text-body-alt-color u-tab-link-2" id="link-tab-0b3f" href="#tab-0b3f" role="tab" aria-controls="tab-0b3f" aria-selected="false">Pending Requests</a>
+            </li>
+          </ul>
+          <div class="u-tab-content">
+            <div class="u-container-style u-grey-10 u-tab-active u-tab-pane u-tab-pane-1" id="tab-6d38" role="tabpanel" aria-labelledby="link-tab-6d38">
+              <div class="u-container-layout u-container-layout-1">
+                <p class="u-text u-text-default u-text-1">List requests here<br>
+                </p>
               </div>
-              <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
-                <div class="u-container-layout u-valign-top u-container-layout-2">
-                  <h1 class="u-text u-text-body-color u-text-3">Events</h1>
-                  <h3 class="u-text u-text-4">Events</h3>
-                </div>
+            </div>
+            <div class="u-container-style u-grey-10 u-tab-pane u-tab-pane-2" id="tab-0b3f" role="tabpanel" aria-labelledby="link-tab-0b3f">
+              <div class="u-container-layout u-container-layout-2">
+                <p class="u-text u-text-default u-text-2">List requests here<br>
+                </p>
               </div>
             </div>
           </div>
         </div>
-        <a href="Events.html" data-page-id="83571567" class="u-black u-border-2 u-border-hover-palette-1-base u-border-palette-1-base u-btn u-btn-round u-button-style u-hover-palette-1-base u-radius-50 u-btn-1">Events</a>
       </div>
     </section>
-    <section class="u-clearfix u-custom-color-7 u-section-3" id="sec-eea0">
+    <section class="u-clearfix u-grey-5 u-section-3" id="sec-1b27">
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
           <div class="u-layout">
             <div class="u-layout-row">
-              <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
+              <div class="u-align-left u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-1">
                 <div class="u-container-layout u-container-layout-1">
-                  <h2 class="u-align-center u-text u-text-1">About Us</h2>
-                  <p class="u-align-center u-text u-text-2">Learn more about Eco-Go</p>
-                  <a href="About.html" data-page-id="2420901937" class="u-btn u-button-style u-hover-white u-text-custom-color-7 u-text-hover-custom-color-6 u-white u-btn-1">Get started</a>
+                  <h2 class="u-text u-text-1">Plan your route</h2>
+                  <p class="u-text u-text-2">Text if needed here.</p>
                 </div>
               </div>
-              <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
+              <div class="u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2">
                 <div class="u-container-layout u-container-layout-2">
-                  <h2 class="u-align-center u-text u-text-3">Guide</h2>
-                  <p class="u-align-center u-text u-text-4">A quick how-to on using this revolutionary tool.</p>
-                  <a href="Guide.html" data-page-id="483614229" class="u-btn u-button-style u-hover-white u-text-custom-color-7 u-text-hover-custom-color-6 u-white u-btn-2">Guide<br>
-                  </a>
+                  <div class="u-expanded u-grey-10 u-map">
+                    <div class="embed-responsive">
+                      <iframe class="embed-responsive-item" src="//maps.google.com/maps?output=embed&amp;q=27020%20Cedar%20Rd%20Beachwood%20Ohio&amp;t=m" data-map="JTdCJTIycG9zaXRpb25UeXBlJTIyJTNBJTIybWFwLWFkZHJlc3MlMjIlMkMlMjJhZGRyZXNzJTIyJTNBJTIyMjcwMjAlMjBDZWRhciUyMFJkJTIwQmVhY2h3b29kJTIwT2hpbyUyMiUyQyUyMnpvb20lMjIlM0FudWxsJTJDJTIydHlwZUlkJTIyJTNBJTIycm9hZCUyMiUyQyUyMmxhbmclMjIlM0FudWxsJTJDJTIyYXBpS2V5JTIyJTNBbnVsbCUyQyUyMm1hcmtlcnMlMjIlM0ElNUIlNUQlN0Q="></iframe>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

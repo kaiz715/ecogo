@@ -1,34 +1,11 @@
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="en">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
-    <meta name="keywords" content="Login, Register">
-    <meta name="description" content="">
-    <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>Login</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='styles/nicepage.css')}}" media="screen">
-<link rel="stylesheet" href="{{url_for('static', filename='styles/Login.css')}}" media="screen">
-    <script class="u-script" type="text/javascript" src=static/js/jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="static/js/nicepage.js" defer=""></script>
-    <meta name="generator" content="/">
-    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
     
-    
-    
-    <script type="application/ld+json">{
-		"@context": "http://schema.org",
-		"@type": "Organization",
-		"name": "Eco-Go",
-		"url": "/",
-		"logo": "{{url_for('static', filename = '/images/ecogologo_7.svg')}}"
-}</script>
-    <meta property="og:title" content="Login">
-    <meta property="og:type" content="website">
-    <meta name="theme-color" content="#478ac9">
-    <link rel="canonical" href="/">
-    <meta property="og:url" content="/">
-  </head>
+  <include src="includes/head.html">{
+    "title": "Login",
+    "css": "Login.css"
+    }</include>
+
                       {% with messages = get_flashed_messages() %}
   {% if messages %}
     <ul class="flashes">
@@ -40,7 +17,7 @@
 {% endwith %}
   <body class="u-body"><header class="u-clearfix u-header u-header" id="sec-f1ab"><div class="u-clearfix u-sheet u-sheet-1">
         <a href="/" class="u-image u-logo u-image-1" data-image-width="750" data-image-height="250">
-          <img src="{{url_for('static', filename = '/images/ecogologo_7.svg')}}" class="u-logo-image u-logo-image-1" data-image-width="171.9558">
+          <img src="{{url_for('static', filename = '//public/images/ecogologo_7.svg')}}" class="u-logo-image u-logo-image-1" data-image-width="171.9558">
         </a>
         <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
           <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
