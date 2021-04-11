@@ -7,10 +7,10 @@
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
     <title>Events</title>
-    <link rel="stylesheet" href="nicepage.css" media="screen">
-<link rel="stylesheet" href="Events.css" media="screen">
-    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/nicepage.css')}}" media="screen">
+<link rel="stylesheet" href="{{url_for('static', filename='styles/Events.css')}}" media="screen">
+    <script class="u-script" type="text/javascript" src="static/js/jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="static/js/nicepage.js" defer=""></script>
     <meta name="generator" content="Nicepage 3.11.0, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
     
@@ -22,8 +22,8 @@
 		"@type": "Organization",
 		"name": "Eco-Go",
 		"url": "index.html",
-		"logo": "images/ecogologo_7.svg"
-}</script>
+		"logo": "{{url_for('static', filename = '/images/ecogologo_7.svg')}}"}
+    </script>
     <meta property="og:title" content="Events">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#478ac9">
@@ -32,7 +32,7 @@
   </head>
   <body class="u-body"><header class="u-clearfix u-header u-header" id="sec-f1ab"><div class="u-clearfix u-sheet u-sheet-1">
         <a href="https://nicepage.com" class="u-image u-logo u-image-1" data-image-width="750" data-image-height="250">
-          <img src="images/ecogologo_7.svg" class="u-logo-image u-logo-image-1" data-image-width="171.9558">
+          <img src="{{url_for('static', filename = '/images/ecogologo_7.svg')}}" class="u-logo-image u-logo-image-1" data-image-width="171.9558">
         </a>
         <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
           <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
@@ -44,11 +44,11 @@
             </a>
           </div>
           <div class="u-custom-menu u-nav-container">
-            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Home.html" style="padding: 10px 20px;">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Requests.html" style="padding: 10px 20px;">Requests</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Events.html" style="padding: 10px 20px;">Events</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="About.html" style="padding: 10px 20px;">About</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Login.html" style="padding: 10px 20px;">Login</a>
+            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/" style="padding: 10px 20px;">Home</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/requests" style="padding: 10px 20px;">Requests</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/events" style="padding: 10px 20px;">Events</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/about" style="padding: 10px 20px;">About</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/login" style="padding: 10px 20px;">Login</a>
 </li></ul>
           </div>
           <div class="u-custom-menu u-nav-container-collapse">
@@ -56,10 +56,10 @@
               <div class="u-sidenav-overflow">
                 <div class="u-menu-close"></div>
                 <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Home.html" style="padding: 10px 20px;">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Requests.html" style="padding: 10px 20px;">Requests</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Events.html" style="padding: 10px 20px;">Events</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="About.html" style="padding: 10px 20px;">About</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Login.html" style="padding: 10px 20px;">Login</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/requests" style="padding: 10px 20px;">Requests</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/events" style="padding: 10px 20px;">Events</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/about" style="padding: 10px 20px;">About</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/login" style="padding: 10px 20px;">Login</a>
 </li></ul>
               </div>
             </div>
@@ -67,7 +67,7 @@
           </div>
         </nav>
       </div></header>
-    <section class="u-align-left u-clearfix u-image u-shading u-section-1" src="" id="sec-22ce" data-image-width="1600" data-image-height="800">
+    <section class="u-align-left u-clearfix u-image u-shading u-section-1" id="sec-22ce" data-image-width="1600" data-image-height="800">
       <div class="u-clearfix u-sheet u-sheet-1">
         <h1 class="u-align-center u-text u-title u-text-1">Events</h1>
       </div>
@@ -88,7 +88,7 @@
               <div class="u-container-layout u-valign-top u-container-layout-1">
                 <h2 class="u-align-center u-text u-text-1">Join Event</h2>
                 <div class="u-form u-form-1">
-                  <form action="#" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px;" source="custom" name="form">
+                  <form action="#" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px;" name="form">
                     <div class="u-form-group u-form-name">
                       <label for="name-9e71" class="u-form-control-hidden u-label">Name</label>
                       <input type="text" placeholder="Enter the event code" id="name-9e71" name="text" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
@@ -99,7 +99,7 @@
                     </div>
                     <div class="u-align-center u-form-group u-form-submit">
                       <a href="#" class="u-btn u-btn-submit u-button-style u-custom-color-3 u-btn-1">Join</a>
-                      <input type="submit" value="submit" class="u-form-control-hidden">
+                      <input type="submit" value="Join" name='Join' class="u-form-control-hidden">
                     </div>
                     <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
                     <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try again. </div>
@@ -112,18 +112,30 @@
               <div class="u-container-layout u-container-layout-2">
                 <h2 class="u-align-center u-text u-text-2">Create Event</h2>
                 <div class="u-form u-form-2">
-                  <form action="#" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px" source="custom" name="form-1">
+                  <form action="/events?form=1" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px" name="form-1">
                     <div class="u-form-group u-form-name">
                       <label for="name-6c7b" class="u-form-control-hidden u-label">Name</label>
                       <input type="text" placeholder="Enter the event name" id="name-6c7b" name="text" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
                     </div>
                     <div class="u-form-email u-form-group">
                       <label for="email-6c7b" class="u-form-control-hidden u-label"></label>
-                      <input type="email" placeholder="Enter the street address" id="email-6c7b" name="text-1" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+                      <input type="text" placeholder="Enter the street address" id="email-6c7b" name="text-1" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
                     </div>
                     <div class="u-form-group u-form-group-6">
                       <label for="text-859a" class="u-form-control-hidden u-label"></label>
                       <input type="text" placeholder="Enter the secondary address E.g Building 2" id="text-859a" name="text-2" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                    </div>
+                    <div class="u-form-group u-form-group-10">
+                      <label for="text-4391" class="u-form-control-hidden u-label"></label>
+                      <input type="text" placeholder="Enter your city:" id="text-1234" name="city" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
+                    </div>
+                    <div class="u-form-group u-form-group-10">
+                      <label for="text-4391" class="u-form-control-hidden u-label"></label>
+                      <input type="text" placeholder="Enter your state" id="text-4391" name="text-5" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
+                    </div>
+                    <div class="u-form-group u-form-group-11">
+                      <label for="text-a530" class="u-form-control-hidden u-label"></label>
+                      <input type="text" placeholder="Enter your zip code" id="text-a530" name="text-4" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
                     </div>
                     <div class="u-form-date u-form-group u-form-group-7">
                       <label for="date-0a6b" class="u-label">Start Date:</label>
@@ -138,8 +150,7 @@
                       <label for="checkbox-2e4d" class="u-label">This is a repeating event</label>
                     </div>
                     <div class="u-align-center u-form-group u-form-submit">
-                      <a href="#" class="u-btn u-btn-submit u-button-style u-custom-color-3 u-btn-2">Create</a>
-                      <input type="submit" value="submit" class="u-form-control-hidden">
+                      <input type="submit" value="Create" name="create" class="u-btn u-btn-submit u-button-style u-custom-color-3 u-btn-2">
                     </div>
                     <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
                     <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try again. </div>

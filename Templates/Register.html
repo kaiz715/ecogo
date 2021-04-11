@@ -102,11 +102,7 @@
                   <form action="#" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px" name="form">
                     <div class="u-form-group u-form-name">
                       <label for="name-1358" class="u-form-control-hidden u-label">Name</label>
-                      <input type="text" placeholder="Enter your first name" id="name-1358" name="name" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
-                    </div>
-                    <div class="u-form-group u-form-group-5">
-                      <label for="text-f35d" class="u-form-control-hidden u-label"></label>
-                      <input type="text" placeholder="Enter your last name" id="text-f35d" name="text" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
+                      <input type="text" placeholder="Enter your first and last name" id="name-1358" name="name" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
                     </div>
                     <div class="u-form-group u-form-group-6">
                       <label for="text-fed1" class="u-form-control-hidden u-label"></label>
@@ -118,15 +114,23 @@
                     </div>
                     <div class="u-form-email u-form-group">
                       <label for="email-1358" class="u-form-control-hidden u-label">Email</label>
-                      <input type="email" placeholder="Enter a valid email address" id="email-1358" name="email" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+                      <input type="email" placeholder="Enter a valid email address" id="email-1358" name="email" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
                     </div>
                     <div class="u-form-email u-form-group">
                       <label for="number-1358" class="u-form-control-hidden u-label">Phone Number</label>
-                      <input type="tel" placeholder="Enter a valid phone number" id="number-1358" name="number-1358" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+                      <input type="tel" placeholder="Enter a valid phone number" id="number-1358" name="number-1358" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
                     </div>
                     <div class="u-form-group u-form-group-9">
                       <label for="text-06b9" class="u-form-control-hidden u-label"></label>
                       <input type="text" placeholder="Enter your street address" id="text-06b9" name="text-2" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
+                    </div>
+                    <div class="u-form-group u-form-group-9">
+                      <label for="text-06b9" class="u-form-control-hidden u-label"></label>
+                      <input type="text" placeholder="Enter your building number/apartment" id="secondary" name="secondary" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+                    </div>
+                    <div class="u-form-group u-form-group-10">
+                      <label for="text-4391" class="u-form-control-hidden u-label"></label>
+                      <input type="text" placeholder="Enter your city:" id="" name="city" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
                     </div>
                     <div class="u-form-group u-form-group-10">
                       <label for="text-4391" class="u-form-control-hidden u-label"></label>
@@ -142,7 +146,7 @@
                       </label>
                     </div>
                     <div class="u-align-center u-form-group u-form-submit">
-                      <input type="submit" value="Register" class="u-btn u-btn-submit u-button-style">
+                      <input type="submit" value="register" name="register-button" class="u-btn u-btn-submit u-button-style">
                     </div>
                     <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
                     <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try again. </div>
@@ -165,12 +169,10 @@
             <div class="u-layout-col">
               <div class="u-container-style u-layout-cell u-size-60 u-layout-cell-1">
                 <div class="u-container-layout u-valign-middle u-container-layout-1">
-                  <a href="Home.html" data-page-id="57737307" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-1-base u-btn-1">Home</a>
-                  <a href="Events.html" data-page-id="83571567" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-1-base u-btn-2">Events</a>
-                  <a href="Login.html" data-page-id="3222474" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-1-base u-btn-3">Login</a>
-                  <a href="About.html" data-page-id="2420901937" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-1-base u-btn-4">About Us</a>
-                  <a href="About.html" data-page-id="2420901937" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-1-base u-btn-5">Privacy Policy</a>
-                  <a href="About.html" data-page-id="2420901937" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-1-base u-btn-6">Terms &amp; Conditions</a>
+                  <a href="/home" data-page-id="57737307" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-1-base u-btn-1">Home</a>
+                  <a href="/events" data-page-id="83571567" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-1-base u-btn-2">Events</a>
+                  <a href="/login" data-page-id="3222474" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-1-base u-btn-3">Login</a>
+                  <a href="/about" data-page-id="2420901937" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-1-base u-btn-4">About Us</a>
                 </div>
               </div>
             </div>
