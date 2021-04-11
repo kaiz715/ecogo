@@ -4,6 +4,7 @@ import dbstuff
 import distance
 from datetime import timedelta
 app = Flask(config.name ,template_folder = config.TEMPLATE_FOLDER, static_folder = config.STATIC_FOLDER, static_url_path = config.STATIC_URL_PATH)
+app.jinja_options = config.jinja_options
 app.secret_key = 'app'
 app.config.from_object("config.FlaskConf")
 app.permanent_session_lifetime = timedelta(days=1)
