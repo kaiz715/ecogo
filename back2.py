@@ -10,15 +10,17 @@ all_events = []
 
 
 def convert_to(date):
-    date = date[3:-2]
-    temp = date.find('-')
-    month = int(date[:temp])
-    date = date[temp:]
-    temp = date.find('-')
-    day = int(date[:temp])
-    date = date[temp:]
+    print(date)
     temp = date.find('-')
     year = int(date[:temp])
+    date = date[temp:]
+    date = date[1:]
+    temp = date.find('-')
+    month = int(date[0:temp])
+    date = date[temp:]
+    date = date[1:]
+    temp = date.find('-')
+    day = int(date[0:])
     date1 = datetime.datetime(year, month, day)
     return date1.date()
 
@@ -123,7 +125,6 @@ def events():
     else:
         form = int(request.args.get('form'))
         if form == 1:
-            print('done')
             location = request.form['text-1'] + ' ' + request.form['text-2'] + ' ' + request.form['city'] + ' ' + request.form['text-5'] + ' ' + request.form['text-4']
             uid = dbstuff.username_to_uid(session['user'])
             name = request.form['text']
@@ -131,12 +132,13 @@ def events():
             start = convert_to(temp1)
             temp2 = request.form['date-1']
             end = convert_to(temp2)
-            repeating = request.form['checkbox']
-            if repeating == 'On':
-                event = classes.FunctionEvents.from_new(location, uid, name, start, end, True)
+            checkbox = request.form.get('recurring', False)
+            if checkbox == 'On':
+                repeating = True
             else:
-                event = classes.FunctionEvents.from_new(location, uid, name, start, end, False)
-            return redirect(url_for(event_created(event.eid)))
+                repeating = False
+            event = classes.FunctionEvents.from_new(location, uid, name, start, end, repeating)
+            return redirect(url_for('event_created', eid=event.eid))
         elif form == 2:
             availability = ''
             event_id = request.form['text']
@@ -154,8 +156,8 @@ def events():
 
 @app.route('/eventCreated/<eid>', methods=['GET'])
 def event_created(eid):
-    event = classes.FunctionEvents.from_db(eid)
-    code = event.code
+    specific_event = classes.FunctionEvents.from_db(eid)
+    code = specific_event.code
     return render_template("eventCreated.html", event_code=code)
 
 
