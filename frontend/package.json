@@ -5,11 +5,15 @@
   "repository": "https://github.com/bhscomputerscienceclub/ecogo",
   "author": "bhscs",
   "license": "Copyright",
-  "private": false,
+  "private": true,
   "scripts": {
-    "html": "parcel serve ./src/*.html --public-url ./public",
-    "watch": "parcel watch ./src/*.html --public-url ./public",
-    "build": "parcel build ./src/*.html --public-url ./public"
+    "watch": "webpack watch --mode development",
+    "build": "webpack --mode production",
+    "clean": "rm -rf dist/ .parcel-cache/"
+  },
+  "staticFiles": {
+    "staticPath": "public",
+    "watcherGlob": "**"
   },
   "targets": {
     "app": {
@@ -21,12 +25,22 @@
     }
   },
   "devDependencies": {
-    "@parcel/packager-raw-url": "2.0.0-beta.2",
-    "@parcel/transformer-jsonld": "2.0.0-beta.2",
-    "parcel": "^2.0.0-beta.2",
-    "parcel-optimizer-friendly-urls": "^0.2.0",
-    "parcel-plugin-remove-index-html": "^0.1.0",
     "posthtml-include": "^1.7.0",
     "posthtml-shorten": "^1.0.0"
+  },
+  "dependencies": {
+    "@open-wc/webpack-import-meta-loader": "^0.4.7",
+    "extract-loader": "^5.1.0",
+    "file-loader": "^6.2.0",
+    "glob": "^7.1.6",
+    "html-loader": "^2.1.2",
+    "parcel-plugin-html-root-syntax": "^0.0.3",
+    "posthtml": "^0.15.1",
+    "posthtml-loader": "^2.0.1",
+    "posthtml-modules": "^0.7.4",
+    "posthtml-parser": "^0.7.1",
+    "raw-loader": "^4.0.2",
+    "webpack": "^5.31.2",
+    "webpack-cli": "^4.6.0"
   }
 }
