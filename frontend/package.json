@@ -2,7 +2,6 @@
   "name": "ecogo-frontend",
   "version": "1.0.0",
   "description": "my description",
-  "main": "index.html",
   "repository": "https://github.com/bhscomputerscienceclub/ecogo",
   "author": "bhscs",
   "license": "Copyright",
@@ -12,9 +11,21 @@
     "flask": "parcel watch ./src/index.html",
     "build": "parcel build ./src/index.html"
   },
+  "targets": {
+    "app": {
+      "distDir": "dist/",
+      "publicUrl": "/public",
+      "engines": {
+        "browsers": "> 0.25%"
+      }
+    }
+  },
   "devDependencies": {
+    "@parcel/packager-raw-url": "2.0.0-beta.2",
     "@parcel/transformer-jsonld": "2.0.0-beta.2",
     "parcel": "^2.0.0-beta.2",
+    "parcel-optimizer-friendly-urls": "^0.2.0",
+    "parcel-plugin-remove-index-html": "^0.1.0",
     "posthtml-include": "^1.7.0"
   }
 }
