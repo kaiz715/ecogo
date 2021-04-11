@@ -1,2 +1,5 @@
 dev:
-	npx concurrently "python back.py" "cd frontend; yarn watch"
+	npx concurrently -k "python back.py" "cd frontend; yarn watch"
+
+install:
+	cd frontend; yarn
