@@ -7,9 +7,9 @@
   "license": "Copyright",
   "private": false,
   "scripts": {
-    "html": "parcel serve ./src/index.html",
-    "flask": "parcel watch ./src/index.html",
-    "build": "parcel build ./src/index.html"
+    "html": "parcel serve ./src/index.html --public-url ./public",
+    "watch": "parcel watch ./src/index.html --public-url ./public",
+    "build": "parcel build ./src/index.html --public-url ./public"
   },
   "targets": {
     "app": {

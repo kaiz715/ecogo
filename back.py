@@ -1,9 +1,11 @@
 from flask import Flask, render_template, session, request, redirect, url_for, flash
+import config
 import dbstuff
 import distance
 from datetime import timedelta
-app = Flask('__name__')
+app = Flask(config.name ,template_folder = config.TEMPLATE_FOLDER, static_folder = config.STATIC_FOLDER, static_url_path = config.STATIC_URL_PATH)
 app.secret_key = 'app'
+app.config.from_object("config.FlaskConf")
 app.permanent_session_lifetime = timedelta(days=1)
 requests_dic = dict()
 
@@ -220,4 +222,4 @@ def get_active():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
