@@ -139,6 +139,7 @@ def events():
                 repeating = False
             event = classes.FunctionEvents.from_new(location, uid, name, start, end, repeating)
             return redirect(url_for('event_created', eid=event.eid))
+            #return redirect('/eventCreated/' + str(event.eid))
         elif form == 2:
             availability = ''
             event_id = request.form['text']
@@ -156,9 +157,12 @@ def events():
 
 @app.route('/eventCreated/<eid>', methods=['GET'])
 def event_created(eid):
+    print('a')
     specific_event = classes.FunctionEvents.from_db(eid)
+    print('b')
     code = specific_event.code
-    return render_template("eventCreated.html", event_code=code)
+    print('c')
+    return render_template("EventCreated.html", event_code=code)
 
 
 @app.route('/event/<eid>', methods=['GET', 'POST'])
