@@ -139,7 +139,7 @@ def events():
                 else:
                     repeating = False
                 event = classes.FunctionEvents.from_new(location, uid, name, start, end, repeating)
-                return redirect(url_for('event_created', eid=event.eid))
+                return redirect(url_for('event_created', eid=event.eid), code=303)
             elif form == 2:
                 availability = ''
                 event_id = request.form['text']
