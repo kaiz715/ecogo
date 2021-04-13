@@ -47,7 +47,7 @@ def separate_address(address):
 @app.route('/', methods=['POST', 'GET'])
 def home():
     if request.method == 'GET':
-        return render_template('Home.html')
+        return render_template('home.html')
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -56,7 +56,7 @@ def login():
         if 'user' in session:
             return redirect(url_for('home'))
         else:
-            return render_template('Login.html')
+            return render_template('login.html')
     else:
         if request.form['login-button'] == 'Login':
             user = request.form['username-281b']
@@ -78,7 +78,7 @@ def login():
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == 'GET':
-        return render_template('Register.html')
+        return render_template('register.html')
     else:
         if request.form['register-button'] == 'register':
             username = request.form['text-5']
@@ -90,19 +90,19 @@ def register():
             address = request.form['text-2'] + ' ' + request.form['secondary'] + ' ' + request.form['city'] + ' ' + request.form['text-1'] + ' ' +request.form['text-4']
             if dbstuff.username_exists(username):
                 flash('Username already exists')
-                return render_template('Register.html')
+                return render_template('register.html')
             else:
                 User = classes.FunctionUser.from_new(names[0], names[1], username, password, phone, email, address)
                 session['user'] = username
                 return redirect(url_for('home'))
         else:
-            return render_template('Register.html')
+            return render_template('register.html')
 
 
 @app.route('/requests', methods=['POST', 'GET'])
 def requests():
     if request.method == 'GET':
-        return render_template('Requests.html')
+        return render_template('requests.html')
     else:
         pass
 
@@ -115,7 +115,7 @@ def specific_request(rid):
         User = classes.FunctionUser.from_db(id)
         address = str(User.address)
         complete_Address = separate_address(address)
-        return render_template('SpecificRequests.html', address_list=complete_Address)
+        return render_template('specificrequests.html', address_list=complete_Address)
 
 
 @app.route("/events", methods=['POST', 'GET'])
@@ -162,7 +162,7 @@ def event_created(eid):
     if request.method == 'GET':
         specific_event = classes.FunctionEvents.from_db(eid)
         code = specific_event.code
-        return render_template("EventCreated.html", event_code=code)
+        return render_template("eventcreated.html", event_code=code)
 
 
 @app.route('/event/<eid>', methods=['GET', 'POST'])
@@ -175,7 +175,7 @@ def event(eid):
         start = event.start_time
         end = event.end_time
         users = event
-        return render_template('Event.html')
+        return render_template('event.html')
     else:
         return redirect(url_for(events))
 
