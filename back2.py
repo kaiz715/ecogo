@@ -3,9 +3,10 @@ import dbstuff
 import distance
 import classes
 import datetime
-app = Flask('__name__')
-app.secret_key = 'app'
-app.permanent_session_lifetime = datetime.timedelta(days=1)
+import config
+
+app = config.app()
+
 all_events = []
 
 

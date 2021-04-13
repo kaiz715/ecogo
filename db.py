@@ -11,10 +11,11 @@ from sqlalchemy import (
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 import random
+import config
 
 
 Base = declarative_base()
-engine = create_engine("sqlite:///ecogo.db", echo=True)
+engine = create_engine("sqlite:///ecogo.db", echo=config.SQL_DEBUG)
 
 
 class User(Base):
