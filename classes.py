@@ -6,6 +6,15 @@ from datetime import datetime
 from distance import all_distances
 import random, time
 
+def code_to_eid(code):  # returns false if code doesnt exist
+    session = Session()
+    if session.query(Event).filter_by(code=code).first() == None:
+        session.close()
+        return False
+    event = session.query(Event).filter_by(code=code).first()
+    eid = event.eid
+    session.close()
+    return eid
 
 def next_id(db):
     session = Session()
