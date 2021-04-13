@@ -114,55 +114,55 @@ def specific_request(rid):
         id = Request.receiving_id()
         User = classes.FunctionUser.from_db(id)
         address = str(User.address)
-        complete = separate_address(address)
-        return render_template('SpecificRequests.html', address_list=complete)
+        complete_Address = separate_address(address)
+        return render_template('SpecificRequests.html', address_list=complete_Address)
 
 
 @app.route("/events", methods=['POST', 'GET'])
 def events():
-    if request.method == 'GET':
-        return render_template('events.html')
+    if 'user' in session:
+        if request.method == 'GET':
+            return render_template('events.html')
+        else:
+            form = int(request.args.get('form'))
+            if form == 1:
+                location = request.form['text-1'] + ' ' + request.form['text-2'] + ' ' + request.form['city'] + ' ' + request.form['text-5'] + ' ' + request.form['text-4']
+                uid = dbstuff.username_to_uid(session['user'])
+                name = request.form['text']
+                temp1 = request.form['date']
+                start = convert_to(temp1)
+                temp2 = request.form['date-1']
+                end = convert_to(temp2)
+                checkbox = request.form.get('recurring', False)
+                if checkbox == 'On':
+                    repeating = True
+                else:
+                    repeating = False
+                event = classes.FunctionEvents.from_new(location, uid, name, start, end, repeating)
+                return redirect(url_for('event_created', eid=event.eid))
+            elif form == 2:
+                availability = ''
+                event_id = request.form['text']
+                status = request.form.get('checkbox', False)
+                if status == 'On':
+                    availability = 'Need'
+                else:
+                    availability = 'Give'
+                event = classes.FunctionEvents.from_db(event_id)
+                username = session["user"]
+                uid = dbstuff.username_to_uid(username)
+                event.add_user(uid, availability)
+                return redirect(url_for('home'))
     else:
-        form = int(request.args.get('form'))
-        if form == 1:
-            location = request.form['text-1'] + ' ' + request.form['text-2'] + ' ' + request.form['city'] + ' ' + request.form['text-5'] + ' ' + request.form['text-4']
-            uid = dbstuff.username_to_uid(session['user'])
-            name = request.form['text']
-            temp1 = request.form['date']
-            start = convert_to(temp1)
-            temp2 = request.form['date-1']
-            end = convert_to(temp2)
-            checkbox = request.form.get('recurring', False)
-            if checkbox == 'On':
-                repeating = True
-            else:
-                repeating = False
-            event = classes.FunctionEvents.from_new(location, uid, name, start, end, repeating)
-            return redirect(url_for('event_created', eid=event.eid))
-            #return redirect('/eventCreated/' + str(event.eid))
-        elif form == 2:
-            availability = ''
-            event_id = request.form['text']
-            status = request.form['checkbox']
-            if status:
-                availability = 'Need'
-            else:
-                availability = 'Give'
-            event = classes.FunctionEvents.from_db(event_id)
-            username = session["user"]
-            uid = dbstuff.username_to_uid(username)
-            event.add_user(uid, availability)
-            return redirect(url_for('home'))
+        return redirect(url_for('login'))
 
 
-@app.route('/eventCreated/<eid>', methods=['GET'])
+@app.route('/creation/<eid>', methods=['POST', 'GET'])
 def event_created(eid):
-    print('a')
-    specific_event = classes.FunctionEvents.from_db(eid)
-    print('b')
-    code = specific_event.code
-    print('c')
-    return render_template("EventCreated.html", event_code=code)
+    if request.method == 'GET':
+        specific_event = classes.FunctionEvents.from_db(eid)
+        code = specific_event.code
+        return render_template("EventCreated.html", event_code=code)
 
 
 @app.route('/event/<eid>', methods=['GET', 'POST'])
