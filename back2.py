@@ -2,17 +2,11 @@ from flask import Flask, render_template, session, request, redirect, url_for, f
 import distance
 import classes
 import datetime
-<<<<<<< Updated upstream
 import config
 
 app = config.app()
 
 all_events = []
-=======
-app = Flask('__name__')
-app.secret_key = 'app'
-app.permanent_session_lifetime = datetime.timedelta(days=1)
->>>>>>> Stashed changes
 
 
 def convert_to(date):
