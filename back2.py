@@ -1,13 +1,18 @@
 from flask import Flask, render_template, session, request, redirect, url_for, flash
-import dbstuff
 import distance
 import classes
 import datetime
+<<<<<<< Updated upstream
 import config
 
 app = config.app()
 
 all_events = []
+=======
+app = Flask('__name__')
+app.secret_key = 'app'
+app.permanent_session_lifetime = datetime.timedelta(days=1)
+>>>>>>> Stashed changes
 
 
 def convert_to(date):
@@ -48,7 +53,28 @@ def separate_address(address):
 @app.route('/', methods=['POST', 'GET'])
 def home():
     if request.method == 'GET':
-        return render_template('home.html')
+        if 'user' in session:
+            if 'uid' in session:
+                uid = session["uid"]
+                User = classes.FunctionUser.from_db(uid)
+                all_rids = User.get_receiving_requests()
+                all_eids = User.get_events()
+                all_events = []
+                all_requests = []
+                for eid in all_eids:
+                    Event = classes.FunctionEvents.from_db(eid)
+                    all_events.append(Event)
+                for rid in all_rids:
+                    Request = classes.FunctionRequests.from_db(rid)
+                    all_events.append(Request)
+            else:
+                session.pop("user", None)
+                all_requests = []
+                all_events = []
+        else:
+            all_requests = []
+            all_events = []
+        return render_template('home.html', requests=all_requests, events=all_events)
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -71,7 +97,12 @@ def login():
                 return render_template('login.html')
             else:
                 session['user'] = request.form['username-281b']
-                return redirect(url_for('home'))
+                session['uid'] = classes.credential_check(user, password)
+                if int(session['uid']) != -1:
+                    return redirect(url_for('home'))
+                else:
+                    flash("This username doesn't exist")
+                    return render_template('login.html')
         else:
             return render_template('Login.html')
 
@@ -81,21 +112,26 @@ def register():
     if request.method == 'GET':
         return render_template('register.html')
     else:
-        if request.form['register-button'] == 'register':
+        if request.form['register-button'] == 'Register':
             username = request.form['text-5']
             password = request.form['password']
-            email = request.form['email']
-            phone = request.form['number-1358']
-            name = str(request.form['name'])
-            names = name.split(' ')
-            address = request.form['text-2'] + ' ' + request.form['secondary'] + ' ' + request.form['city'] + ' ' + request.form['text-1'] + ' ' +request.form['text-4']
-            if dbstuff.username_exists(username):
-                flash('Username already exists')
-                return render_template('register.html')
+            if password == request.form['password2']:
+                email = request.form['email']
+                phone = request.form['number-1358']
+                name = str(request.form['name'])
+                names = name.split(' ')
+                address = request.form['text-2'] + ' ' + request.form['secondary'] + ' ' + request.form['city'] + ' ' + request.form['text-1'] + ' ' +request.form['text-4']
+                if classes.unique_check(username) is False:
+                    flash('Username already exists')
+                    return render_template('register.html')
+                else:
+                    User = classes.FunctionUser.from_new(names[0], names[1], username, password, phone, email, address)
+                    session['user'] = username
+                    session['uid'] = User.uid
+                    return redirect(url_for('home'))
             else:
-                User = classes.FunctionUser.from_new(names[0], names[1], username, password, phone, email, address)
-                session['user'] = username
-                return redirect(url_for('home'))
+                flash("Passwords don't match")
+                return render_template('register.html')
         else:
             return render_template('register.html')
 
@@ -108,15 +144,22 @@ def requests():
         pass
 
 
-@app.route('/customRequests/<rid>')
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    session.pop('uid', None)
+    return redirect(url_for('login'))
+
+
+@app.route('/specificRequests/<rid>')
 def specific_request(rid):
     if request.method == 'GET':
         Request = classes.FunctionRequests.from_db(rid)
         id = Request.receiving_id()
         User = classes.FunctionUser.from_db(id)
         address = str(User.address)
-        complete_Address = separate_address(address)
-        return render_template('specificrequests.html', address_list=complete_Address)
+        complete_address = separate_address(address)
+        return render_template('specificrequests.html', address_list=complete_address)
 
 
 @app.route("/events", methods=['POST', 'GET'])
@@ -128,7 +171,7 @@ def events():
             form = int(request.args.get('form'))
             if form == 1:
                 location = request.form['text-1'] + ' ' + request.form['text-2'] + ' ' + request.form['city'] + ' ' + request.form['text-5'] + ' ' + request.form['text-4']
-                uid = dbstuff.username_to_uid(session['user'])
+                uid = session["uid"]
                 name = request.form['text']
                 temp1 = request.form['date']
                 start = convert_to(temp1)
@@ -140,18 +183,18 @@ def events():
                 else:
                     repeating = False
                 event = classes.FunctionEvents.from_new(location, uid, name, start, end, repeating)
-                return redirect(url_for('event_created', eid=event.eid), code=303)
+                return redirect(url_for('event_created', eid=event.eid))
             elif form == 2:
                 availability = ''
-                event_id = request.form['text']
+                event_code = request.form['text']
+                event_id = classes.code_to_eid(event_code)
                 status = request.form.get('checkbox', False)
                 if status == 'On':
                     availability = 'Need'
                 else:
                     availability = 'Give'
                 event = classes.FunctionEvents.from_db(event_id)
-                username = session["user"]
-                uid = dbstuff.username_to_uid(username)
+                uid = session["uid"]
                 event.add_user(uid, availability)
                 return redirect(url_for('home'))
     else:
@@ -162,23 +205,39 @@ def events():
 def event_created(eid):
     if request.method == 'GET':
         specific_event = classes.FunctionEvents.from_db(eid)
-        code = specific_event.code
-        return render_template("eventcreated.html", event_code=code)
+        if specific_event.organiser_id == session["uid"]:
+            code = specific_event.code
+            return render_template("eventcreated.html", event_code=code)
+        else:
+            return redirect(url_for('events'))
+
+
+@app.route('/event/join/<event_code>')
+def join(event_code):
+    if 'user' in session:
+        eid = classes.code_to_eid(event_code)
+        event = classes.FunctionEvents.from_db(eid=eid)
+        uid = session["uid"]
+        event.add_user(uid)
+        return redirect(url_for('event', eid=eid))
 
 
 @app.route('/event/<eid>', methods=['GET', 'POST'])
 def event(eid):
     username = session['user']
     event = classes.FunctionEvents.from_db(eid)
-    if event.organiser_id == (dbstuff.username_to_uid(username)):
-        location = event.location
-        name = event.event_name
-        start = event.start_time
-        end = event.end_time
-        users = event
-        return render_template('event.html')
-    else:
-        return redirect(url_for(events))
+    location = event.location
+    name = event.event_name
+    start = str(event.start_time.date())
+    end = str(event.end_time.date())
+    uids = event.participants
+    all_participants = []
+    for uid in uids:
+        user = classes.FunctionUser.from_db(int(uid))
+        first_name = user.first_name
+        last_name = user.last_name
+        all_participants.append((first_name + last_name))
+    return render_template('event.html', event_location=location, event_name=name, event_start=start, event_end=end, event_participant=all_participants)
 
 
 if __name__ == "__main__":

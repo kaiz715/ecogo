@@ -32,7 +32,7 @@
   </head>
   <body class="u-body"><header class="u-clearfix u-header u-header" id="sec-f1ab"><div class="u-clearfix u-sheet u-sheet-1">
         <a href="/" class="u-image u-logo u-image-1" data-image-width="750" data-image-height="250">
-          <img src="static/images/ecogologo_7.svg" class="u-logo-image u-logo-image-1" data-image-width="171.9558">
+          <img src="{{url_for('static', filename = 'images/ecogologo_7.svg')}}" class="u-logo-image u-logo-image-1" data-image-width="171.9558">
         </a>
         <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
           <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
@@ -49,6 +49,7 @@
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/events" style="padding: 10px 20px;">Events</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/about" style="padding: 10px 20px;">About</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/login" style="padding: 10px 20px;">Login</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/logout" style="padding: 10px 20px;">Log Out</a>
 </li></ul>
           </div>
           <div class="u-custom-menu u-nav-container-collapse">
@@ -60,6 +61,7 @@
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/events" style="padding: 10px 20px;">Events</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/about" style="padding: 10px 20px;">About</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/login" style="padding: 10px 20px;">Login</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/logout" style="padding: 10px 20px;">Log Out</a>
 </li></ul>
               </div>
             </div>
@@ -78,13 +80,33 @@
               <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
                 <div class="u-container-layout u-container-layout-1">
                   <h1 class="u-text u-text-body-color u-text-1">Pending Requests</h1>
-                  <h3 class="u-text u-text-2">Requests</h3>
+                    {% block content %}
+                        {% if requests %}
+                            {% for request in requests %}
+                                <a>href="/specificRequests/{{request.rid}}"
+                                    <li>{{request}}</li>
+                                </a>
+                            {% endfor %}
+                        {% else %}
+                                <h3 class="u-text u-text-2">None</h3>
+                        {% endif %}
+                    {% endblock %}
                 </div>
               </div>
               <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
                 <div class="u-container-layout u-valign-top u-container-layout-2">
                   <h1 class="u-text u-text-body-color u-text-3">Events</h1>
-                  <h3 class="u-text u-text-4">Events</h3>
+                    <br>
+                    {% block content1 %}
+                        {% if events %}
+                            {% for event in events %}
+                                </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/event/{{event.eid}}" style="padding: 10px 20px;">{{event.event_name}}</a>
+                                <h3 class="u-text u-text-4">{{event.event_name}}</h3>
+                            {% endfor %}
+                        {% else %}
+                                <h3 class="u-text u-text-4">None</h3>
+                        {% endif %}
+                    {% endblock %}
                 </div>
               </div>
             </div>

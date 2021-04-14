@@ -21,7 +21,7 @@
 		"@type": "Organization",
 		"name": "Eco-Go",
 		"url": "/",
-		"logo": "{{url_for('static', filename = '/images/ecogologo_7.svg')}}"
+		"logo": "{{url_for('static', filename = 'images/ecogologo_7.svg')}}"
 }</script>
     <meta property="og:title" content="Register">
     <meta property="og:type" content="website">
@@ -29,18 +29,18 @@
     <link rel="canonical" href="/">
     <meta property="og:url" content="/">
   </head>
-                      {% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class="flashes">
-    {% for message in messages %}
-      <h1>{{ message }}</h1>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flashes">
+        {% for message in messages %}
+            <h1>{{ message }}</h1>
+        {% endfor %}
+        </ul>
+    {% endif %}
+  {% endwith %}
   <body class="u-body"><header class="u-clearfix u-header u-header" id="sec-f1ab"><div class="u-clearfix u-sheet u-sheet-1">
         <a href="/" class="u-image u-logo u-image-1" data-image-width="750" data-image-height="250">
-          <img src="{{url_for('static', filename = '/images/ecogologo_7.svg')}}" class="u-logo-image u-logo-image-1" data-image-width="171.9558">
+          <img src="{{url_for('static', filename = 'images/ecogologo_7.svg')}}" class="u-logo-image u-logo-image-1" data-image-width="171.9558">
         </a>
         <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
           <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
@@ -58,6 +58,7 @@
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/events" style="padding: 10px 20px;">Events</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/about" style="padding: 10px 20px;">About</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/login" style="padding: 10px 20px;">Login</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/logout" style="padding: 10px 20px;">Log Out</a>
 </li></ul>
           </div>
           <div class="u-custom-menu u-nav-container-collapse">
@@ -69,6 +70,7 @@
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/events" style="padding: 10px 20px;">Events</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/about" style="padding: 10px 20px;">About</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/login" style="padding: 10px 20px;">Login</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/logout" style="padding: 10px 20px;">Log Out</a>
 </li></ul>
               </div>
             </div>
@@ -112,6 +114,10 @@
                       <label for="text-c1e0" class="u-form-control-hidden u-label"></label>
                       <input type="password" placeholder="Password" id="text-c1e0" name="password" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required" maxlength="15">
                     </div>
+                    <div class="u-form-group u-form-group-7">
+                      <label for="text-c1e0" class="u-form-control-hidden u-label"></label>
+                      <input type="password" placeholder="Confirm Password" id="text-c1e" name="password2" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required" maxlength="15">
+                    </div>
                     <div class="u-form-email u-form-group">
                       <label for="email-1358" class="u-form-control-hidden u-label">Email</label>
                       <input type="email" placeholder="Enter a valid email address" id="email-1358" name="email" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
@@ -146,7 +152,7 @@
                       </label>
                     </div>
                     <div class="u-align-center u-form-group u-form-submit">
-                      <input type="submit" value="register" name="register-button" class="u-btn u-btn-submit u-button-style">
+                      <input type="submit" value="Register" name="register-button" class="u-btn u-btn-submit u-button-style">
                     </div>
                     <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
                     <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try again. </div>

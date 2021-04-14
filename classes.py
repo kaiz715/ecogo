@@ -160,7 +160,7 @@ class FunctionUser:
         events = session.query(Event).all()
         for i in events:
             try:
-                if i.participants[str(uid)] != None:
+                if i.participants[str(self.uid)] != None:
                     events_list.append(i.eid)
             except Exception:
                 pass

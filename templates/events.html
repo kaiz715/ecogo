@@ -49,6 +49,7 @@
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/events" style="padding: 10px 20px;">Events</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/about" style="padding: 10px 20px;">About</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/login" style="padding: 10px 20px;">Login</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/logout" style="padding: 10px 20px;">Log Out</a>
 </li></ul>
           </div>
           <div class="u-custom-menu u-nav-container-collapse">
@@ -60,6 +61,7 @@
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/events" style="padding: 10px 20px;">Events</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/about" style="padding: 10px 20px;">About</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/login" style="padding: 10px 20px;">Login</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/logout" style="padding: 10px 20px;">Log Out</a>
 </li></ul>
               </div>
             </div>
@@ -91,15 +93,14 @@
                   <form action="/events?form=2" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px;" name="form">
                     <div class="u-form-group u-form-name">
                       <label for="name-9e71" class="u-form-control-hidden u-label">Name</label>
-                      <input type="text" placeholder="Enter the event code" id="name-9e71" name="text" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+                      <input type="text" placeholder="Enter the event code:" id="name-9e71" name="text" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
                     </div>
                     <div class="u-form-checkbox u-form-group u-form-group-2">
                       <input type="checkbox" id="checkbox-6348" name="checkbox" value="On">
                       <label for="checkbox-6348" class="u-label">Need a ride</label>
                     </div>
                     <div class="u-align-center u-form-group u-form-submit">
-                      <a href="#" class="u-btn u-btn-submit u-button-style u-custom-color-3 u-btn-1">Join</a>
-                      <input type="submit" value="Join" name='Join' class="u-form-control-hidden">
+                      <input type="submit" value="Join" name='join_button' class="u-btn u-btn-submit u-button-style u-custom-color-3 u-btn-1">
                     </div>
                     <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
                     <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try again. </div>
