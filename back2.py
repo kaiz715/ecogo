@@ -6,8 +6,6 @@ import config
 
 app = config.app()
 
-all_events = []
-
 
 def convert_to(date):
     print(date)
@@ -25,25 +23,6 @@ def convert_to(date):
     return date1.date()
 
 
-def separate_address(address):
-    num1 = address.find(' ')
-    num = address[:num1]
-    address = address[num1:]
-    temp2 = address.find(' ')
-    add1 = address[:temp2]
-    address = address[temp2:]
-    temp3 = address.find(' ')
-    add2 = address[:temp3]
-    address = address[temp3:]
-    temp4 = address.find(' ')
-    add3 = address[:temp4]
-    address = address[temp4:]
-    temp5 = address.find(' ')
-    add4 = address[:temp5]
-    seperated = [num, add1, add2, add3, add4]
-    return seperated
-
-
 @app.route('/', methods=['POST', 'GET'])
 def home():
     if request.method == 'GET':
@@ -51,24 +30,28 @@ def home():
             if 'uid' in session:
                 uid = session["uid"]
                 User = classes.FunctionUser.from_db(uid)
-                all_rids = User.get_receiving_requests()
+                all_requests = User.get_receiving_requests()
                 all_eids = User.get_events()
                 all_events = []
-                all_requests = []
+                all_names = {}
                 for eid in all_eids:
                     Event = classes.FunctionEvents.from_db(eid)
                     all_events.append(Event)
-                for rid in all_rids:
-                    Request = classes.FunctionRequests.from_db(rid)
-                    all_events.append(Request)
+                for current_request in all_requests:
+                    first_name = classes.FunctionUser.from_db(current_request.requesting_id).first_name
+                    last_name = classes.FunctionUser.from_db(current_request.requesting_id).last_name
+                    name = first_name + ' ' + last_name
+                    all_names[current_request] = name
             else:
                 session.pop("user", None)
                 all_requests = []
                 all_events = []
+                all_names = {}
         else:
             all_requests = []
             all_events = []
-        return render_template('home.html', requests=all_requests, events=all_events)
+            all_names = {}
+        return render_template('home.html', requests=all_requests, events=all_events, names=all_names)
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -149,11 +132,19 @@ def logout():
 def specific_request(rid):
     if request.method == 'GET':
         Request = classes.FunctionRequests.from_db(rid)
-        id = Request.receiving_id()
-        User = classes.FunctionUser.from_db(id)
-        address = str(User.address)
-        complete_address = separate_address(address)
-        return render_template('specificrequests.html', address_list=complete_address)
+        receiving_id = Request.receiving_id
+        id2 = Request.requesting_id
+        if int(receiving_id) == int(session['uid']):
+            user = classes.FunctionUser.from_db(id2)
+            name = user.first_name + ' ' + user.last_name
+            event = classes.FunctionEvents.from_db(Request.event_id)
+            date = str(event.start_time.date()) + ' - ' + str(event.end_time.date())
+            event_name = event.event_name
+            address = str(user.address)
+            complete_address = address.split()
+            return render_template('specificrequest.html', address_list=complete_address, user_name=name, event=event_name, date=date, address=address)
+        else:
+            return redirect(url_for('home'))
 
 
 @app.route("/events", methods=['POST', 'GET'])
@@ -219,7 +210,7 @@ def join(event_code):
 @app.route('/event/<eid>', methods=['GET', 'POST'])
 def event(eid):
     username = session['user']
-    event = classes.FunctionEvents.from_db(eid)
+    event = classes.FunctionEvents.from_db(int(eid))
     location = event.location
     name = event.event_name
     start = str(event.start_time.date())
@@ -230,8 +221,8 @@ def event(eid):
         user = classes.FunctionUser.from_db(int(uid))
         first_name = user.first_name
         last_name = user.last_name
-        all_participants.append((first_name + last_name))
-    return render_template('event.html', event_location=location, event_name=name, event_start=start, event_end=end, event_participant=all_participants)
+        all_participants.append((first_name + ' ' + last_name))
+    return render_template('event.html', event_location=location, event_name=name, event_start=start, event_end=end, event_participants=all_participants)
 
 
 if __name__ == "__main__":
