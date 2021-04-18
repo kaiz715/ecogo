@@ -354,6 +354,20 @@ class FunctionEvents:
         distances = all_distances(driver_address, all_addresses)
         return distances
 
+    def remove_user(self, uid):
+        session = Session()
+        if session.query(Event).filter_by(eid=self.eid).first() == None:
+            return False
+        event = session.query(Event).filter_by(eid=self.eid).first()
+        tdic = event.participants.copy()
+        time.sleep(0.05)
+        del tdic[uid]
+        time.sleep(0.05)
+        event.participants = tdic.copy()
+        time.sleep(0.05)
+        session.commit()
+        session.close()
+
 
 # # tester code:
 # first_name, last_name, username, password, phone_number, email, address = (
