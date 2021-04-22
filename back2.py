@@ -193,9 +193,9 @@ def events():
                 event_id = classes.code_to_eid(event_code)
                 status = request.form.get('checkbox', False)
                 if status == 'On':
-                    availability = 'Need'
+                    availability = 'need'
                 else:
-                    availability = 'Give'
+                    availability = 'give'
                 event = classes.FunctionEvents.from_db(event_id)
                 uid = session["uid"]
                 event.add_user(uid, availability)
@@ -276,14 +276,14 @@ def remove(eid, uid):
 @app.route('/request/accept/<rid>')
 def accept(rid):
     Request = classes.FunctionRequests.from_db(rid)
-    Request.update_request('Accepted')
+    Request.update_request('accepted')
     return redirect(url_for('home'))
 
 
 @app.route('/request/reject/<rid>')
 def reject(rid):
     Request = classes.FunctionRequests.from_db(rid)
-    Request.update_request('Declined')
+    Request.update_request('declined')
     return redirect(url_for('home'))
 
 
