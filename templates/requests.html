@@ -90,14 +90,31 @@
             <div class="u-container-style u-grey-10 u-tab-active u-tab-pane u-tab-pane-1" id="tab-6d38" role="tabpanel" aria-labelledby="link-tab-6d38">
               <div class="u-container-layout u-container-layout-1">
                   {% block content %}
+                    {% if users %}
+                        {% for uid, name in users %}
+                            <p class="u-text u-text-default u-text-1">{{name}}<br>
+                        {% endfor %}
+                    {% else %}
+                        <h3>No available users</h3>
+                    {% endif %}
                   {% endblock %}
-                <p class="u-text u-text-default u-text-1">List requests here<br>
                 </p>
               </div>
             </div>
             <div class="u-container-style u-grey-10 u-tab-pane u-tab-pane-2" id="tab-0b3f" role="tabpanel" aria-labelledby="link-tab-0b3f">
               <div class="u-container-layout u-container-layout-2">
-                <p class="u-text u-text-default u-text-2">List requests here<br>
+                  {% block content2 %}
+                    {% if requests %}
+                        {% for uid, name in requests %}
+                            <p class="u-text u-text-default u-text-1">{{name}}<br>
+                            <a href="">
+                                <input type="button" value="Send Request">
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <h3>No pending requests</h3>
+                    {% endif %}
+                  {% endblock %}
                 </p>
               </div>
             </div>

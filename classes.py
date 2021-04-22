@@ -348,11 +348,16 @@ class FunctionEvents:
     def find_distances(self, uid):
         session = Session()
         all_addresses = []
+        user_distances = {}
         for i in self.participants.keys():
             all_addresses.append(session.query(User).filter_by(uid=i).first().address)
         driver_address = session.query(User).filter_by(uid=uid).first().address
         distances = all_distances(driver_address, all_addresses)
-        return distances
+        counter = 0
+        for key in self.participants.keys():
+            user_distances[key] = distances[counter]
+            counter += 1
+        return user_distances
 
     def remove_user(self, uid):
         session = Session()

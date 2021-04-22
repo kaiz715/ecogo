@@ -7,6 +7,19 @@ import config
 app = config.app()
 
 
+def get_requests(uid):
+    users = {}
+    user = classes.FunctionUser.from_db(uid)
+    events = user.get_events()
+    for event in events:
+        for id, status in event.participants.items():
+            if status == 'give':
+                participant = classes.FunctionUser.from_db(id)
+                name = participant.first_name + ' ' + participant.last_name
+                users[id] = name
+    return users
+
+
 def convert_to(date):
     print(date)
     temp = date.find('-')
@@ -38,10 +51,13 @@ def home():
                     Event = classes.FunctionEvents.from_db(eid)
                     all_events.append(Event)
                 for current_request in all_requests:
-                    first_name = classes.FunctionUser.from_db(current_request.requesting_id).first_name
-                    last_name = classes.FunctionUser.from_db(current_request.requesting_id).last_name
-                    name = first_name + ' ' + last_name
-                    all_names[current_request] = name
+                    if current_request.status == 'Default':
+                        first_name = classes.FunctionUser.from_db(current_request.requesting_id).first_name
+                        last_name = classes.FunctionUser.from_db(current_request.requesting_id).last_name
+                        name = first_name + ' ' + last_name
+                        all_names[current_request] = name
+                    else:
+                        all_requests.remove(current_request)
             else:
                 session.pop("user", None)
                 all_requests = []
@@ -116,7 +132,8 @@ def register():
 @app.route('/requests', methods=['POST', 'GET'])
 def requests():
     if request.method == 'GET':
-        return render_template('requests.html')
+        user = classes.FunctionUser.from_db(session['uid'])
+        return render_template('requests.html', events=user.get_events())
     else:
         pass
 
@@ -142,7 +159,7 @@ def specific_request(rid):
             event_name = event.event_name
             address = str(user.address)
             complete_address = address.split()
-            return render_template('specificrequest.html', address_list=complete_address, user_name=name, event=event_name, date=date, address=address)
+            return render_template('specificrequest.html', address_list=complete_address, user_name=name, event=event_name, date=date, address=address, rid=rid)
         else:
             return redirect(url_for('home'))
 
@@ -168,6 +185,7 @@ def events():
                 else:
                     repeating = False
                 event = classes.FunctionEvents.from_new(location, uid, name, start, end, repeating)
+                event.add_user(uid)
                 return redirect(url_for('event_created', eid=event.eid))
             elif form == 2:
                 availability = ''
@@ -207,22 +225,77 @@ def join(event_code):
         return redirect(url_for('event', eid=eid))
 
 
+@app.route('/event/<eid>/', methods=['GET', 'POST'])
 @app.route('/event/<eid>', methods=['GET', 'POST'])
 def event(eid):
-    username = session['user']
-    event = classes.FunctionEvents.from_db(int(eid))
-    location = event.location
-    name = event.event_name
-    start = str(event.start_time.date())
-    end = str(event.end_time.date())
-    uids = event.participants
-    all_participants = []
-    for uid in uids:
-        user = classes.FunctionUser.from_db(int(uid))
-        first_name = user.first_name
-        last_name = user.last_name
-        all_participants.append((first_name + ' ' + last_name))
-    return render_template('event.html', event_location=location, event_name=name, event_start=start, event_end=end, event_participants=all_participants)
+    if request.method == 'GET':
+        username = session['user']
+        event = classes.FunctionEvents.from_db(int(eid))
+        location = event.location
+        name = event.event_name
+        start = str(event.start_time.date())
+        end = str(event.end_time.date())
+        uids = event.participants
+        all_participants = {}
+        for uid in uids:
+            user = classes.FunctionUser.from_db(int(uid))
+            first_name = user.first_name
+            last_name = user.last_name
+            all_participants[uid] = (first_name + ' ' + last_name)
+        if session['uid'] == event.organiser_id:
+            owner = True
+        else:
+            owner = False
+        return render_template('event.html', event_location=location, event_name=name, event_start=start, event_end=end, event_participants=all_participants, eid=int(eid), all_uids=uids, owner=owner)
+    else:
+        form = str(request.args.get('user'))
+        event = classes.FunctionEvents.from_db(int(eid))
+        uids = event.participants
+        for uid in uids:
+            user = classes.FunctionUser.from_db(int(uid))
+            first_name = user.first_name
+            last_name = user.last_name
+            name = first_name + ' ' + last_name
+            if name == form:
+                event.remove_user(uid)
+
+
+@app.route('/event/remove/<eid>/<uid>')
+def remove(eid, uid):
+    try:
+        event = classes.FunctionEvents.from_db(eid)
+        if session['uid'] == event.organiser_id:
+            event.remove_user(uid)
+            return redirect(url_for('event', eid=eid))
+        else:
+            return redirect(url_for('home'))
+    except:
+        return redirect(url_for('home'))
+
+
+@app.route('/request/accept/<rid>')
+def accept(rid):
+    Request = classes.FunctionRequests.from_db(rid)
+    Request.update_request('Accepted')
+    return redirect(url_for('home'))
+
+
+@app.route('/request/reject/<rid>')
+def reject(rid):
+    Request = classes.FunctionRequests.from_db(rid)
+    Request.update_request('Declined')
+    return redirect(url_for('home'))
+
+
+@app.route('/about', methods=['GET'])
+def about():
+    return render_template('about.html')
+
+
+@app.route('/send/{{uid}}', methods=['POST', 'GET'])
+def send(uid):
+    if request.method == 'GET':
+        return render_template('send.html')
 
 
 if __name__ == "__main__":

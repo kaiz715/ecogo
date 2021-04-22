@@ -179,7 +179,15 @@
                 <div class="u-container-layout u-container-layout-2">
                   <h2 class="u-align-center u-text u-text-4">Owned<br>
                   </h2>
-                  <p class="u-text u-text-5">Events created go here</p>
+                  {% block content3 %}
+                    {% if owned_events %}
+                      {% for event in owned_events %}
+                        </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/event/{{event.eid}}" style="padding: 10px 20px;">{{event.event_name}}</a>
+                      {% endfor %}
+                    {% else %}
+                      <p>You haven't created any events!</p>
+                    {% endif %}
+                  {% endblock %}
                 </div>
               </div>
             </div>
