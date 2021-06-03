@@ -6,9 +6,9 @@
     <meta name="keywords" content="eco, eco-go, carpool, carpooling, carbon">
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>Page 1</title>
+    <title>Send Request</title>
     <link rel="stylesheet" href="{{url_for('static', filename='styles/nicepage.css')}}" media="screen">
-<link rel="stylesheet" href="{{url_for('static', filename='styles/SpecificRequest.css')}}" media="screen">
+<link rel="stylesheet" href="{{url_for('static', filename='styles/send.css')}}" media="screen">
     <script class="u-script" type="text/javascript" src="static/js/jquery.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="static/js/nicepage.js" defer=""></script>
     <meta name="generator" content="Nicepage 3.11.0, nicepage.com">
@@ -21,8 +21,8 @@
 		"@type": "Organization",
 		"name": "Eco-Go",
 		"url": "index.html",
-		"logo": "images/ecogologo_7.svg"
-}</script>
+		"logo": "{{url_for('static', filename = 'images/ecogologo_7.svg')}}"}
+    </script>
     <meta property="og:title" content="Page 1">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#478ac9">
@@ -30,7 +30,7 @@
     <meta property="og:url" content="index.html">
   </head>
   <body class="u-body"><header class="u-clearfix u-header u-header" id="sec-f1ab"><div class="u-clearfix u-sheet u-sheet-1">
-        <a href="https://nicepage.com" class="u-image u-logo u-image-1" data-image-width="750" data-image-height="250">
+        <a href="/" class="u-image u-logo u-image-1" data-image-width="750" data-image-height="250">
           <img src="{{url_for('static', filename = 'images/ecogologo_7.svg')}}" class="u-logo-image u-logo-image-1" data-image-width="171.9558">
         </a>
         <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
@@ -44,23 +44,22 @@
           </div>
           <div class="u-custom-menu u-nav-container">
             <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Home.html" style="padding: 10px 20px;">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Requests.html" style="padding: 10px 20px;">Requests</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Events.html" style="padding: 10px 20px;">Events</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="About.html" style="padding: 10px 20px;">About</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Login.html" style="padding: 10px 20px;">Login</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Page-1.html" style="padding: 10px 20px;">Page 1</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Page-1.html" style="padding: 10px 20px;">Page 1</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/requests" style="padding: 10px 20px;">Requests</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/events" style="padding: 10px 20px;">Events</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/about" style="padding: 10px 20px;">About</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/login" style="padding: 10px 20px;">Login</a>
 </li></ul>
           </div>
           <div class="u-custom-menu u-nav-container-collapse">
             <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
               <div class="u-sidenav-overflow">
                 <div class="u-menu-close"></div>
-                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Home.html" style="padding: 10px 20px;">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/requests" style="padding: 10px 20px;">Requests</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/events" style="padding: 10px 20px;">Events</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/about" style="padding: 10px 20px;">About</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/login" style="padding: 10px 20px;">Login</a>
+                  <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/" style="padding: 10px 20px;">Home</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/requests" style="padding: 10px 20px;">Requests</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/events" style="padding: 10px 20px;">Events</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/about" style="padding: 10px 20px;">About</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/login" style="padding: 10px 20px;">Login</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/logout" style="padding: 10px 20px;">Log Out</a>
 </li></ul>
               </div>
             </div>
@@ -68,53 +67,45 @@
           </div>
         </nav>
       </div></header>
-    <section class="u-align-left u-clearfix u-image u-shading u-section-1" src="" id="sec-975f" data-image-width="1600" data-image-height="800">
+    <section class="u-align-left u-clearfix u-image u-shading u-section-1" src="" data-image-width="1600" data-image-height="800" id="sec-c367">
       <div class="u-clearfix u-sheet u-sheet-1">
-        <h1 class="u-text u-text-1">User Name:</h1>
-        <h3 class="u-text u-text-2">{{user_name}}</h3>
+        <h1 class="u-text u-title u-text-1">Send A Request</h1>
+      </div>
+    </section>
+    <section class="u-clearfix u-section-2" id="sec-6a19">
+      <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
         <div class="u-form u-form-1">
           <form action="#" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px" source="custom" name="form">
             <input type="hidden" id="siteId" name="siteId" value="561919753">
-            <input type="hidden" id="pageId" name="pageId" value="401225135">
-            <div class="u-align-left u-form-group u-form-submit">
-              <a href="/request/reject/{{rid}}" class="u-btn u-btn-submit u-button-style u-custom-color-11 u-btn-1">Reject</a>
-              <input type="submit" value="submit" class="u-form-control-hidden">
+            <input type="hidden" id="pageId" name="pageId" value="464107915">
+            <div class="u-form-group u-form-select u-form-group-1">
+              <label for="select-f265" class="u-label">Select Event</label>
+              <div class="u-form-select-wrapper">
+                <select id="select-f265" name="select" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                  {% block content %}
+                    {% for eid, name in events.items() %}
+                        <option value={{eid}}>{{name}}</option>
+                    {% endfor %}
+                  {% endblock %}
+                </select>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
+              </div>
+            </div>
+            <div class="u-form-agree u-form-group u-form-group-2">
+              <input type="checkbox" id="agree-1d39" name="agree" class="u-agree-checkbox" required="">
+              <label for="agree-1d39" class="u-label">I accept the <a href="/terms-service">Terms of Service</a>
+              </label>
+            </div>
+            <div class="u-align-center u-form-group u-form-submit">
+              <input type="submit" value="Send" class="u-btn u-btn-submit u-button-style">
             </div>
             <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
             <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try again. </div>
             <input type="hidden" value="" name="recaptchaResponse">
           </form>
-        </div>
-        <div class="u-form u-form-2">
-          <form action="#" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px" source="custom" name="form">
-            <input type="hidden" id="siteId" name="siteId" value="561919753">
-            <input type="hidden" id="pageId" name="pageId" value="401225135">
-            <div class="u-align-right u-form-group u-form-submit">
-              <a href=/request/accept/{{rid}}" class="u-btn u-btn-submit u-button-style u-custom-color-3 u-btn-2">Accept</a>
-              <input type="submit" value="submit" class="u-form-control-hidden">
-            </div>
-            <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
-            <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try again. </div>
-            <input type="hidden" value="" name="recaptchaResponse">
-          </form>
-        </div>
-        <h1 class="u-text u-text-3">User Address:</h1>
-        <h3 class="u-text u-text-4">{{address}}</h3>
-        <h1 class="u-text u-text-5">Event Name:</h1>
-        <h3 class="u-text u-text-6">{{event}}</h3>
-        <h1 class="u-text u-text-7">Event Date:</h1>
-        <h1 class="u-text u-text-8">{{date}}</h1>
-        <div class="u-grey-light-2 u-map u-map-1">
-          <div class="embed-responsive">
-            {% block content %}
-                <iframe class="embed-responsive-item" src="//maps.google.com/maps?output=embed&amp;q={{address_list[0]}}%20{{address_list[1]}}%20{{address_list[2]}}%20{{address_list[3]}}%20{{address_list[4]}}&amp;t=m" data-map="JTdCJTIycG9zaXRpb25UeXBlJTIyJTNBJTIybWFwLWFkZHJlc3MlMjIlMkMlMjJhZGRyZXNzJTIyJTNBJTIyMjcwMjAlMjBDZWRhciUyMFJkJTIwQmVhY2h3b29kJTIwT2hpbyUyMiUyQyUyMnpvb20lMjIlM0FudWxsJTJDJTIydHlwZUlkJTIyJTNBJTIycm9hZCUyMiUyQyUyMmxhbmclMjIlM0FudWxsJTJDJTIyYXBpS2V5JTIyJTNBbnVsbCUyQyUyMm1hcmtlcnMlMjIlM0ElNUIlNUQlN0Q="></iframe>
-            {% endblock %}
         </div>
       </div>
     </section>
-    <section class="u-clearfix u-section-2" id="sec-16ee"></section>
-    
-    
     <footer class="u-align-left u-clearfix u-footer u-grey-80 u-footer" id="sec-8972"><div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
         <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
           <div class="u-layout">

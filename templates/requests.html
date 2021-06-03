@@ -104,15 +104,12 @@
             <div class="u-container-style u-grey-10 u-tab-pane u-tab-pane-2" id="tab-0b3f" role="tabpanel" aria-labelledby="link-tab-0b3f">
               <div class="u-container-layout u-container-layout-2">
                   {% block content2 %}
-                    {% if requests %}
-                        {% for uid, name in requests %}
-                            <p class="u-text u-text-default u-text-1">{{name}}<br>
-                            <a href="">
-                                <input type="button" value="Send Request">
-                            </a>
+                    {% if events %}
+                        {% for event in events %}
+                            <h3>{{event}}</h3>
                         {% endfor %}
                     {% else %}
-                        <h3>No pending requests</h3>
+                        <h3>No Events</h3>
                     {% endif %}
                   {% endblock %}
                 </p>

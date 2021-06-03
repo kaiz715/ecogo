@@ -69,6 +69,15 @@
           </div>
         </nav>
       </div></header>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flashes">
+    {% for message in messages %}
+      <h3>{{ message }}</h3>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
     <section class="u-align-left u-clearfix u-image u-section-1" id="sec-edf6" data-image-width="1000" data-image-height="500">
       <div class="u-clearfix u-sheet u-sheet-1"></div>
     </section>
@@ -81,12 +90,16 @@
                 <div class="u-container-layout u-container-layout-1">
                   <h1 class="u-text u-text-body-color u-text-1">Pending Requests</h1>
                     {% block content2 %}
-                        {% if requests %}
-                            {% for request in requests %}
-                                </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/specificRequests/{{request.rid}}" style="padding: 10px 20px;">{{names[request]}}</a>
-                            {% endfor %}
+                        {% if logged_in %}
+                            {% if requests %}
+                                {% for request in requests %}
+                                    </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/specificRequests/{{request.rid}}" style="padding: 10px 20px;">{{names[request]}}</a>
+                                {% endfor %}
+                            {% else %}
+                                    <h3 class="u-text u-text-4">None</h3>
+                            {% endif %}
                         {% else %}
-                                <h3 class="u-text u-text-4">None</h3>
+                            <h2>You're not logged in!</h2>
                         {% endif %}
                     {% endblock %}
                 </div>
@@ -96,12 +109,16 @@
                   <h1 class="u-text u-text-body-color u-text-3">Events</h1>
                     <br>
                     {% block content1 %}
-                        {% if events %}
-                            {% for event in events %}
-                                </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/event/{{event.eid}}" style="padding: 10px 20px;">{{event.event_name}}</a>
-                            {% endfor %}
+                        {% if logged_in %}
+                            {% if events %}
+                                {% for event in events %}
+                                    </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/event/{{event.eid}}" style="padding: 10px 20px;">{{event.event_name}}</a>
+                                {% endfor %}
+                            {% else %}
+                                    <h3 class="u-text u-text-4">None</h3>
+                            {% endif %}
                         {% else %}
-                                <h3 class="u-text u-text-4">None</h3>
+                            <h2>You're not logged in!</h2>
                         {% endif %}
                     {% endblock %}
                 </div>
