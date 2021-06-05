@@ -351,9 +351,9 @@ def accept(rid):
     global query
     if logged_in():
         Request = classes.FunctionRequests.from_db(rid)
-        if Request.receiving_id == session['uid']:
+        if Request.receiving_id == str(session['uid']):
             Request.update_request('accepted')
-            return redirect(url_for('home'))
+        return redirect(url_for('home'))
     else:
         query = rid
         return redirect(url_for('login', direction='accept'))
@@ -364,7 +364,7 @@ def reject(rid):
     global query
     if logged_in():
         Request = classes.FunctionRequests.from_db(rid)
-        if Request.receiving_id == session['uid']:
+        if Request.receiving_id == str(session['uid']):
             Request.update_request('rejected')
             return redirect(url_for('home'))
     else:
