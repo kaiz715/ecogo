@@ -24,6 +24,7 @@
     <meta property="og:title" content="{{title}}">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#478ac9">
-    <link rel="canonical" href="/">
-    <meta property="og:url" content="/">
+    <link rel="canonical" href="{{ url_for(request.endpoint) }}">
+    <meta property="og:url" content="{{ url_for(request.endpoint) }}">
+    {%block customhead%}{%endblock customhead%}
   </head>
