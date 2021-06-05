@@ -48,6 +48,10 @@ def convert_to(date):
     return date1.date()
 
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
 @app.route('/', methods=['POST', 'GET'])
 def home():
     if request.method == 'GET':
