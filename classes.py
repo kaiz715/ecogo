@@ -164,6 +164,7 @@ class FunctionUser:
                     events_list.append(i.eid)
             except Exception:
                 pass
+        session.close()
         return events_list
 
     def make_request(self, receiving_id, event_id):
@@ -357,6 +358,7 @@ class FunctionEvents:
         for key in self.participants.keys():
             user_distances[key] = distances[counter]
             counter += 1
+        session.close()
         return user_distances
 
     def remove_user(self, uid):
