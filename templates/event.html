@@ -6,7 +6,7 @@
     <meta name="keywords" content="eco, eco-go, carpool, carpooling, carbon">
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>Page 1</title>
+    <title>{{event_name}}</title>
     <link rel="stylesheet" href="{{url_for('static', filename='styles/nicepage.css')}}" media="screen">
     <link rel="stylesheet" href="{{url_for('static', filename='styles/Event.css')}}" media="screen">
     <script class="u-script" type="text/javascript" src="static/js/jquery.js" defer=""></script>
@@ -89,7 +89,7 @@
                 <div class="u-form u-form-1">
                   <form action="#" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px" source="custom" name="form">
                     <div class="u-align-left u-form-group u-form-submit">
-                      <a href="/event/remove/{{uid}}/{{eid}}" class="u-btn u-btn-submit u-button-style u-custom-color-11 u-btn-1">Kick</a>
+                      <a href="/event/remove/{{eid}}/{{uid}}" class="u-btn u-btn-submit u-button-style u-custom-color-11 u-btn-1">Kick</a>
                       <input type="submit" value="submit" class="u-form-control-hidden">
                     </div>
                     <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>

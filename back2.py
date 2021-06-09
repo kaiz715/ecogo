@@ -48,10 +48,14 @@ def convert_to(date):
     return date1.date()
 
 
+<<<<<<< Updated upstream
+=======
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
 
+
+>>>>>>> Stashed changes
 @app.route('/', methods=['POST', 'GET'])
 def home():
     if request.method == 'GET':
@@ -111,8 +115,8 @@ def login(direction='home'):
                 return render_template('login.html')
             else:
                 session['user'] = request.form['username-281b']
-                session['uid'] = classes.credential_check(user, password)
-                if int(session['uid']) != -1:
+                session['uid'] = int(classes.credential_check(user, password))
+                if session['uid'] != -1:
                     if direction == 'specific_requests':
                         return redirect(url_for(direction, rid=query))
                     elif direction == 'join':
@@ -285,7 +289,6 @@ def join(event_code):
 def event(eid):
     global query
     if request.method == 'GET':
-        username = session['user']
         event = classes.FunctionEvents.from_db(int(eid))
         location = event.location
         name = event.event_name
@@ -311,7 +314,7 @@ def event(eid):
     else:
         if logged_in():
             event = classes.FunctionEvents.from_db(int(eid))
-            if int(event.organiser_id) == int(session['uid']):
+            if event.organiser_id == session['uid']:
                 form = str(request.args.get('user'))
                 uids = event.participants
                 for uid in uids:
@@ -320,7 +323,7 @@ def event(eid):
                     last_name = user.last_name
                     name = first_name + ' ' + last_name
                     if name == form:
-                        event.remove_user(uid)
+                        event.remove_user(int(uid))
             else:
                 return redirect(url_for('logout'))
         else:
@@ -332,15 +335,12 @@ def event(eid):
 def remove(eid, uid):
     global query
     if logged_in():
-        try:
-            event = classes.FunctionEvents.from_db(eid)
-            if session['uid'] == event.organiser_id:
-                event.remove_user(uid)
-                return redirect(url_for('event', eid=eid))
-            else:
-                return redirect(url_for('logout'))
-        except:
-            return redirect(url_for('home'))
+        event = classes.FunctionEvents.from_db(eid)
+        if session['uid'] == event.organiser_id:
+            event.remove_user(uid)
+            return redirect(url_for('event', eid=eid))
+        else:
+            return redirect(url_for('logout'))
     else:
         query = eid
         return redirect(url_for('login', direction='event'))
@@ -366,7 +366,7 @@ def reject(rid):
         Request = classes.FunctionRequests.from_db(rid)
         if Request.receiving_id == str(session['uid']):
             Request.update_request('rejected')
-            return redirect(url_for('home'))
+        return redirect(url_for('home'))
     else:
         query = rid
         return redirect(url_for('login', direction='reject'))
