@@ -375,6 +375,9 @@ def reject(rid):
 @app.route('/about', methods=['GET'])
 def about():
     return render_template('about.html')
+@app.route('/guide', methods=["GET"])
+def guide():
+    return render_template('guide.html')
 
 
 @app.route('/send/<uid>', methods=['POST', 'GET'])
