@@ -48,14 +48,11 @@ def convert_to(date):
     return date1.date()
 
 
-<<<<<<< Updated upstream
-=======
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
 
 
->>>>>>> Stashed changes
 @app.route('/', methods=['POST', 'GET'])
 def home():
     if request.method == 'GET':
@@ -220,7 +217,17 @@ def events():
     if logged_in():
         if 'user' in session:
             if request.method == 'GET':
-                return render_template('events.html')
+                user = classes.FunctionUser.from_db(session['uid'])
+                events_created = []
+                events_joined = []
+                all_events = user.get_events()
+                for event in all_events:
+                    Event = classes.FunctionEvents.from_db(event)
+                    if Event.organiser_id == user.uid:
+                        events_created.append(Event)
+                    else:
+                        events_joined.append(Event)
+                return render_template('events.html', created=events_created, joined=events_joined)
             else:
                 form = int(request.args.get('form'))
                 if form == 1:
@@ -240,7 +247,6 @@ def events():
                     event.add_user(uid, 'none')
                     return redirect(url_for('event_created', eid=event.eid))
                 elif form == 2:
-                    availability = ''
                     event_code = request.form['text']
                     event_id = classes.code_to_eid(event_code)
                     status = request.form.get('checkbox', False)
@@ -395,7 +401,7 @@ def send(uid):
             return render_template('send.html', events=event_names)
         else:
             if request.form['agree'] == 'on':
-                Request = classes.FunctionRequests.from_new(session['uid'], uid, request.form['select'])
+                classes.FunctionRequests.from_new(session['uid'], uid, request.form['select'])
                 flash('Request Sent!')
                 return redirect(url_for('home'))
     else:
