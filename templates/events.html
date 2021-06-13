@@ -106,18 +106,25 @@
                 <div class="u-container-layout u-valign-top u-container-layout-1">
                   <h2 class="u-align-center u-text u-text-2">Joined<br>
                   </h2>
-                  <p class="u-text u-text-3">Events go here</p>
+                  {% block content %}
+                    {% if joined %}
+                      {% for event in joined %}
+                        </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/event/{{event.eid}}" style="padding: 10px 20px;">{{event.event_name}}</a>
+                      {% endfor %}
+                    {% else %}
+                      <p>You currently aren't in any events!</p>
+                    {% endif %}
+                  {% endblock %}
                 </div>
               </div>
               <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
                 <div class="u-container-layout u-container-layout-2">
-                  <h2 class="u-align-center u-text u-text-4">Owned<br>
+                  <h2 class="u-align-center u-text u-text-4">Created<br>
                   </h2>
-                  {% block content3 %}
-                    {% if owned_events %}
-                      {% for event in owned_events %}
-                        <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/event/{{event.eid}}" style="padding: 10px 20px;">{{event.event_name}}</a>
-</li>
+                  {% block content2 %}
+                    {% if created %}
+                      {% for event in created %}
+                        </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/event/{{event.eid}}" style="padding: 10px 20px;">{{event.event_name}}</a>
                       {% endfor %}
                     {% else %}
                       <p>You haven't created any events!</p>
