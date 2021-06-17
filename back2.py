@@ -410,10 +410,20 @@ def send(uid):
         return redirect(url_for('login', direction='send'))
 
 
+@app.route('/terms-service', methods=['GET'])
+def terms():
+    return render_template('terms.html')
+
+
+@app.route('/privacy-policy')
+def policy():
+    return render_template('policy.html')
+
+
 @app.route('/premium', methods=['POST', 'GET'])
 def store():
     if request.method == 'GET':
-        pass
+        return render_template('store.html')
     else:
         if logged_in():
             pass
