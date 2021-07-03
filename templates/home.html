@@ -26,7 +26,7 @@
                         {% if logged_in %}
                             {% if requests %}
                                 {% for request in requests %}
-                                    </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/specificRequests/{{request.rid}}" style="padding: 10px 20px;">{{names[request]}}</a>
+                                    </li><li class="u-nav-item" style="height: 15%;"><a class="u-button-style u-nav-link" href="/specificRequests/{{request.rid}}" style="margin-top: 5px; margin-bottom: -100px; margin-left: 86%;">{{names[request]}}</a>
                                 {% endfor %}
                             {% else %}
                                     <h3 class="u-section-2 u-text-4">None</h3>
@@ -45,13 +45,13 @@
                         {% if logged_in %}
                             {% if events %}
                                 {% for event in events %}
-                                    </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/event/{{event.eid}}" style="padding: 10px 20px;">{{event.event_name}}</a>
+                                    </li><li class="u-nav-item" style="height: 15%;"><a class="u-button-style u-nav-link" href="/event/{{event.eid}}" style="margin-top: -5px; margin-bottom: -100px; margin-left: 4%;">{{event.event_name}}</a>
                                 {% endfor %}
                             {% else %}
-                                    <h3 class="u-section-2 u-text-5">None</h3>
+                                    <h3 class="u-section-2 u-text-5" style="margin-left: -33%;">None</h3>
                             {% endif %}
                         {% else %}
-                            <h2 class="u-section-2 u-text-4">You're not logged in!</h2>
+                            <h2 class="u-section-2 u-text-4" style="margin-left: 4%; margin-top: 1%;">You're not logged in!</h2>
                         {% endif %}
                     {% endblock %}
                 </div>

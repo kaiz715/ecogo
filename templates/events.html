@@ -80,10 +80,6 @@
                       <label for="date-98f0" class="u-label">End Date:</label>
                       <input type="date" id="date-98f0" name="date-1" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
                     </div>
-                    <div class="u-form-checkbox u-form-group u-form-group-9">
-                      <input type="checkbox" id="checkbox-2e4d" name="recurring" value="On">
-                      <label for="checkbox-2e4d" class="u-label">This is a repeating event</label>
-                    </div>
                     <div class="u-align-center u-form-group u-form-submit">
                       <input type="submit" value="Create" name="create" class="u-btn u-button-style u-custom-color-3 u-btn-2">
                     </div>
@@ -109,10 +105,10 @@
                   {% block content %}
                     {% if joined %}
                       {% for event in joined %}
-                        </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/event/{{event.eid}}" style="padding: 10px 20px;">{{event.event_name}}</a>
+                        </li><li class="u-nav-item" style="height: 15%;"><a class="u-button-style u-nav-link" href="/event/{{event.eid}}" style="padding: 10px 20px; margin-left: 15%;">{{event.event_name}}</a>
                       {% endfor %}
                     {% else %}
-                      <p>You currently aren't in any events!</p>
+                      <p style="margin-left: 25%;">You currently aren't in any events!</p>
                     {% endif %}
                   {% endblock %}
                 </div>
@@ -124,7 +120,7 @@
                   {% block content2 %}
                     {% if created %}
                       {% for event in created %}
-                        </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/event/{{event.eid}}" style="padding: 10px 20px;">{{event.event_name}}</a>
+                        </li><li class="u-nav-item" style="height: 15%;"><a class="u-button-style u-nav-link" href="/event/{{event.eid}}" style="padding: 10px 20px;">{{event.event_name}}</a><br>
                       {% endfor %}
                     {% else %}
                       <p>You haven't created any events!</p>

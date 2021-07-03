@@ -96,8 +96,12 @@ def home():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    query = session['query']
-    direction = session['direction']
+    try:
+        query = session['query']
+        direction = session['direction']
+    except KeyError:
+        query = None
+        direction = "home"
     form = 0
     try:
         form = int(request.args.get('form'))
@@ -171,11 +175,11 @@ def requests():
         if request.method == 'GET':
             user = classes.FunctionUser.from_db(session['uid'])
             events = user.get_events()
-            event_names = []
+            event_names = {}
             users = {}
             for eid in events:
                 event = classes.FunctionEvents.from_db(eid)
-                event_names.append(event.event_name)
+                event_names[eid] = event.event_name
                 for uid in event.participants.keys():
                     user2 = classes.FunctionUser.from_db(int(uid))
                     for request1 in user2.get_sent_requests():
@@ -250,14 +254,28 @@ def events():
                     start = convert_to(temp1)
                     temp2 = request.form['date-1']
                     end = convert_to(temp2)
-                    checkbox = request.form.get('recurring', False)
-                    if checkbox == 'On':
-                        repeating = True
+                    if datetime.date.today() <= start <= end:
+                        checkbox = request.form.get('recurring', False)
+                        if checkbox == 'On':
+                            repeating = True
+                        else:
+                            repeating = False
+                        event = classes.FunctionEvents.from_new(location, uid, name, start, end, repeating)
+                        event.add_user(uid, 'none')
+                        return redirect(url_for('event_created', eid=event.eid))
                     else:
-                        repeating = False
-                    event = classes.FunctionEvents.from_new(location, uid, name, start, end, repeating)
-                    event.add_user(uid, 'none')
-                    return redirect(url_for('event_created', eid=event.eid))
+                        flash("Invalid Dates!")
+                        user = classes.FunctionUser.from_db(session['uid'])
+                        events_created = []
+                        events_joined = []
+                        all_events = user.get_events()
+                        for event in all_events:
+                            Event = classes.FunctionEvents.from_db(event)
+                            if Event.organiser_id == user.uid:
+                                events_created.append(Event)
+                            else:
+                                events_joined.append(Event)
+                        return render_template('events.html', created=events_created, joined=events_joined)
                 elif form == 2:
                     event_code = request.form['text']
                     event_id = classes.code_to_eid(event_code)
@@ -438,7 +456,7 @@ def terms():
 
 @app.route('/privacy-policy')
 def policy():
-    return render_template('policy.html')
+    return render_template('privacy.html')
 
 
 # @app.route('/premium', methods=['POST', 'GET'])

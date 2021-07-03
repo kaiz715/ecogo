@@ -38,8 +38,8 @@
               <div class="u-container-layout u-container-layout-2">
                   {% block content2 %}
                     {% if events %}
-                        {% for event in events %}
-                            <h3>{{event}}</h3>
+                        {% for eid in events.keys() %}
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/event/{{eid}}" style="padding: 10px 20px;">{{events[eid]}}</a></li>
                         {% endfor %}
                     {% else %}
                         <h3>No Events</h3>
