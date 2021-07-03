@@ -8376,6 +8376,9 @@ section.u-image,
 .u-sheet.u-image,
 .u-group.u-image,
 .u-layout-cell.u-image {
+  max-width: 100%;
+  height: auto;
+  width: auto\9;
   overflow: visible;
 }
 .u-text .u-image {

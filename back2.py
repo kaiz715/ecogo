@@ -5,7 +5,11 @@ import datetime
 import config
 
 app = config.app()
-query = None
+
+
+def clear_direction():
+    session.pop('direction', None)
+    session.pop('query', None)
 
 
 def make_payment(type):
@@ -55,6 +59,7 @@ def page_not_found(e):
 
 @app.route('/', methods=['POST', 'GET'])
 def home():
+    session.pop('direction', None)
     if request.method == 'GET':
         if logged_in():
             account = True
@@ -90,17 +95,22 @@ def home():
 
 
 @app.route('/login', methods=['POST', 'GET'])
-@app.route('/login/<direction>', methods=['POST', 'GET'])
-def login(direction='home'):
-    global query
-    if request.method == 'GET':
+def login():
+    query = session['query']
+    direction = session['direction']
+    form = 0
+    try:
+        form = int(request.args.get('form'))
+    except:
+        pass
+    if request.method == 'GET' or form == 0:
         if logged_in():
             flash("You're already logged in!")
             return redirect(url_for(direction))
         else:
             return render_template('login.html')
     else:
-        if request.form['login-button'] == 'Login':
+        if form == 1:
             user = request.form['username-281b']
             password = request.form['pass-281b']
             check = classes.credential_check(user, password)
@@ -130,53 +140,54 @@ def login(direction='home'):
                     flash("This username doesn't exist")
                     return render_template('login.html')
         else:
-            return render_template('login.html')
-
-
-@app.route('/register', methods=['POST', 'GET'])
-def register():
-    if request.method == 'GET':
-        return render_template('register.html')
-    else:
-        if request.form['register-button'] == 'Register':
             username = request.form['text-5']
             password = request.form['password']
             if password == request.form['password2']:
                 email = request.form['email']
-                phone = request.form['number-1358']
+                phone = request.form['phone-number']
                 name = str(request.form['name'])
                 names = name.split(' ')
-                address = request.form['text-2'] + ' ' + request.form['secondary'] + ' ' + request.form['city'] + ' ' + request.form['text-1'] + ' ' +request.form['text-4']
+                address = request.form['text-2'] + ' ' + request.form['secondary'] + ' ' + request.form[
+                    'city'] + ' ' + request.form['text-1'] + ' ' + request.form['text-4']
                 if classes.unique_check(username) is False:
                     flash('Username already exists')
-                    return render_template('register.html')
+                    return render_template('login.html')
                 else:
-                    User = classes.FunctionUser.from_new(names[0], names[1], username, password, phone, email, address)
+                    User = classes.FunctionUser.from_new(names[0], names[1], username, password, phone,
+                                                         email, address)
                     session['user'] = username
                     session['uid'] = User.uid
                     return redirect(url_for('home'))
             else:
-                flash("Passwords don't match")
-                return render_template('register.html')
-        else:
-            return render_template('register.html')
+                print('No match')
+                flash("Passwords don't match!")
+                return render_template('login.html')
 
 
 @app.route('/requests', methods=['POST', 'GET'])
 def requests():
+    clear_direction()
     if logged_in():
         if request.method == 'GET':
             user = classes.FunctionUser.from_db(session['uid'])
             events = user.get_events()
             event_names = []
+            users = {}
             for eid in events:
                 event = classes.FunctionEvents.from_db(eid)
                 event_names.append(event.event_name)
-            return render_template('requests.html', events=event_names)
+                for uid in event.participants.keys():
+                    user2 = classes.FunctionUser.from_db(int(uid))
+                    for request1 in user2.get_sent_requests():
+                        if request1.receiving_id == session['uid']:
+                            users[request1.rid] = user2.first_name + user2.last_name
+                            break
+            return render_template('requests.html', events=event_names, users=users)
         else:
             pass
     else:
         flash("You aren't logged in!")
+        session['direction'] = 'requests'
         return redirect(url_for('login'))
 
 
@@ -189,7 +200,7 @@ def logout():
 
 @app.route('/specificRequests/<rid>')
 def specific_request(rid):
-    global query
+    clear_direction()
     if logged_in():
         if request.method == 'GET':
             Request = classes.FunctionRequests.from_db(rid)
@@ -208,12 +219,13 @@ def specific_request(rid):
                 return redirect(url_for('home'))
     else:
         flash("You aren't logged in!")
-        query = rid
-        return redirect(url_for('login', direction='specific_request'))
+        session['direction'] = 'specific_request'
+        return redirect(url_for('login'))
 
 
 @app.route("/events", methods=['POST', 'GET'])
 def events():
+    clear_direction()
     if logged_in():
         if 'user' in session:
             if request.method == 'GET':
@@ -267,6 +279,7 @@ def events():
 
 @app.route('/creation/<eid>', methods=['POST', 'GET'])
 def event_created(eid):
+    clear_direction()
     if request.method == 'GET':
         specific_event = classes.FunctionEvents.from_db(eid)
         if specific_event.organiser_id == session["uid"]:
@@ -278,7 +291,7 @@ def event_created(eid):
 
 @app.route('/event/join/<event_code>', methods=['GET'])
 def join(event_code):
-    global query
+    clear_direction()
     if logged_in():
         eid = classes.code_to_eid(event_code)
         event = classes.FunctionEvents.from_db(eid=eid)
@@ -286,14 +299,15 @@ def join(event_code):
         event.add_user(uid)
         return redirect(url_for('event', eid=eid))
     else:
-        query = event_code
-        return redirect(url_for('login', direction='join'))
+        session['query'] = event_code
+        session['direction'] = 'join'
+        return redirect(url_for('login'))
 
 
 @app.route('/event/<eid>/', methods=['GET', 'POST'])
 @app.route('/event/<eid>', methods=['GET', 'POST'])
 def event(eid):
-    global query
+    clear_direction()
     if request.method == 'GET':
         event = classes.FunctionEvents.from_db(int(eid))
         location = event.location
@@ -333,13 +347,14 @@ def event(eid):
             else:
                 return redirect(url_for('logout'))
         else:
-            query = eid
+            session['query'] = eid
+            session['direction'] = 'event'
             return redirect(url_for('login', direction='event'))
 
 
 @app.route('/event/remove/<eid>/<uid>')
 def remove(eid, uid):
-    global query
+    clear_direction()
     if logged_in():
         event = classes.FunctionEvents.from_db(eid)
         if session['uid'] == event.organiser_id:
@@ -348,39 +363,44 @@ def remove(eid, uid):
         else:
             return redirect(url_for('logout'))
     else:
-        query = eid
-        return redirect(url_for('login', direction='event'))
+        session['query'] = eid
+        session['direction'] = 'remove'
+        return redirect(url_for('login'))
 
 
 @app.route('/request/accept/<rid>')
 def accept(rid):
-    global query
+    clear_direction()
     if logged_in():
         Request = classes.FunctionRequests.from_db(rid)
         if Request.receiving_id == str(session['uid']):
             Request.update_request('accepted')
         return redirect(url_for('home'))
     else:
-        query = rid
-        return redirect(url_for('login', direction='accept'))
+        session['query'] = rid
+        session['direction'] = 'accept'
+        return redirect(url_for('login'))
 
 
 @app.route('/request/reject/<rid>')
 def reject(rid):
-    global query
+    clear_direction()
     if logged_in():
         Request = classes.FunctionRequests.from_db(rid)
         if Request.receiving_id == str(session['uid']):
             Request.update_request('rejected')
         return redirect(url_for('home'))
     else:
-        query = rid
-        return redirect(url_for('login', direction='reject'))
+        session['query'] = rid
+        session['direction'] = 'reject'
+        return redirect(url_for('login'))
 
 
 @app.route('/about', methods=['GET'])
 def about():
     return render_template('about.html')
+
+
 @app.route('/guide', methods=["GET"])
 def guide():
     return render_template('guide.html')
@@ -388,7 +408,7 @@ def guide():
 
 @app.route('/send/<uid>', methods=['POST', 'GET'])
 def send(uid):
-    global query
+    clear_direction()
     if logged_in():
         if request.method == 'GET':
             user = classes.FunctionUser.from_db(session['uid'])
@@ -406,8 +426,9 @@ def send(uid):
                 return redirect(url_for('home'))
     else:
         flash("You aren't logged in!")
-        query = uid
-        return redirect(url_for('login', direction='send'))
+        session['direction'] = 'send'
+        session['query'] = uid
+        return redirect(url_for('login'))
 
 
 @app.route('/terms-service', methods=['GET'])
@@ -420,15 +441,15 @@ def policy():
     return render_template('policy.html')
 
 
-@app.route('/premium', methods=['POST', 'GET'])
-def store():
-    if request.method == 'GET':
-        return render_template('store.html')
-    else:
-        if logged_in():
-            pass
-        else:
-            return redirect(url_for('login', direction='store'))
+# @app.route('/premium', methods=['POST', 'GET'])
+# def store():
+#     if request.method == 'GET':
+#         return render_template('store.html')
+#     else:
+#         if logged_in():
+#             pass
+#         else:
+#             return redirect(url_for('login', direction='store'))
 
 
 if __name__ == "__main__":
