@@ -1,0 +1,20 @@
+{%extends "layout/base.html"%}
+{% set css, title = "static/styles/EventCreated.css", "Event Created" %}
+{% block body %}
+<head>
+</head>
+    <section class="u-clearfix u-custom-color-3 u-section-1" id="sec-ddf8">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <h1 class="u-text u-text-1">Event Code:<span style="font-size: 3.75rem;"></span>
+        </h1>
+        <p class="u-text u-text-2">{{event_code}}</p>
+        </li><li class="u-nav-item"><a class="u-button-style u-nav-link1" href="http://ecogo.us/join/{{event_code}}" style="padding-left: 450px; color: #0000FF">http://ecogo.us/join/{{event_code}}</a>
+        <p class="u-text u-text-3">Share this link or code with your invitees so they can join your event<span style="font-size: 1.5rem;">
+            <span style="font-size: 1.875rem;"></span>
+          </span>
+        </p>
+      </div>
+    </section>
+    
+    
+{% endblock body %}

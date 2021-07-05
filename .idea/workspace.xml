@@ -4,60 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9897125-46d5-452c-b469-1764117e1883" name="Default Changelist" comment="Updates">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dbstuff.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/distance.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/1.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/2.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/3.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/blue_background.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/ecogologo_5.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/ecogologo_7.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/green_background.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/profile.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/profile.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/jquery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/nicepage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/styles/About.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/styles/Event.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/styles/EventCreated.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/styles/Events.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/styles/Guide.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/styles/Home.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/styles/Login.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/styles/Requests.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/styles/Send.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/styles/SpecificRequest.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/styles/nicepage.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/404.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/about.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/event.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/event_created.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/events.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/guide.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/includes/footer.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/includes/head.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/includes/header.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/layout/base.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/privacy.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/requests.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/send.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/specificrequest.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/terms.html" beforeDir="false" />
-    </list>
+    <list default="true" id="d9897125-46d5-452c-b469-1764117e1883" name="Default Changelist" comment="Updates" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -90,7 +37,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.project" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
