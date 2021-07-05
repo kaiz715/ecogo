@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d9897125-46d5-452c-b469-1764117e1883" name="Default Changelist" comment="Updates">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dbstuff.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/distance.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/1.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/2.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/3.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/blue_background.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/ecogologo_5.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/ecogologo_7.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/green_background.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/profile.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/profile.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/jquery.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/nicepage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/styles/About.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/styles/Event.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/styles/EventCreated.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/styles/Events.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/styles/Guide.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/styles/Home.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/styles/Login.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/styles/Requests.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/styles/Send.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/styles/SpecificRequest.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/styles/nicepage.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/404.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/about.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/event.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/event_created.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/events.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/guide.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/includes/footer.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/includes/head.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/includes/header.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/layout/base.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/privacy.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/requests.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/send.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/specificrequest.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/terms.html" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1phzciYqCRJSZFJAKQDYGsp8rT9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\karee\OneDrive\Documents\GitHub\Hyland-2021-Volt\templates" />
+      <recent name="C:\Users\karee\OneDrive\Documents\GitHub\Hyland-2021-Volt\Templates" />
+      <recent name="C:\Users\karee\OneDrive\Documents\GitHub\Hyland-2021-Volt\Static\styles" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\karee\OneDrive\Documents\GitHub\Hyland-2021-Volt\templates" />
+      <recent name="C:\Users\karee\OneDrive\Documents\GitHub\Hyland-2021-Volt\static\styles" />
+      <recent name="C:\Users\karee\OneDrive\Documents\GitHub\Hyland-2021-Volt\static\images" />
+      <recent name="C:\Users\karee\OneDrive\Documents\GitHub\Hyland-2021-Volt\Static\images" />
+      <recent name="C:\Users\karee\OneDrive\Documents\GitHub\Hyland-2021-Volt\Static\styles" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.back2">
+    <configuration name="back" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\karee\OneDrive\Documents\GitHub\Hyland-2021-Volt\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/back.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="back2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Hyland-2021-Volt" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/back2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="challenge" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Hyland-2021-Volt" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Desktop" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/Desktop/challenge.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="db" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\karee\OneDrive\Documents\GitHub\Hyland-2021-Volt\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/db.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="default" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="distance" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\karee\OneDrive\Documents\GitHub\Hyland-2021-Volt\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/distance.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.default" />
+      <item itemvalue="Python.back2" />
+      <item itemvalue="Python.back" />
+      <item itemvalue="Python.db" />
+      <item itemvalue="Python.distance" />
+      <item itemvalue="Python.challenge" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.back2" />
+        <item itemvalue="Python.challenge" />
+        <item itemvalue="Python.db" />
+        <item itemvalue="Python.back" />
+        <item itemvalue="Python.distance" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d9897125-46d5-452c-b469-1764117e1883" name="Default Changelist" comment="" />
+      <created>1615650190803</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1615650190803</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Updates">
+      <created>1618322089124</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1618322089124</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Updates">
+      <created>1619102457522</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1619102457522</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Updates">
+      <created>1619102611138</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1619102611138</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.css" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updates" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="session['uid']" language="Python" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>
