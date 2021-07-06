@@ -29,6 +29,7 @@ class User(Base):
     phone_number = Column("phone_number", String)
     email = Column("email", String)
     address = Column("address", String)
+    verified = Column("verified", Boolean)
 
 
 class Event(Base):

@@ -90,6 +90,7 @@ class FunctionUser:
         phone_number,
         email,
         address,
+        verified,
     ):
         self.uid = uid
         self.username = username
@@ -99,6 +100,7 @@ class FunctionUser:
         self.phone_number = phone_number
         self.email = email
         self.address = address
+        self.verified = verified
 
     @classmethod
     def from_new(  # for creating a new user
@@ -111,6 +113,7 @@ class FunctionUser:
         phone_number,
         email,
         address,
+        verified,
     ):
         session = Session()
         user = User()
@@ -124,12 +127,13 @@ class FunctionUser:
         user.phone_number = phone_number
         user.email = email
         user.address = address
+        user.verified = verified
         session.add(user)
         session.commit()
         session.close()
 
         return cls(
-            uid, first_name, last_name, username, password, phone_number, email, address
+            uid, first_name, last_name, username, password, phone_number, email, address, verified
         )
 
     @classmethod
@@ -143,9 +147,10 @@ class FunctionUser:
         phone_number = user.phone_number
         email = user.email
         address = user.address
+        verified = user.verified
         session.close()
         return cls(
-            uid, first_name, last_name, username, password, phone_number, email, address
+            uid, first_name, last_name, username, password, phone_number, email, address, verified
         )
 
     def join_event(self, eid, availability="default"):
@@ -196,6 +201,15 @@ class FunctionUser:
         session.add(request)
         session.commit()
         session.close()
+    
+    def update_verification(self, new_verification):
+        session = Session()
+        user = session.query(Request).filter_by(uid=self.uid).first()
+        user.verified = new_verification
+        session.add(user)
+        session.commit()
+        session.close()
+        self.verified = new_verification
 
 
 class FunctionRequests:
