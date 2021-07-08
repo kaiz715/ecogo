@@ -1,0 +1,24 @@
+{%extends "layout/base.html"%}
+{% set css, title = "static/styles/Verify.css", Verify %}
+{% block body %}
+    <section class="u-clearfix u-section-1" id="sec-16ee">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <h1 class="u-align-center u-heading-font u-text u-title u-text-1">A code has been sent to&nbsp;{{email}}</h1>
+        <div class="u-form u-form-1">
+          <form action="#" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px" source="custom" name="form">
+            <div class="u-form-group u-form-name">
+              <label for="name-512a" class="u-form-control-hidden u-label">Name</label>
+              <input type="text" placeholder="Code" id="name-512a" name="name" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+            </div>
+            <div class="u-align-center u-form-group u-form-submit">
+              <a href="#" class="u-btn u-btn-submit u-button-style">Verify</a>
+              <input type="submit" value="submit" class="u-form-control-hidden">
+            </div>
+            <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
+            <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try again. </div>
+            <input type="hidden" value="" name="recaptchaResponse">
+          </form>
+        </div>
+      </div>
+    </section>
+{%endblock body%}

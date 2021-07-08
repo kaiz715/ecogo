@@ -8,7 +8,7 @@ name = "Eco-Go"
 TEMPLATE_FOLDER = "templates"
 STATIC_FOLDER = "public"
 STATIC_URL_PATH = "/static"
-
+password_mail = "YhqPg*99%"
 jinja_options = {'line_statement_prefix': "#"}
 
 SQL_DEBUG = False

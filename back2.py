@@ -3,8 +3,20 @@ import distance
 import classes
 import datetime
 import config
+import smtplib, ssl
 
 app = config.app()
+
+
+def send_email(uid):
+    user = classes.FunctionUser.from_db(uid)
+    receiver_email = user.email
+    message = f"Your code is: {uid}"
+    port = 465
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
+        server.login("ecogo23@gmail.com", config.password_mail)
+        server.sendmail("ecogo23@gmail.com", receiver_email, message)
 
 
 def clear_direction():
@@ -177,7 +189,7 @@ def login():
                                                          email, address)
                     session['user'] = username
                     session['uid'] = User.uid
-                    return redirect(url_for('home'))
+                    return redirect(url_for('verify'))
             else:
                 print('No match')
                 flash("Passwords don't match!")
@@ -541,6 +553,20 @@ def profile(uid=-1):
 #             pass
 #         else:
 #             return redirect(url_for('login', direction='store'))
+
+
+@app.route('/verify', methods=['GET', 'POST'])
+def verify():
+    uid = session['uid']
+    if request.method == 'GET':
+        user = classes.FunctionUser.from_db(uid)
+        return render_template('Verify.html', email=user.email)
+    else:
+        if request.form['code'] == uid:
+            user = classes.FunctionUser.from_db(uid)
+            user.verified_email = True
+        return redirect(url_for('home'))
+
 
 
 if __name__ == "__main__":
