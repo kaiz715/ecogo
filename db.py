@@ -15,7 +15,7 @@ import config
 
 
 Base = declarative_base()
-engine = create_engine("sqlite:///ecogo.db", echo=config.SQL_DEBUG)
+engine = create_engine(config.SQL_PATH, echo=config.SQL_DEBUG)
 
 
 class User(Base):
