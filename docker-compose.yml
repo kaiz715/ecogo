@@ -1,0 +1,50 @@
+version: "3.7"
+services:
+  app:
+    restart: unless-stopped
+    volumes:
+      - ./mount/data:/src/data
+      - ./mount/secret:/src/data/secret:ro
+    image: ecogo/app:352d9eb9
+    depends_on:
+      - db
+    networks:
+      - ecogo_net
+      - default
+    labels:
+      caddy: localhost
+      caddy.reverse_proxy: "{{upstreams 5000}}"
+    environment:
+      - EG_SQL_PATH=postgresql://ecogo:internal_pass@db:5432/ecogo
+  caddy:
+    image: "lucaslorentz/caddy-docker-proxy:ci-alpine"
+    ports:
+      - 80:80
+      - 443:443
+    restart: unless-stopped
+    environment:
+      - CADDY_INGRESS_NETWORKS=ecogo_net
+    depends_on:
+      - app
+    volumes:
+      - ./mount/caddy:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - ecogo_net
+  db:
+    image: postgres:13-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=internal_pass
+      - POSTGRES_USER=ecogo
+    volumes:
+      - ./mount/postgres/a/:/var/lib/postgresql/data
+
+networks:
+  ecogo_net:
+    name: ecogo_net
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+        - subnet: fd69:96ab:cdef::/80
