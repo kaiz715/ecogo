@@ -104,8 +104,7 @@ class FunctionUser:
     def from_new(  # for creating a new user
         # IMPORTANT: check if unique username first by using unique_check()
         cls,
-        first_name,
-        last_name,
+        name,
         username,
         password,
         phone_number,
@@ -119,8 +118,7 @@ class FunctionUser:
         user.uid = uid
         user.username = username
         user.password = password
-        user.first_name = first_name
-        user.last_name = last_name
+        user.name = name
         user.phone_number = phone_number
         user.email = email
         user.address = address
@@ -129,7 +127,7 @@ class FunctionUser:
         session.close()
 
         return cls(
-            uid, first_name, last_name, username, password, phone_number, email, address
+            uid, name, username, password, phone_number, email, address
         )
 
     @classmethod
@@ -138,14 +136,13 @@ class FunctionUser:
         user = session.query(User).filter_by(uid=uid).first()
         username = user.username
         password = user.password
-        first_name = user.first_name
-        last_name = user.last_name
+        name = user.name
         phone_number = user.phone_number
         email = user.email
         address = user.address
         session.close()
         return cls(
-            uid, first_name, last_name, username, password, phone_number, email, address
+            uid, name, username, password, phone_number, email, address
         )
 
     def join_event(self, eid, availability="default"):

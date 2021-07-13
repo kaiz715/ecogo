@@ -22,8 +22,7 @@ class User(Base):
     __tablename__ = "users"
 
     uid = Column("uid", Integer, primary_key=True)
-    first_name = Column("first_name", String)
-    last_name = Column("last_name", String)
+    name = Column("name", String)
     username = Column("username", String, unique=True)
     password = Column("password", String)
     phone_number = Column("phone_number", String)

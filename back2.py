@@ -160,7 +160,6 @@ def login():
                 email = request.form['email']
                 phone = request.form['phone-number']
                 name = str(request.form['name'])
-                names = name.split(' ')
                 address = request.form['text-2'] + ' ' + request.form['secondary'] + ' ' + request.form[
                     'city'] + ' ' + request.form['text-1'] + ' ' + request.form['text-4']
                 print(address)
@@ -173,7 +172,7 @@ def login():
                     flash('Username already exists')
                     return render_template('login.html')
                 else:
-                    User = classes.FunctionUser.from_new(names[0], names[1], username, password, phone,
+                    User = classes.FunctionUser.from_new(name, username, password, phone,
                                                          email, address)
                     session['user'] = username
                     session['uid'] = User.uid
