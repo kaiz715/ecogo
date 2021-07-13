@@ -1,5 +1,11 @@
+# docker stuff
+mount/
+.dockerignore
+
+# ecogo dev stuff
 *.db
 *.db-journal
+data
 # ecogo specific
 .secret.bin
 secret.py
